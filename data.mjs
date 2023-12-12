@@ -25,4 +25,5 @@ const dataParser = new DataParser(data);
 dataParser.decimalController('Profit', 3);
 dataParser.decimalController('Sales', 2);
 // dataParser.logData();
-dataParser.dataFilter('SubCategory', 'Phones')
+dataParser.dataFilter('SubCategory', 'Phones');
+dataParser.filterByValues('Furniture', 'Chairs')
