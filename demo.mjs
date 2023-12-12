@@ -54,5 +54,17 @@ const dataParser = new DataParser(data);
   dataParser.logData();
   dataParser.filterColumn('Category','Furniture');
 
-  // hello
+  let filterList = [
+    {
+      column : "Category",
+      value : "Technology"
+    },
+    {
+      column : "SubCategory",
+      value : "Copiers"
+    }
+  ]
+   
+  const result = dataParser.filterArrayObjectColumn(filterList);
+  console.log(result);
   
