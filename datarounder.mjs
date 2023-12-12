@@ -3,9 +3,9 @@ class Datarounder{
     header = [];
     values = [];
 
-     Datarounder(data){
-        this.header = header;
-        this.values = values;
+     constructor(data){
+        this.header = data[0];
+        this.values = data.slice(1);
     }
 
     roundOffColumn(sourceColumn, decimal) {
@@ -18,10 +18,20 @@ class Datarounder{
           let newValue = parseFloat(value).toFixed(decimal);
           row[index] = newValue;
         });
-    }  
-
+    }
     
-
+    filterColumn (Column, value){
+      const index = this.header.indexOf(Column);
+        if (index === -1) {
+          throw new Error(`Column ${Column} not found`);
+        }
+        this.values.forEach((row) => {
+          const val = row[index];
+          if(value == val){
+            console.log(row);
+          }
+        });
+    }
 }
 
 export { Datarounder };

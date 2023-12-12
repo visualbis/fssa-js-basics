@@ -1,39 +1,38 @@
-class SalesProfitCalculator {
-    constructor(data) {
-      this.data = data;
-    }
- 
-   
-    roundToDecimalPlaces(number) {
-      return Math.round(number * 100) / 100;
-    }
- 
-   
-    calculateSalesProfit(category, profit, sales) {
-      if (category === "Technology") {
-        return this.roundToDecimalPlaces(sales + 0.05 * profit).toString();
-      } else {
-        return this.roundToDecimalPlaces(sales + 0.1 * profit).toString();
-      }
-    }
+// class SalesProfitCalculator {
+//     constructor(data) {
+//       this.data = data;
+//     }
 
-    addSalesProfitColumn() {
-   
-      for (let i = 1; i < this.data.length; i++) {
-        const category = this.data[i][0];
-        const profit = parseFloat(this.data[i][2]);
-        const sales = parseFloat(this.data[i][3]);
+//     roundToDecimalPlaces(number) {
+//       return Math.round(number * 100) / 100;
+//     }
+
+//     calculateSalesProfit(category, profit, sales) {
+//       if (category === "Technology") {
+//         return this.roundToDecimalPlaces(sales + 0.05 * profit).toString();
+//       } else {
+//         return this.roundToDecimalPlaces(sales + 0.1 * profit).toString();
+//       }
+//     }
+
+//     addSalesProfitColumn() {
+    
+//       for (let i = 1; i < this.data.length; i++) {
+//         const category = this.data[i][0];
+//         const profit = parseFloat(this.data[i][2]);
+//         const sales = parseFloat(this.data[i][3]);
  
-        const newSalesProfitValue = this.calculateSalesProfit(category, profit, sales);
+//         const newSalesProfitValue = this.calculateSalesProfit(category, profit, sales);
+
+//         this.data[i].push(newSalesProfitValue);
+//       }
  
-     
-        this.data[i].push(newSalesProfitValue);
-      }
- 
-      return this.data;
-    }
-  }
- 
+//       return this.data;
+//     }
+//   }
+
+  import { Datarounder } from "./datarounder.mjs";
+
   const data = [
       ["Category","SubCategory","Profit","Sales"  ],
       ["Technology","Copiers","55617.824900000036","149528.02999999994"  ],
@@ -55,8 +54,10 @@ class SalesProfitCalculator {
       ["Furniture","Tables","-17725.481100000015","206965.53199999995"  ]
     ]
  
- 
-  const salesProfitCalculator = new SalesProfitCalculator(data);
-  const newData = salesProfitCalculator.addSalesProfitColumn();
-  console.log(newData);
+    let datarounder = new Datarounder(data);
+    datarounder.filterColumn('Category' ,'Technology');
+    
+  // const salesProfitCalculator = new SalesProfitCalculator(data);
+  // const newData = salesProfitCalculator.addSalesProfitColumn();
+  // console.log(newData);
  
