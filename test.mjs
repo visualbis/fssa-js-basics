@@ -21,7 +21,24 @@ const data = [
     ["Furniture","Tables","-17725.481100000015","206965.53199999995"  ]
   ]
  
+
+
 const dataParser = new DataParser(data);
 dataParser.roundColumnValues('Profit', 2);
 dataParser.logData();
 dataParser.filterRowsByColumn('Category', 'Technology');
+
+
+const filterData = [
+  {
+    column : "Category",
+    value : "Technology"
+  },
+  {
+    column : "SubCategory",
+    value : "Phones"
+  }
+]
+
+const result = dataParser.filterArrayObjectColumn(filterData);
+console.log(result);

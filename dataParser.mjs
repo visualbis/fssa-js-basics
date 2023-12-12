@@ -34,7 +34,19 @@ class DataParser {
       }
     });
   }
- 
+
+filterArrayObjectColumn(filterList) {
+  filterList.forEach((filter) => {
+    const { column, value } = filter;
+    const index = this.header.indexOf(column);
+    if (index === -1) {
+      throw new Error(`Column ${column} not found`);
+    }
+    this.values = this.values.filter((row) => row[index] === filter.value);
+  });
+  return this.values;
+}
+
   logData() {
     console.log(this.header);
     console.log(this.values);
