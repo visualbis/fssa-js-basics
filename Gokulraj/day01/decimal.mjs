@@ -9,12 +9,27 @@ class Decimal {
 
     }
 
+    filterColumn(columnname, value) {
+        const index = this.header.indexOf(columnname);
+        if (index === -1) {
+            throw new Error(`Column ${columnname} not found`);
+        }
+
+        this.value.forEach((row) => {
+            if (value == row[index]) {
+                console.log(row);
+            }
+        });
+    }
 
     roundoffDecimal(columnname, decimal) {
 
         let index = this.header.indexOf(columnname);
 
-       
+        if (index === -1) {
+            throw new Error(`Column ${columnname} not found`);
+        }
+
 
         for (let i = 0; i < this.value.length; i++) {
             let num = parseFloat(this.value[i][index]);
@@ -30,7 +45,11 @@ class Decimal {
 
         let index = this.header.indexOf(columnname);
 
-        this.header.push(columnname + " + "+ percentage);
+        if (index === -1) {
+            throw new Error(`Column ${columnname} not found`);
+        }
+
+        this.header.push(columnname + " + " + percentage);
 
         for (let i = 0; i < this.value.length; i++) {
 
@@ -40,6 +59,7 @@ class Decimal {
     }
 
     logData() {
+        console.log(this.header);
         console.log(this.value);
     }
 

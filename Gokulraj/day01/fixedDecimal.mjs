@@ -23,6 +23,7 @@ const data = [
 
 let decimal = new Decimal(data);
 
-decimal.roundoffDecimal("Profit", 2);
-decimal.columnpercentage("Profit",10);
-decimal.logData();
+// decimal.roundoffDecimal("Profit", 2);
+// decimal.columnpercentage("Profit",10);
+decimal.filterColumn('Category','Technology');
+// decimal.logData();
