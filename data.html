@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Table</title>
+</head>
+<body>
+
+<table id="myTable" border="1">
+</table>
+
+<script>
+    const data = [
+        ["Category","SubCategory","Profit","Sales"  ],
+        ["Technology","Copiers","55617.824900000036","149528.02999999994"  ],
+        ["Technology","Phones","44515.73059999999","330007.0539999998"  ],
+        ["Technology","Accessories","41936.635699999955","167380.318"  ],
+        ["Technology","Machines","3384.756899999995","189238.631"  ],
+        ["Office Supplies","Paper","34053.56929999999","78479.20599999995"  ],
+        ["Office Supplies","Binders","30221.76329999999","203412.73300000004"  ],
+        ["Office Supplies","Storage","21278.82639999999","223843.60799999998"  ],
+        ["Office Supplies","Appliances","18138.00540000003","107532.1610000001"  ],
+        ["Office Supplies","Envelopes","6964.176699999995","16476.402"  ],
+        ["Office Supplies","Art","6527.786999999998","27118.791999999998"  ],
+        ["Office Supplies","Labels","5546.253999999996","12486.312000000005"  ],
+        ["Office Supplies","Fasteners","949.5181999999995","3024.2799999999997"  ],
+        ["Office Supplies","Supplies","-1189.0994999999998","46673.53799999997"  ],
+        ["Furniture","Chairs","26590.16630000003","328449.10300000064"  ],
+        ["Furniture","Furnishings","13059.143600000005","91705.16399999989"  ],
+        ["Furniture","Bookcases","-3472.5560000000046","114879.9963"  ],
+        ["Furniture","Tables","-17725.481100000015","206965.53199999995"  ]
+    ];
+
+    var table = document.getElementById("myTable");
+
+    var headerRow = table.insertRow(0);
+    for (var i = 0; i < data[0].length; i++) {
+        var headerCell = headerRow.insertCell(i);
+        headerCell.innerHTML = data[0][i];
+    }
+    
+        var headerCell = headerRow.insertCell(4);
+        headerCell.innerHTML = "Profit %";
+        
+        var headerCell = headerRow.insertCell(5);
+        headerCell.innerHTML = "sales %";
+
+    for (var i = 1; i < data.length; i++) {
+        var row = table.insertRow(i);
+        for (var j = 0; j < data[i].length; j++) {
+        var cell = row.insertCell(j);
+        if (isNaN(parseFloat(data[i][j]))) {
+            cell.innerHTML = data[i][j];
+        } else {
+            var roundedNumber = parseFloat(data[i][j]).toFixed(2);
+            cell.innerHTML = roundedNumber;
+        }
+        }
+
+        for (var j = 4; j <= 5; j++) {
+      var cell = row.insertCell(j);
+      if(j == 4) {
+        var roundedNumber = parseFloat(data[i][2] * 1.1).toFixed(2);
+        cell.innerHTML = roundedNumber;
+      } else {
+        var roundedNumber = parseFloat(data[i][3] * 1.05).toFixed(2);
+        cell.innerHTML = roundedNumber;
+      }
+    }
+    }
+    
+
+</script>
+
+</body>
+</html>
