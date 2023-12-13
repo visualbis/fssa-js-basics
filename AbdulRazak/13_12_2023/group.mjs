@@ -49,7 +49,7 @@
             if(arr[i-1][index] == arr[i][index]){
                 arr[i].push(rank);
             }else{
-                rank++;
+                rank = i+1;
                 arr[i].push(rank);
             }
 

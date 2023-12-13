@@ -30,4 +30,4 @@ let salesData = [
   let grpData =  new DataSet(salesData);
   grpData.groupBy(100,300,500,"Sales")
   console.log(grpData.filterByGroup("Group","good"))
-  console.log(grpData.rankBy("Sales",5))
+  console.log(grpData.rankBy("Sales",10))
