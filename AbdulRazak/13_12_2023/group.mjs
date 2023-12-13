@@ -62,10 +62,23 @@
          newArr.unshift(this.header)
          return newArr;
     }
+    runningTotal(col,prd,colOfrun){
+        let index = this.header.indexOf(col);
+        let index2 = this.header.indexOf(colOfrun);
+        if(index==-1 || index2 == -1){
+            throw new Error("cant find the column name")
+        }
+        this.header.push("Running Total");
+        let arr = this.values.filter((a)=>a[index] == prd);
+        let sum = 0 ;
+        for(let i = 0 ; i < arr.length ; i++){
+            sum += parseFloat( arr[i][index2]);
+            arr[i].push(sum)
+        }
 
-    
-
-
+        this.values = arr;
+        console.log(arr);
+    }
 
 
  }
