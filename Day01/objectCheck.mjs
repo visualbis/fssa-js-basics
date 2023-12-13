@@ -32,12 +32,19 @@ class dataParser {
         `Column name ${columnName} is not exists in the data collections`
       );
     }
-    this.head = this.head.filter((row, index) => {
+    this.head.filter((row, index) => {
       if (index === 0) {
         return;
       }
       return columnValues === row[columnIndex];
     });
+  }
+
+  // Filter the matched Values
+  filterTheMiultipleColumnValues(columnData) {
+    columnData.forEach((items) => {
+     
+    })
   }
 
   // Show data of current collection function
