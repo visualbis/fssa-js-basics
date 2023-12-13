@@ -21,9 +21,23 @@ const data = [
   ["Furniture", "Tables", "-17725.481100000015", "206965.53199999995"]
 ]
 
+let filterList = [
+  {
+    column : "Category",
+    value : "Technology"
+  },
+  {
+    column : "SubCategory",
+    value : "Machines"
+  }
+]
+
+
 let decimal = new Decimal(data);
 
 // decimal.roundoffDecimal("Profit", 2);
 // decimal.columnpercentage("Profit",10);
-decimal.filterColumn('Category','Technology');
+// decimal.filterColumn('Category','Technology');
+decimal.filter(filterList);
+
 // decimal.logData();

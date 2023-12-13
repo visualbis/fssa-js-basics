@@ -2,11 +2,12 @@ class Decimal {
 
     header = [];
     value = [];
+    Data =[];
 
     constructor(data) {
         this.header = data[0];
         this.value = data.slice(1);
-
+        this.Data = data.slice(1);
     }
 
     filterColumn(columnname, value) {
@@ -21,6 +22,25 @@ class Decimal {
             }
         });
     }
+
+    filter(filterList) {
+
+        if (filterList.length === 0) {
+          console.log("Filter list is empty");
+          return [this.header, this.Data];
+        }
+       
+        filterList.forEach((filter) => {
+          const index = this.header.indexOf(filter.column);
+          if (index === -1) {
+            throw new Error(`Column ${filter.column} not found`);
+          }
+          this.Data = this.Data.filter((row) => row[index] === filter.value);
+        });
+       
+       console.log(this.Data,this.header)
+      }
+
 
     roundoffDecimal(columnname, decimal) {
 
