@@ -19,7 +19,7 @@ class Decimal {
     });
   }
 
-  //Filter column
+  // Filter column
   filterColumn(sourceColumn, value) {
     const index = this.header.indexOf(sourceColumn);
     if (index === -1) {
