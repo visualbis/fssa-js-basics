@@ -17,7 +17,7 @@ class DataParse{
     addColumn(col,per){
         let index  =  this.header.indexOf(col);
         if(index!=-1){
-            this.values[0].push(col + " + " + per + "%");
+            this.header.push(col + " + " + per + "%");
             for(let i = 1 ; i < this.values.length ; i++){
                 let value =  this.values[i][index];
                 this.values[i].push((per/100)*value);
@@ -25,13 +25,48 @@ class DataParse{
         }
 
     }
+
     print(){
         this.values.forEach(element => {
             console.log(element)
             
         });
     }
+    Deepfilter(arr){
+        let index = []
+        for(let i = 0; i < arr.length ; i++){
+           index.push(this.header.indexOf(arr[i]["column"]))
+        }
+        let newArr = [];
+        for(let i = 0; i < this.values.length ; i++){
+            let chk = false;
+            for(let j  = 0 ; j < index ; j++){
+                
+            }
+         }
+
+
+    }
+    
+ filterArrayObjectColumn(filterList) {
+    if (filterList.length === 0) {
+      console.log("Filter list is empty");
+      return [this.header, this.values];
+    }
+   
+    filterList.forEach((filter) => {
+      const index = this.header.indexOf(filter.column);
+      if (index === -1) {
+        throw new Error(`Column ${filter.column} not found`);
+      }
+      this.values = this.values.filter((row) => row[index] === filter.value);
+    });
+   
+    return [this.header, this.originalData];
+  }
 }
+
+
 function numberOfDecimal(num) {
     let n  = 10 ; 
     for(let i  =  1 ; i< num ; i++){
@@ -42,5 +77,6 @@ function numberOfDecimal(num) {
 else 
     return 1 ;
 }
+
 
 export default DataParse;
