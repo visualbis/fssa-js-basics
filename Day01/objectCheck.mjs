@@ -41,10 +41,13 @@ class dataParser {
   }
 
   // Filter the matched Values
-  filterTheMiultipleColumnValues(columnData) {
-    columnData.forEach((items) => {
-     
-    })
+  filterTheMultipleColumnValues(filterList) {
+    return data.filter((row) => {
+      return filterList.every((filter) => {
+        const columnIndex = data[0].indexOf(filter.column);
+        return row[columnIndex] === filter.value;
+      });
+    });
   }
 
   // Show data of current collection function

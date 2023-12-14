@@ -33,3 +33,12 @@ console.log(parser.logData());
 
 parser.filterTheColumnData("Category", "Furniture");
 console.log(parser.logData());
+
+// Filter the multiple data
+//Filter format data
+const filterList = [
+  { column: "Category", value: "Technology" },
+  { column: "SubCategory", value: "Phones" },
+];
+let filteredData = parser.filterTheMultipleColumnValues(filterList);
+console.log(filteredData);

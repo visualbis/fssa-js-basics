@@ -30,8 +30,16 @@ let salesData = [
 
 let salesManage = new salesManger(salesData);
 
+// categrazeFormat data
+let categrazeFormat = [
+  { group: "Poor", from: 0, to: 300 },
+  { group: "Neutral", from: 300, to: 500 },
+  { group: "Good", from: 500, to: 1000 },
+];
+
 // Categorize the product by Group
-salesManage.categorizeGroup("Sales", 300, 500);
+salesManage.categorizeGroup("Sales", categrazeFormat);
+
 salesManage.logData();
 salesManage.getTopFiveCount();
 

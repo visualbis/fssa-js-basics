@@ -7,7 +7,7 @@ class salesManger {
   }
 
   // Add Group for the products
-  categorizeGroup(columnName, poor, neutral) {
+  categorizeGroup(columnName, categrazeFormat) {
     let columnIndex = this.header.indexOf(columnName);
 
     if (columnIndex === -1) {
@@ -30,14 +30,13 @@ class salesManger {
       }
 
       row.push(
-        parseFloat(row[columnIndex]) <= poor
+        parseFloat(row[columnIndex]) <= categrazeFormat[0]["to"]
           ? "Poor"
-          : parseFloat(row[columnIndex]) <= neutral
+          : parseFloat(row[columnIndex]) <= categrazeFormat[1]["to"]
           ? "Neutral"
           : "Good",
         currentRank
       );
-
       previousSales = row[columnIndex];
     });
 
