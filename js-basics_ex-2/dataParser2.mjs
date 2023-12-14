@@ -7,10 +7,10 @@ class SalesDataParser {
     this.values = data.slice(1);
   }
 
-  salesGroup(sales_column, groupArray) {
-    const columnIndex = this.header.indexOf(sales_column);
+  salesGroup(salesColumn, groupArray) {
+    const columnIndex = this.header.indexOf(salesColumn);
     if (columnIndex === -1) {
-      throw new Error(`Column ${sales_column} not found`);
+      throw new Error(`Column ${salesColumn} not found`);
     }
 
     this.values.forEach((row) => {
