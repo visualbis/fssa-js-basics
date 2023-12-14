@@ -33,12 +33,10 @@ class DataGroup {
       salesData.slice(1).sort((a, b) => a[3] - b[3]).forEach((row) => {
         console.log(row);
       });
-
       console.log("Top 5 Rank");
-      salesData.slice(1, 6).sort((a, b) => a[3] - b[3]).forEach((row) => {
-        console.log(row);
-      });
-    
+      let value =   this.values.sort((a, b) => a[3] - b[3]).slice(1,6);
+      console.log(value);
+
   }
 }
   
