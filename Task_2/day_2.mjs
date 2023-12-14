@@ -1,8 +1,13 @@
 class Groupclassification {
+  values  = [];
+  header = [];
+  salesData = [];
   constructor(salesData) {
+    this.values = salesData.slice(1);
+    this.header = salesData[0];
     this.salesData = salesData;
   }
-
+// Group classification and colour marking
   categorizeSales(sales) {
     const salesValue = parseInt(sales, 10);
 
@@ -45,6 +50,44 @@ class Groupclassification {
     });
 
     return categorizedData;
+  }
+
+   // Find the running by month
+   findRunningTotalMonth() {
+    let result = [];
+
+    let uniqueProducts = [...new Set(this.values.map((row) => row[0]))];
+    let uniqueMonths = [...new Set(this.values.map((row) => row[1]))];
+
+    uniqueProducts.forEach((product) => {
+      let productData = [];
+      uniqueMonths.forEach((month, index) => {
+        let runningTotal = 0;
+        let count = 0;
+        this.values.forEach((row) => {
+          if (product === row[0] && count <= index) {
+            runningTotal += parseInt(row[2]);
+            count++;
+          }
+        });
+        productData.push([month, runningTotal]);
+      });
+      result.push({ product, data: productData });
+    });
+    this.values = result;
+  }
+
+  logData() {
+    console.log(this.values);
+  }
+
+  showRunningTotal() {
+    this.values.forEach((product) => {
+      console.log(`Product: ${product.product}`);
+      product.data.forEach((entry) => {
+        console.log(`  ${entry[0]}: ${entry[1]}`);
+      });
+    });
   }
 }
 
