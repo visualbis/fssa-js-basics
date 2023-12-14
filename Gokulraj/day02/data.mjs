@@ -17,7 +17,6 @@ class Data {
             
             for (let i = 0; i < object.length; i++) {
                 
-                
                 if (row[1] >= object[i].from && row[1] <= object[i].to) {
 
                     row.push(object[i].columnName);
@@ -68,6 +67,32 @@ class Data {
         })
     }
 
+
+    runningTotal(){
+    
+        let total = [];
+
+        let product = [...new Set(this.value.map(row => row[0]))]
+        
+        product.forEach((element) => {
+            let count = 0;
+
+            let oneProduct = this.value.filter(ele => ele[0] == element);
+
+            oneProduct.forEach((row) => {
+
+                count += parseInt(row[2]);
+
+                row.push(count);
+            })
+            
+
+            total.push(oneProduct);
+
+        })
+
+        console.log(total);        
+    }
 
   
 

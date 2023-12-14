@@ -357,5 +357,5 @@ data.assignRank(5);
 data.logData();
 
 
-// let data2 = new Data(datasetMonth);
-// data.runningTotal();
+let data2 = new Data(datasetMonth);
+data2.runningTotal();
