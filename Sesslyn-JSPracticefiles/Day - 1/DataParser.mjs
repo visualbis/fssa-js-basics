@@ -42,18 +42,18 @@ class DataParser {
         console.log("Filter list is empty");
         return;
     }
+    let filteredValues = this.values.slice();
     filterList.forEach((filter) => {
         const index = this.header.indexOf(filter.column);
         if (index === -1) {
             throw new Error(`Column ${filter.column} not found`);
         }
-        this.values = this.values.filter((row) => row[index] === filter.value);
+        filteredValues = filteredValues.slice().filter((row) => row[index] === filter.value);
     });
-    let resultValues = this.values;
-    let resultHeader = this.header;
+    const resultHeader = this.header;
     this.values = this.originalData;
-    return [resultHeader, resultValues] ;
-}
+    return [resultHeader, filteredValues];
+  }
 
   logData() {
     console.log(this.header);
