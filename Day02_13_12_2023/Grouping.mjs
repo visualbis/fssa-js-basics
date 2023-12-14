@@ -7,73 +7,69 @@ class Grouping{
         this.header = salesData.slice(1);
     }
 
-    // Task 1 - A function is identifing the whether the product is poor, neutral, good.
-    categorizeProduct(columnName) {
-        let columnIndex = this.values[0].indexOf(columnName);
-     
-        if (columnIndex === -1) {
+  // Task 1 - A function is identifing the whether the product is poor, neutral, good.
+    categorizeProduct(columnName, groups) {
+      let columnIndex = this.values[0].indexOf(columnName);
+
+      if (columnIndex === -1) {
           console.log(`Column "${columnName}" not found.`);
           return;
-        }
-     
-        this.values[0].push("Group");
-     
-        this.values.slice(1).forEach((row) => {
-          if (row[columnIndex] <= 300) {
-            row.push("Poor");
-          } else if (row[columnIndex] > 300 && row[columnIndex] <= 500) {
-            row.push("Neutral");
-          } else if (row[columnIndex] > 500 && row[columnIndex] <= 1000) {
-            row.push("Good");
-          } else {
-            row.push("Invalid Product.");
-          }
-        });
-    }
-     
-    // Task 2 - Add a new column for "Rank" based on sales amount
-    addRankColumn() {
-    const salesColumnIndex = this.values[0].indexOf("Sales");
+      }
 
-    if (salesColumnIndex === -1) {
-        console.log("Sales column not found.");
-        return;
-    }
+      groups.forEach(group => {
+          this.values[0].push(group.group);
 
-    const salesData = this.values.slice(1).map(row => parseInt(row[salesColumnIndex]));
-    const sortedSales = salesData.slice().sort((a, b) => b - a);
+          this.values.slice(1).forEach((row) => {
+              const sales = parseInt(row[columnIndex]);
+              if (sales >= group.from && sales <= group.to) {
+                  row.push(group.group);
+              }
+          });
+      });
+  }
 
-    this.values[0].push("Rank");
+  // Task 2 - Add a new column for "Rank" based on sales amount
+  addRankColumn() {
+      const salesColumnIndex = this.values[0].indexOf("Sales");
 
-    this.values.slice(1).forEach((row) => {
-        const sales = parseInt(row[salesColumnIndex]);
-        const rank = sortedSales.indexOf(sales) + 1;
-        row.push(rank);
-    });
-    
-    console.log(this.values);
+      if (salesColumnIndex === -1) {
+          console.log("Sales column not found.");
+          return;
+      }
 
-    // Sort the data based on the "Rank" column
+      const salesData = this.values.slice(1).map(row => parseInt(row[salesColumnIndex]));
+      const sortedSales = salesData.slice().sort((a, b) => b - a);
+
+      this.values[0].push("Rank");
+
+      this.values.slice(1).forEach((row) => {
+          const sales = parseInt(row[salesColumnIndex]);
+          const rank = sortedSales.indexOf(sales) + 1;
+          row.push(rank);
+      });
+
+      // Sort the data based on the "Rank" column
+      let columnIndex = this.values[0].indexOf("Rank");
+      this.values = this.values.slice(1).sort((a, b) => a[columnIndex] - b[columnIndex]);
+  }
+
+  // Task 3 - Filter the top N values based on the "Rank" column
+  filterTopNRanks(n) {
     let columnIndex = this.values[0].indexOf("Rank");
-    this.values =  this.values.slice(1).sort((a, b) => a[columnIndex] - b[columnIndex]);
-    }
+    let filterTopNRanksData = this.values.slice(0, n);
+    console.log(filterTopNRanksData);
+  }
 
-    // Task 3 - Filter the top N values based on the "Rank" column
-    filterTopFiveCount() {
-        let filterTopFiveData = this.values.slice(0, 5);
-        console.log(filterTopFiveData);
-    }
-
-    logData() {
-        console.log(this.values);
-    }
+  logData() {
+      console.log(this.values);
+  }
 
     // Task 4 - Find the running by month
-    findRunningByTotalMonth() {
+  findRunningByTotalMonth() {
     let result = [];
-console.log(this.values);
+    //console.log(this.values);
     let uniqueProducts = [...new Set(this.values.map((row) =>{
-console.log(row)
+    console.log(row)
     } ))];
     let uniqueMonths = [...new Set(this.values.map((row) => row[1]))];
 
@@ -94,10 +90,10 @@ console.log(row)
       result.push({ product, data: productData });
     });
     this.values = result;
-    }
+  }
 
     // Task 5 - Showing Running Total
-    showRunningTotal() {
+  showRunningTotal() {
     this.values.forEach((product) => {
       console.log(`Product: ${product.product}`);
       product.data.forEach((entry) => {

@@ -29,8 +29,13 @@ let salesData = [
   ];
 
   const grouping = new Grouping(salesData);
-  grouping.categorizeProduct("Sales");
+  grouping.categorizeProduct("Sales", [
+    { group: "Poor", from: 0, to: 300 },
+    { group: "Neutral", from: 301, to: 500 },
+    { group: "Good", from: 501, to: 1000 }
+  ]);
   grouping.addRankColumn();
+  grouping.filterTopNRanks(5);
   grouping.logData();
 
 
@@ -110,6 +115,6 @@ let salesData = [
 
   ];
 
-  let salesManage = new Grouping(salesDataWithMonth);
-  salesManage.findRunningByTotalMonth()
-  salesManage.showRunningTotal();
+  // let salesManage = new Grouping(salesDataWithMonth);
+  // salesManage.findRunningByTotalMonth()
+  // salesManage.showRunningTotal();
