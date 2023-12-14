@@ -61,14 +61,20 @@ class salesManger {
       let productData = [];
       uniqueMonths.forEach((month, index) => {
         let runningTotal = 0;
+        let salesAmount = 0;
         let count = 0;
         this.values.forEach((row) => {
           if (product === row[0] && count <= index) {
             runningTotal += parseInt(row[2]);
+            salesAmount = parseInt(row[2]);
             count++;
           }
         });
-        productData.push([month, runningTotal]);
+        productData.push({
+          Month: month,
+          "Sales Amount": salesAmount,
+          "Running Total": runningTotal,
+        });
       });
       result.push({ product, data: productData });
     });
@@ -82,10 +88,8 @@ class salesManger {
 
   showRunningTotal() {
     this.values.forEach((product) => {
-      console.log(`Product: ${product.product}`);
-      product.data.forEach((entry) => {
-        console.log(`  ${entry[0]}: ${entry[1]}`);
-      });
+      console.log(`Product : ${product.product}`);
+      console.log(product.data);
     });
   }
 }
