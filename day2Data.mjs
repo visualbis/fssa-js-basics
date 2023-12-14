@@ -333,8 +333,14 @@ let salesDataWithMonth = [
     ["Lollipop", "December", "950"],
   ];
 
+let categorizeData = [
+  { category : "Poor", from : 0, to : 300},
+  { category : "Neutral", from : 300, to : 500},
+  { category : "Good", from : 500, to : 1000}
+]
+
   const dataGroup = new DataGroup(salesData);
-  dataGroup.CategeoryFinder(salesData.length);
+  dataGroup.categeoryFinder(salesData.length, categorizeData);
   
 
   const RunningTotal = new DataGroup(salesDataWithMonth);

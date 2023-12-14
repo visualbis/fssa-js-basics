@@ -7,20 +7,18 @@ class DataGroup {
       this.values = salesData.slice(1);
     }
   
-    CategeoryFinder(n) {
+    categeoryFinder(n, category) {
       this.header.push("Grade", "Rank");
       let salesData = this.values;
         salesData.slice(1).sort((a, b) => b[1] - a[1]).forEach((row, index, array) => {
         let salesAmount = parseInt(row[1]);
-        if (salesAmount < 300) {
+        if (salesAmount <= category[0]["to"]) {
           row.push("Poor");
-        } else if (salesAmount >= 300 && salesAmount < 500) {
+        } else if (salesAmount > category[1]["from"] && salesAmount <= category[1]["to"]) {
           row.push("Neutral");
-        } else if (salesAmount >= 500 && salesAmount < 1000) {
+        } else if (salesAmount > category[2]["from"] && salesAmount <= category[2]["to"]) {
           row.push("Good");
-        } else if (salesAmount >= 1000) {
-          row.push("Very Good");
-        }
+        } 
   
         if (index > 0 && salesAmount === parseInt(array[index - 1][1])) {
           row.push(array[index - 1][3]);
