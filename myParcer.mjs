@@ -39,7 +39,6 @@ class DataParser {
 
     filterByValues(value1, value2) {
         const foundRow = this.values.filter(row => row.includes(value1) && row.includes(value2));
-      
         if (foundRow) {
             console.log(foundRow);
         } else {
