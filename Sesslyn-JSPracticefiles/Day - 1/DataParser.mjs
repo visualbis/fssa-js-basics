@@ -1,12 +1,10 @@
 class DataParser {
   header = [];
   values = [];
-  originalData = [];
 
   constructor(data) {
     this.header = data[0];
     this.values = data.slice(1);
-    this.originalData = data.slice(1);
   }
 
   roundOffColumn(sourceColumn, decimal) {
@@ -27,13 +25,12 @@ class DataParser {
         throw new Error(`Column ${sourceColumn} not found`);
     }   
     let resultValues = [];
-    this.originalData.forEach((row) => {
+    this.values.forEach((row) => {
         if (value == row[index]) {
             resultValues.push(row);
         }
     });
     let resultHeader = this.header;
-    this.values = this.originalData;
     return [resultHeader, resultValues];
 }
 
@@ -51,7 +48,6 @@ class DataParser {
         filteredValues = filteredValues.slice().filter((row) => row[index] === filter.value);
     });
     const resultHeader = this.header;
-    this.values = this.originalData;
     return [resultHeader, filteredValues];
   }
 

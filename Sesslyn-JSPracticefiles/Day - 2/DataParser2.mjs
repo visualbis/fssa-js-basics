@@ -2,26 +2,20 @@ class DataParser2 {
   header = [];
   values = [];
 
-  originalData = [];
-
   constructor(data) {
     this.header = data[0];
     this.values = data.slice(1);
-    this.originalData = data.slice(1);
   }
 
-  // Find the index of the given column within the class
-  findIndex(sourceColumn) {
+  findIndex = (sourceColumn) => {
     const index = this.header.indexOf(sourceColumn);
     if (index === -1) {
       throw new Error(`Column ${sourceColumn} not found`);
     }
     return index;
-  }
+  };
 
-  //Group the column into category
-  //Eg : I f we give an array (Poor, Netural, Good ) it will categories based on the array value
-  groupTheColumn(sourceColumn, arrayGroup) {
+  groupTheColumn = (sourceColumn, arrayGroup) => {
     if (arrayGroup.length === 0) {
       console.log("Group list is empty");
       return;
@@ -41,41 +35,35 @@ class DataParser2 {
     });
 
     this.header.push("Group By");
-  }
+  };
 
-  //Filter the column
-  //Eg : I f we give group by , poor it will return only the poor columns
   filterColumn(sourceColumn, value) {
-    const index = this.findIndex(sourceColumn);
+    const index = this.header.indexOf(sourceColumn);
+    if (index === -1) {
+        throw new Error(`Column ${sourceColumn} not found`);
+    }   
     let resultValues = [];
-    this.originalData.forEach((row) => {
-      if (value == row[index]) {
-        resultValues.push(row);
-      }
+    this.values.forEach((row) => {
+        if (value == row[index]) {
+            resultValues.push(row);
+        }
     });
     let resultHeader = this.header;
-    this.values = this.originalData;
     return [resultHeader, resultValues];
-  }
+}
 
-  //Count the column
-  //Eg : { Poor: 5, Netural: 7, Good: 3 }
-  countColumn(sourceColumn) {
+  countColumn = (sourceColumn) => {
     const index = this.findIndex(sourceColumn);
     let result = {};
     this.values.forEach((row) => {
       const group = row[index];
-      if (result[group] !== undefined) {
-        result[group]++;
-      } else {
-        result[group] = 1;
-      }
+      result[group] = (result[group] || 0) + 1;
     });
 
     return result;
-  }
+  };
 
-  rankTheColumn(sourceColumn) {
+  rankTheColumn = (sourceColumn) => {
     const index = this.findIndex(sourceColumn);
     const sortedValues = this.values
       .slice()
@@ -84,20 +72,21 @@ class DataParser2 {
 
     let currentRank = 1;
     let currentSales = parseInt(sortedValues[0][index]);
-    for (let i = 0; i < sortedValues.length; i++) {
-      const sales = parseInt(sortedValues[i][index]);
+
+    sortedValues.forEach((row, i) => {
+      const sales = parseInt(row[index]);
       if (i > 0 && sales !== currentSales) {
         currentRank++;
       }
-      sortedValues[i].push(currentRank);
+      row.push(currentRank);
       currentSales = sales;
-    }
+    });
+
     const topFive = sortedValues.slice(0, 5);
     return [this.header, topFive];
-}
+  };
 
-  //Group all the data by month or products
-  groupByColumn(productData, sourceColumn) {
+  groupByColumn = (productData, sourceColumn) => {
     this.header = productData[0];
     this.values = productData.slice(1);
 
@@ -108,8 +97,7 @@ class DataParser2 {
 
     const groupedData = {};
 
-    for (let i = 1; i < productData.length; i++) {
-      const value = productData[i];
+    this.values.forEach((value, i) => {
       const group = value[index];
 
       if (!groupedData[group]) {
@@ -117,16 +105,16 @@ class DataParser2 {
       }
 
       groupedData[group].push(value);
-    }
+    });
 
     const groupValues = [];
 
-    for (const group in groupedData) {
-      groupValues.push(...groupedData[group]);
-    }
+    Object.values(groupedData).forEach((group) => {
+      groupValues.push(...group);
+    });
 
     return [this.header, ...groupValues];
-  }
+  };
 
   runningTotal(productData, sourceColumn, valueColumn) {
     let header2 = [];
@@ -134,47 +122,47 @@ class DataParser2 {
     header2 = productData[0];
     const groupResult = this.groupByColumn(productData, sourceColumn);
     values2 = groupResult.slice(1);
-
+  
     const index = header2.indexOf(sourceColumn);
     if (index === -1) {
       throw new Error(`Column ${sourceColumn} not found`);
     }
-
+  
     const valueIndex = header2.indexOf(valueColumn);
     if (valueIndex === -1) {
       throw new Error(`Column ${valueColumn} not found`);
     }
-
+  
     const runningTotalIndex = header2.length;
     header2.push("Running Total");
-
+  
     for (let i = values2.length - 1; i >= 0; i--) {
       const value = values2[i];
       const group = value[index];
       let number = 0;
-
+  
       for (let j = i; j >= 0; j--) {
         const value1 = values2[j];
         const group1 = value1[index];
-
+  
         if (group === group1) {
           number += parseInt(value1[valueIndex]);
         }
       }
       value[runningTotalIndex] = number;
     }
-
+  
     const runningTotalValues = values2.map((row) =>
       row.slice(0, runningTotalIndex + 1)
     );
-
+  
     return [header2, ...runningTotalValues];
   }
-
-  logData() {
+  
+  logData = () => {
     console.log(this.header);
     console.log(this.values);
-  }
+  };
 }
 
 export { DataParser2 };
