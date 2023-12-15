@@ -342,4 +342,4 @@ let salesDataWithMonth = [
 ];
 const groupClassification1 = new Groupclassification(salesDataWithMonth);
 groupClassification1.findRunningTotalMonth();
-groupClassification1.showRunningTotal();
+groupClassification1.showRunningTotal(); 
