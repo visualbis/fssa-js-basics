@@ -78,22 +78,21 @@ class SalesDataParser {
 
     const groupedData = {};
 
-    for (let i = 1; i < productData.length; i++) {
-      const value = productData[i];
+    productData.forEach((value, i) => {
       const group = value[index];
-
+    
       if (!groupedData[group]) {
         groupedData[group] = [];
       }
-
+    
       groupedData[group].push(value);
-    }
-
+    });
+    
     const groupValues = [];
-
-    for (const group in groupedData) {
+    
+    Object.keys(groupedData).forEach(group => {
       groupValues.push(...groupedData[group]);
-    }
+    });
 
     return [this.header, ...groupValues];
   }
