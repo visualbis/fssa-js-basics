@@ -1,4 +1,4 @@
-class salesManger {
+class SalesManger {
   values = [];
   header = [];
   constructor(data) {
@@ -11,13 +11,13 @@ class salesManger {
     let columnIndex = this.header.indexOf(columnName);
 
     if (columnIndex === -1) {
-      console.log(`Column "${columnName}" not found.`);
+      throw new Error(`Column "${columnName}" not found.`);
       return;
     }
 
     this.header.push("Group", "Rank");
 
-    let sortedRows = [...this.values];
+    const sortedRows = [...this.values];
 
     sortedRows.sort((a, b) => b[columnIndex] - a[columnIndex]);
 
@@ -45,7 +45,7 @@ class salesManger {
 
   // Get top 5 count
   getTopFiveCount() {
-    let topFiveData = this.values.slice(0, 5);
+    const topFiveData = this.values.slice(0, 5);
     console.log(topFiveData);
   }
 
@@ -53,8 +53,10 @@ class salesManger {
   findRunningTotalMonth() {
     let result = [];
 
-    let uniqueProducts = [...new Set(this.values.map((row) => row[0]))];
-    let uniqueMonths = [...new Set(this.values.map((row) => row[1]))];
+    let uniqueProducts = new Set();
+    this.values.forEach((row) => uniqueProducts.add(row[0]));
+    let uniqueMonths = new Set();
+    this.values.forEach((row) => uniqueMonths.add(row[1]));
 
     uniqueProducts.forEach((product) => {
       let productData = [];
@@ -93,4 +95,4 @@ class salesManger {
   }
 }
 
-export { salesManger };
+export { SalesManger };

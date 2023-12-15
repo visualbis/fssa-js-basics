@@ -1,6 +1,6 @@
-import { salesManger } from "./salesManager.mjs";
+import { SalesManger } from "./salesManager.mjs";
 
-let salesData = [
+const salesData = [
   ["Product", "Sales"],
   ["Milkybar", "200"],
   ["Silk", "400"],
@@ -28,10 +28,10 @@ let salesData = [
   ["Lollipop", "1000"],
 ];
 
-let salesManage = new salesManger(salesData);
+const salesManage = new SalesManger(salesData);
 
 // categrazeFormat data
-let categrazeFormat = [
+const categrazeFormat = [
   { group: "Poor", from: 0, to: 300 },
   { group: "Neutral", from: 300, to: 500 },
   { group: "Good", from: 500, to: 1000 },
@@ -45,7 +45,7 @@ salesManage.getTopFiveCount();
 
 // Running total month
 
-let salesDataWithMonth = [
+const salesDataWithMonth = [
   ["Product", "Month", "Sales"],
   ["Milkybar", "January", "200"],
   ["Silk", "January", "400"],
@@ -349,6 +349,6 @@ let salesDataWithMonth = [
 ];
 
 //
-let saleMangeTwo = new salesManger(salesDataWithMonth);
+const saleMangeTwo = new SalesManger(salesDataWithMonth);
 saleMangeTwo.findRunningTotalMonth();
 saleMangeTwo.showRunningTotal();

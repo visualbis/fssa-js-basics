@@ -1,0 +1,7 @@
+const snakePositionData = {
+
+}
+
+const ladderPositionData = {
+    
+}

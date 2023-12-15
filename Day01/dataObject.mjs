@@ -1,4 +1,4 @@
-import { dataParser } from "./objectCheck.mjs";
+import { DataParser } from "./objectCheck.mjs";
 const data = [
   ["Category", "SubCategory", "Profit", "Sales"],
   ["Technology", "Copiers", "55617.824900000036", "149528.02999999994"],
@@ -21,18 +21,18 @@ const data = [
 ];
 
 // Create the instance of the class
-let parser = new dataParser(data);
+const parser = new DataParser(data);
 
 // Round the column data
 parser.roundOfColumnValue("Profit", 2);
-console.log(parser.logData());
+parser.logData();
 
 // Filter the matched data
 parser.filterTheColumnData("SubCategory", "Phones");
-console.log(parser.logData());
+parser.logData();
 
 parser.filterTheColumnData("Category", "Furniture");
-console.log(parser.logData());
+parser.logData();
 
 // Filter the multiple data
 //Filter format data
@@ -40,5 +40,5 @@ const filterList = [
   { column: "Category", value: "Technology" },
   { column: "SubCategory", value: "Phones" },
 ];
-let filteredData = parser.filterTheMultipleColumnValues(filterList);
+const filteredData = parser.filterTheMultipleColumnValues(filterList);
 console.log(filteredData);

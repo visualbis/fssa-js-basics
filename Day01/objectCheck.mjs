@@ -1,50 +1,45 @@
-class dataParser {
+class DataParser {
   head = [];
-
+  value = [];
   constructor(data) {
-    this.head = data;
+    this.head = data[0];
+    this.value = data.slice(1);
   }
 
   // round the column values function
   roundOfColumnValue(columnName, decimal) {
-    let columnIndex = this.head[0].indexOf(columnName);
+    let columnIndex = this.head.indexOf(columnName);
 
     if (columnIndex == -1) {
       throw new Error(
         `Column name ${columnName} is not exists in the data collections`
       );
     }
-    this.head = this.head.map((row, index) => {
-      if (index === 0) {
-        return row;
-      } else {
-        row[columnIndex] = parseFloat(row[columnIndex]).toFixed(decimal);
-        return row;
-      }
+
+    this.value = this.value.map((row) => {
+      row[columnIndex] = parseFloat(row[columnIndex]).toFixed(decimal);
+      return row;
     });
   }
 
   // filter the column data
   filterTheColumnData(columnName, columnValues) {
-    const columnIndex = this.head[0].indexOf(columnName);
+    const columnIndex = this.head.indexOf(columnName);
     if (columnIndex == -1) {
       throw new Error(
         `Column name ${columnName} is not exists in the data collections`
       );
     }
-    this.head.filter((row, index) => {
-      if (index === 0) {
-        return;
-      }
+    this.value.filter((row) => {
       return columnValues === row[columnIndex];
     });
   }
 
   // Filter the matched Values
   filterTheMultipleColumnValues(filterList) {
-    return data.filter((row) => {
+    return this.value.filter((row) => {
       return filterList.every((filter) => {
-        const columnIndex = data[0].indexOf(filter.column);
+        const columnIndex = this.head.indexOf(filter.column);
         return row[columnIndex] === filter.value;
       });
     });
@@ -52,7 +47,8 @@ class dataParser {
 
   // Show data of current collection function
   logData() {
-    return this.head;
+    console.log(this.head);
+    console.log(this.value);
   }
 }
-export { dataParser };
+export { DataParser };
