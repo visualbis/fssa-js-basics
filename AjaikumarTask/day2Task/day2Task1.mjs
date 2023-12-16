@@ -7,7 +7,7 @@ class DataGroup {
       this.values = salesData.slice(1);
     }
   
-    categeoryFinder(n, category) {
+    categoryFinder(n, category) {
       this.header.push("Grade", "Rank");
       let salesData = this.values;
         salesData.slice(1).sort((a, b) => b[1] - a[1]).forEach((row, index, array) => {
