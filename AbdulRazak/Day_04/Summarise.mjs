@@ -12,41 +12,48 @@ class SummarizeData {
             arr.push(this.max(arrayOfData, index));
             const count = this.nullCount(arrayOfData, index);
             arr.push(count);
-            arr.push(this.nullPer(arrayOfData, index, count));
+            arr.push(this.nullPer(arrayOfData, count));
             arrList.push(arr);
         }
         return arrList;
     }
-
     sum(arr, index) {
         let sum = 0;
         for (let i = 1; i < arr.length; i++) {
-            sum += parseFloat(arr[i][index]);
+            if(arr[i][index] !=null){
+            let num = parseFloat(arr[i][index]);
+         
+                sum += num
+            
+        }
         }
         return sum;
     }
-
     avg(arr, index) {
         let sum = 0;
         let count = 0;
         for (let i = 1; i < arr.length; i++) {
-            sum += parseFloat(arr[i][index]);
-            count++;
+            if(arr[i][index] !=null){
+                let num = parseFloat(arr[i][index]);
+              
+                    sum += num
+                    count++;
+                
+            }
+            
         }
         return sum / count;
     }
-
     min(arr, index) {
-        let min = 0;
+        let min = arr[1][index];
         for (let i = 1; i < arr.length; i++) {
-            const val = parseFloat(arr[i][index]);
+            let val = parseFloat(arr[i][index]);
             if (val < min) {
                 min = val;
             }
         }
         return min;
-    }
-
+    }   
     max(arr, index) {
         let max = 0;
         for (let i = 1; i < arr.length; i++) {
@@ -61,7 +68,7 @@ class SummarizeData {
     nullCount(arr, index) {
         let count = 0;
         for (let i = 1; i < arr.length; i++) {
-            if (arr[i][index].trim() === '') count++;
+            if (arr[i][index] == null) count++;
         }
         return count;
     }
@@ -72,18 +79,8 @@ class SummarizeData {
     }
 }
 
-// Example usage
-const summarizeData = new SummarizeData();
-const arrayOfData = [
-    ['ColumnName1', 'ColumnName2', 'ColumnName3'],
-    ['Value1', 'Value2', 'Value3'],
-    // ... more data rows
-];
-
-const column = ['ColumnName1', 'ColumnName2'];
-const result = summarizeData.summarize(arrayOfData, column);
-console.log(result);
 
 
 
 
+export default SummarizeData;
