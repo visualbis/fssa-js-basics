@@ -1,7 +1,0 @@
-const snakePositionData = {
-
-}
-
-const ladderPositionData = {
-    
-}

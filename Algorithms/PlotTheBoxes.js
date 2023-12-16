@@ -37,15 +37,12 @@ let maxRow = -Infinity;
 let maxColumn = -Infinity;
 
 // Iterate through the data array
-for (let i = 0; i < data.length; i++) {
-  let [row, column] = data[i].split(",");
-
-  row = parseInt(row);
-  column = parseInt(column);
+data.forEach((entry) => {
+  let [row, column] = entry.split(",").map(Number);
 
   maxRow = Math.max(maxRow, row);
   maxColumn = Math.max(maxColumn, column);
-}
+});
 
 // Map the value as column and row
 let mappedData = data.map((entry) => {
