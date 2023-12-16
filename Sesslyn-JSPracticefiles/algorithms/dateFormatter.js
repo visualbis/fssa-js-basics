@@ -5,7 +5,7 @@ function solve(date, dateFormat) {
     const components = {
         year: "0",
         month: "0",
-        day: "0"
+        date: "0"
     };
   
     for (let i = 0; i < dateFormatArray.length; i++) {
@@ -28,15 +28,15 @@ function solve(date, dateFormat) {
             case "dd":
             case "d":
                 if (value.length <= 2 && parseInt(value) >= 1 && parseInt(value) <= 31) {
-                    components.day = value.padStart(2, "0");
+                    components.date = value.padStart(2, "0");
                 }
                 break;
         }
     }
 
-    return [components.year, components.month, components.day];
+    return [components.year, components.month, components.date];
 }
 
-console.log(solve("22/3/1998", "dd-MM-yyyy")); // Output: ['1998', '03', '22']
+console.log(solve("22/3/1998", "dd-MM-yyyy")); // Output: ['1998', '03', '22'], new Date
 console.log(solve("20-2122", "dd-yyyy")); // Output: [ '2122', '0', '20']
 console.log(solve("03-22", "dd-yy")); // Output: ['22', '0', '03']

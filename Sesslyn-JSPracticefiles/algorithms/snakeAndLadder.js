@@ -1,76 +1,141 @@
-var players = ["Sesslyn", "Pappu"];
-var playerIndex = 0;
-var positions = [0, 0];
- 
-function rollDice() {
-    return Math.ceil(Math.random() * 6);
-}
- 
-function handleSnakesAndLadders(position) {
-    // Define snakes and ladders mapping
-    var snakesAndLadders = {
-        16: 6,   // Snake: from 16 to 6
-        47: 26,  // Snake: from 47 to 26
-        49: 11,  // Snake: from 49 to 11
-        56: 53,  // Snake: from 56 to 53
-        62: 19,  // Snake: from 62 to 19
-        64: 60,  // Snake: from 64 to 60
-        24: 87,  // Ladder: from 24 to 87
-        73: 93,  // Ladder: from 73 to 93
-        95: 75,  // Snake: from 95 to 75
-        78: 98   // Ladder: from 78 to 98
+const snakeData = [
+    [62, 5],
+    [33, 6],
+    [49, 9],
+    [88, 16],
+    [41, 20],
+    [56, 53],
+    [98, 64],
+    [93, 73],
+    [95, 75],
+  ];
+  
+  const ladderData = [
+    [2, 37],
+    [27, 46],
+    [10, 32],
+    [51, 68],
+    [61, 79],
+    [65, 84],
+    [71, 91],
+    [81, 100],
+  ];
+  
+  const playerData = [
+    { player: "Gaurav", moves: [{ diceValue: 0, position: 0 }] },
+    { player: "Sagar", moves: [{ diceValue: 0, position: 0 }] },
+    // { player: "Susi", moves: [{ diceValue: 0, position: 0 }] },
+  ];
+  
+  const snakePositionData = snakeData.map((pair) => {
+    return {
+      from: pair[0],
+      to: pair[1],
     };
- 
-    // Check if the current position has a snake or ladder
-    if (snakesAndLadders[position]) {
-        var newPosition = snakesAndLadders[position];
- 
-        // Check if it's a snake or a ladder
-        if (newPosition < position) {
-            console.log("Oops! " + players[playerIndex] + " encountered a snake at position " + position);
-        } else {
-            console.log("Yay! " + players[playerIndex] + " climbed a ladder at position " + position);
-        }
- 
-        console.log(players[playerIndex] + " moved from " + position + " to " + newPosition);
-        positions[playerIndex] = newPosition;
+  });
+  
+  const ladderPositionData = ladderData.map((pair) => {
+    return {
+      from: pair[0],
+      to: pair[1],
+    };
+  });
+  
+  let count = 0;
+  // Function to roll the dice
+  const rollDice = () => {
+    return Math.ceil(Math.random() * 6) + 1;
+  };
+  
+  // Assuming destination and numberOfPlayers are defined somewhere in your code
+  const destination = 100;
+  const numberOfPlayers = playerData.length;
+  
+  const destinationReachedPlayers = [];
+  
+  // Game loop
+  let turnOfPlayer = 0;
+  
+  while (destinationReachedPlayers.length < numberOfPlayers - 1) {
+    if (destinationReachedPlayers.indexOf(turnOfPlayer) != -1) {
+      continue;
     }
-}
- 
-function movePlayer() {
-    var currentPlayer = players[playerIndex];
-    var currentPosition = positions[playerIndex];
- 
-    var diceValue = rollDice();
-    var newPosition = currentPosition + diceValue;
- 
-    // Check if the newPosition is within the valid range (1 to 100)
-    if (newPosition <= 100) {
-        positions[playerIndex] = newPosition;
-        handleSnakesAndLadders(newPosition);
- 
-        if (positions[playerIndex] === 100) {
-            console.log(currentPlayer + " rolled a " + diceValue + " and moved from " + currentPosition + " to " + positions[playerIndex]);
-            console.log(currentPlayer + " wins!");
-            return true; // Player wins
-        } else {
-            console.log(currentPlayer + " rolled a " + diceValue + " and moved from " + currentPosition + " to " + positions[playerIndex]);
- 
-            playerIndex = (playerIndex + 1) % players.length;
-            return false; // Player didn't win yet
-        }
+    let diceValue = rollDice();
+    let lastPosition =
+      playerData[turnOfPlayer].moves.length > 0? playerData[turnOfPlayer].moves[playerData[turnOfPlayer].moves.length - 1
+          ].position
+        : 0;
+    count++;
+  
+    let newPosition = lastPosition + diceValue;
+    console.log("Before new Position : " + newPosition);
+  
+    if (newPosition > destination) {
+      continue;
+    }
+    // Check the new position in the ladder
+    // Check the new position in the ladder
+    ladderPositionData.forEach((item) => {
+      if (newPosition == item.from) {
+        console.log("Ladder");
+        newPosition = item.to;
+      }
+    });
+  
+    // Check the new position in the snake
+    snakePositionData.forEach((item) => {
+      if (newPosition == item.from) {
+        console.log("Snake");
+        newPosition = item.to;
+      }
+    });
+  
+    console.log("After new Postion : " + newPosition);
+    // Ensure newPosition is not negative
+    if (newPosition >= 0) {
+      playerData[turnOfPlayer].moves.push({
+        diceValue: diceValue,
+        position: newPosition,
+      });
     } else {
-        // newPosition exceeds 100, don't move the player
-        console.log(currentPlayer + " rolled a " + diceValue + " but cannot move beyond 100. Current position: " + currentPosition);
-        playerIndex = (playerIndex + 1) % players.length;
-        return false; // Player didn't win yet
+      console.error("Invalid game state: Negative position");
     }
-}
- 
-// Simulate the game for 10 turns
-while (true && playerIndex >= 0 && playerIndex < players.length) {
-    if (movePlayer()) {
-        break; // Exit the loop if a player wins
+  
+    // Check if the current player has reached the destination
+    if (newPosition >= destination) {
+      console.log(
+        `${playerData[turnOfPlayer].player} has reached the destination!`
+      );
+      destinationReachedPlayers.push(turnOfPlayer);
     }
-}
-
+  
+    // Switch to the next player's turn
+    turnOfPlayer = (turnOfPlayer + 1) % numberOfPlayers;
+  }
+  
+  if (destinationReachedPlayers.length === numberOfPlayers - 1) {
+    // All players, except one, have reached the destination
+    console.log("Game Over! Showing ranks...");
+  
+    // Sort players by their positions
+    playerData.sort(
+      (a, b) =>
+        b.moves[b.moves.length - 1].position -
+        a.moves[a.moves.length - 1].position
+    );
+  
+    // Display the ranks
+    playerData.forEach((player, index) => {
+      console.log(`Rank ${index + 1}: ${player.player}`);
+    });
+  
+    playerData.forEach((item) => {
+      item.moves.forEach((val) => {
+        console.log(
+          `${item.player} scored ${val.diceValue} and moved to ${val.position}`
+        );
+      });
+    });
+  } else {
+    console.log("Game still in progress...");
+  }

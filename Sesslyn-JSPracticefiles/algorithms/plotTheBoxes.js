@@ -1,5 +1,3 @@
-
-
 function plotTheBoxes(inputArray) {
     const vertices = inputArray.map(item => item.split(',').map(Number));
     const sortedVertices = vertices.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
@@ -12,7 +10,7 @@ function plotTheBoxes(inputArray) {
     sortedVertices.forEach(([row, column]) => {
       matrix[row - 1][column - 1] = 1;
     });
-    
+
     let matrixPlot = matrix.map(row => row.join(' ')).join('\n')
     console.log(matrixPlot);
 

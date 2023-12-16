@@ -65,9 +65,7 @@ class DataParser2 {
 
   rankTheColumn = (sourceColumn) => {
     const index = this.findIndex(sourceColumn);
-    const sortedValues = this.values
-      .slice()
-      .sort((a, b) => parseInt(b[index]) - parseInt(a[index]));
+    const sortedValues = this.values.slice().sort((a, b) => parseInt(b[index]) - parseInt(a[index]));
     this.header.push("Rank");
 
     let currentRank = 1;
