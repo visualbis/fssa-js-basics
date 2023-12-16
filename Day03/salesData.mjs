@@ -25,7 +25,7 @@ const data = [
 
 const categoryDataManager = new CategoryDataManager(data);
 const categoryData = {
-  category: ["Sales", "Quantity", "Discount percentage"],
+  category: ["Sales", "Quantity"],
   requirement: [
     "min",
     "max",

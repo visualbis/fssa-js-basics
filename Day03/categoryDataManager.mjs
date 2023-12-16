@@ -4,7 +4,7 @@ class CategoryDataManager {
 
   constructor(data) {
     this.head = data[0];
-    this.values.slice(0);
+    this.values = data.slice(1);
   }
 
   // date measure operation
@@ -13,40 +13,30 @@ class CategoryDataManager {
     let measureHead = [];
 
     // Add "Values" to the measureHead array
-    measureHead.push("Values");
 
     // Iterate through each item in the 'requirement' array of measureData
     measureData.requirement.forEach((items) => measureHead.push(items));
 
     measureData.category.forEach((element) => {
-      console.log(element);
       let findIndex = this.head.indexOf(element);
-
       let dataSet = this.values.map((item) => {
-        console.log("Hello there!  ");
         return item[findIndex];
       });
 
-
       let maxVal = Math.max(...dataSet);
-      console.log(maxVal);
 
       let minVal = Math.min(...dataSet);
-      console.log(minVal);
 
       let avgValue =
         dataSet.reduce((sum, item) => sum + item, 0) / dataSet.length;
-      console.log(avgValue);
 
-      measuredData.push(maxVal + " " + minVal + " " + avgValue);
-
-      //const standardDeviation = this.calculateStandardDeviation(dataSet);
-      // measuredData.push(standardDeviation);
+      const standardDeviation = this.calculateStandardDeviation(dataSet);
+      measuredData.push({ maxVal, minVal, avgValue, standardDeviation });
     });
 
     // Log the measureHead and measuredData arrays to the console
-    // console.log(measureHead);
-    //  console.log(measuredData);
+    console.log(measureHead);
+    console.log(measuredData);
   }
 
   // calculate standard deviation
@@ -67,7 +57,6 @@ class CategoryDataManager {
 
     // Calculate the standard deviation (take the square root)
     const standardDeviation = Math.sqrt(meanSquaredDifferences);
-    console.log(standardDeviation);
     return standardDeviation;
   }
 
