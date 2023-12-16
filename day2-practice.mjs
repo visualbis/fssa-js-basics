@@ -1,5 +1,5 @@
 import { Classification } from "./classification.mjs";
-
+                     
 const salesData = [
     ["Product", "Sales"],
     ["Milkybar", "200"],
@@ -332,15 +332,29 @@ const salesData = [
     ["Lollipop", "December", "950"],
   ];
 
+  let rank = [
+    {
+      column : 'Poor',
+      from : 0,
+      to : 300
+    },
+    {
+      column : 'Neutral',
+      from : 300,
+      to : 500
+    },
+    {
+      column : 'Good',
+      from : 500,
+      to : 1000
+    }
+]
+
   let group = new Classification(salesData);
-   group.addGroupColumn('Sales');
+   group.addGroupColumn(rank);
    group.getColumnIndex('Sales');
    group.addRankColumn('Sales');
    group.top5('Rank');
    
    console.log(group.header);
    console.log(group.values);
-
-
-   
- 

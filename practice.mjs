@@ -54,10 +54,23 @@
       ["Furniture","Tables","-17725.481100000015","206965.53199999995"  ]
     ]
  
+  let obj = [{
+    column: "Category",
+    value: "Technology"
+  },
+  {
+    column : "SubCategory",
+    value : "Phones"
+  }];
+  
+ 
+  
     let datarounder = new Datarounder(data);
-    datarounder.filterColumn('Category' ,'Technology');
+    datarounder.filterColumns(obj);
+
     
+  
   // const salesProfitCalculator = new SalesProfitCalculator(data);
   // const newData = salesProfitCalculator.addSalesProfitColumn();
   // console.log(newData);
- 
+      

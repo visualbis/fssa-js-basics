@@ -19,19 +19,45 @@ class Datarounder{
           row[index] = newValue;
         });
     }
+
+    filterColumn(obj) {
+      let columnIndex = this.header.indexOf(obj.column);
     
-    filterColumn (Column, value){
-      const index = this.header.indexOf(Column);
-        if (index === -1) {
-          throw new Error(`Column ${Column} not found`);
+      if (columnIndex === -1) {
+        throw new Error(`Column not found`);
+      }
+    
+      this.values.forEach((row) => {
+        if (row[columnIndex] === obj.value) {
+          console.log(row);
         }
-        this.values.forEach((row) => {
-          const val = row[index];
-          if(value == val){
-            console.log(row);
-          }
-        });
+      });
     }
+
+    filterColumns(objArray) {
+      let conditions = objArray.map(obj => {
+        let columnIndex = this.header.indexOf(obj.column);
+    
+        if (columnIndex === -1) {
+          throw new Error(`Column not found: ${obj.column}`);
+        }
+    
+        return row => row[columnIndex] === obj.value;
+      });
+    
+      let filteredData = this.values.filter(row => conditions.every(condition => condition(row)));
+    
+      filteredData.forEach(row => {
+        console.log(row);
+      });
+    }
+    
+    
+    
+
+
+
+
 }
 
 export { Datarounder };

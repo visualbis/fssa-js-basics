@@ -15,50 +15,16 @@ class Classification{
         }
         return index;
       }
-
-    addGroupColumn(columnName) {
-        const salesColumnIndex = this.getColumnIndex(columnName);
-    
-        this.header.push('Group');
-    
-        this.values.forEach((row) => {
-          const sales = parseFloat(row[salesColumnIndex]);
-          let group;
-          if (sales >= 100 && sales <= 300) {
-            group = 'Poor';
-          } else if (sales > 300 && sales <= 500) {
-            group = 'Neutral';
-          } else if (sales > 500 && sales <= 1000) {
-            group = 'Good';
-          } else {
-            group = 'Unknown';
-          }
-    
-          row.push(group);
-        });
-      }
-
-    // addRankColumn(columnName) {
-    //     const salesColumnIndex = this.getColumnIndex(columnName);
-    
-    //     if (salesColumnIndex === -1) {
-    //       console.error('Column not found. Unable to add the rank column.');
-    //       return;
-    //     }
-    //     this.header.push('Rank');
-    
-    //     // Create an array of unique sales values
-    //     const uniqueSales = [...new Set(this.values.map((row) => parseFloat(row[salesColumnIndex])))];
-    
-    //     uniqueSales.sort((a, b) => b - a);
-
-    //     this.values.forEach((row) => {
-    //       const sales = parseFloat(row[salesColumnIndex]);
-    //       const rank = uniqueSales.indexOf(sales) + 1;
-    //       row.push(rank);
-    //     });
-    //   }
-
+    addGroupColumn(object){
+      this.header.push("Group")
+      this.values.forEach((dataRow) => {
+         object.forEach((objectRow) => {
+            if(dataRow[1] >= objectRow.from && dataRow[1] < objectRow.to){
+              dataRow.push(objectRow.column);
+            }
+         })
+      })
+    }
 
     addRankColumn(columnName) {
         const salesColumnIndex = this.getColumnIndex(columnName);
@@ -98,8 +64,8 @@ class Classification{
     }
     
     findRunningByTotalMonth() {
+
     let result = [];
- 
     let uniqueProducts = [...new Set(this.values.map((row) => row[0]))];
     let uniqueMonths = [...new Set(this.values.map((row) => row[1]))];
  
@@ -127,11 +93,9 @@ class Classification{
     this.values.forEach((product) => {
       console.log(`Product: ${product.product}`);
       product.data.forEach((entry) => {
-        console.log(`  ${entry[0]}: ${entry[1]}`);
+        console.log(`${entry[0]}: ${entry[1]}`);
       });
     });
   }
-    
-    
 }
 export {Classification};
