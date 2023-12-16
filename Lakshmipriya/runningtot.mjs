@@ -2,7 +2,7 @@
 
 class SalesData {
     constructor(data) {
-      // Exclude the header row
+      
       this.data = data.slice(1);
       this.runningTotal = {};
     }
