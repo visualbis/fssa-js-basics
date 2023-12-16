@@ -5,22 +5,22 @@ class DataParse{
         this.header = data[0];
         this.values = data.slice(1);
     }
-    columnRoundOff(col,num){
-        let index  =  this.header.indexOf(col);
+    columnRoundOff(column,number){
+        let index  =  this.header.indexOf(column);
         if(index!=-1){
-            let n = numberOfDecimal(num);
+            let n = numberOfDecimal(number);
             for(let i = 1 ; i < this.values.length ; i++){
                 this.values[i][index] = Math.round(this.values[i][index]*n)/n;
             }
         }      
     }
-    addColumn(col,per){
-        let index  =  this.header.indexOf(col);
+    addColumn(column,percentage){
+        let index  =  this.header.indexOf(column);
         if(index!=-1){
-            this.header.push(col + " + " + per + "%");
+            this.header.push(column + " + " + percentage + "%");
             for(let i = 1 ; i < this.values.length ; i++){
                 let value =  this.values[i][index];
-                this.values[i].push((per/100)*value);
+                this.values[i].push((percentage/100)*value);
             }
         }
 
@@ -32,7 +32,7 @@ class DataParse{
             
         });
     }
-    Deepfilter(arr){
+    deepfilter(arr){
         let index = []
         for(let i = 0; i < arr.length ; i++){
            index.push(this.header.indexOf(arr[i]["column"]))
