@@ -30,5 +30,6 @@ function tossCoin(count) {
         console.log('Player 2 wins!');
         console.log("The total score of the player: "+player2Score);
     }
+    
 
 
