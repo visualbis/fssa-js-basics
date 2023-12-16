@@ -3,27 +3,26 @@ class Data {
     header = [];
     value = [];
 
-
     constructor(data) {
         this.header = data[0];
         this.value = data.slice(1);
     }
 
-    addGroup(object) {
+    groupRules(object) {
        
         this.header.push("Group")
 
         this.value.forEach((row) => {
             
-            for (let i = 0; i < object.length; i++) {
-                
-                if (row[1] >= object[i].from && row[1] <= object[i].to) {
+            object.forEach((groupRow) => {
 
-                    row.push(object[i].columnName);
+                if (row[1] >= groupRow.from && row[1] <= groupRow.to) {
+
+                    row.push(groupRow.columnName);
                 
                 }
-            }
 
+            })
         })
     }
 

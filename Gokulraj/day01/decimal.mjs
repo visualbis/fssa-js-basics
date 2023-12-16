@@ -2,16 +2,16 @@ class Decimal {
 
     header = [];
     value = [];
-    Data =[];
+    data =[];
 
     constructor(data) {
         this.header = data[0];
         this.value = data.slice(1);
-        this.Data = data.slice(1);
+        this.data = data.slice(1);
     }
 
     filterColumn(columnname, value) {
-        const index = this.header.indexOf(columnname);
+        const index = this.header.indexOf(columname);
         if (index === -1) {
             throw new Error(`Column ${columnname} not found`);
         }
@@ -27,7 +27,7 @@ class Decimal {
 
         if (filterList.length === 0) {
           console.log("Filter list is empty");
-          return [this.header, this.Data];
+          return [this.header, this.data];
         }
        
         filterList.forEach((filter) => {
@@ -38,7 +38,7 @@ class Decimal {
           this.Data = this.Data.filter((row) => row[index] === filter.value);
         });
        
-       console.log(this.Data,this.header)
+       console.log(this.data,this.header)
       }
 
 

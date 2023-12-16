@@ -332,7 +332,7 @@ let datasetMonth = [
 ];
 
 
-let Group = [
+let object = [
     {
         "columnName": "Poor",
         "from": 0,
@@ -352,10 +352,10 @@ let Group = [
 ]
 
 let data = new Data(dataset);
-data.addGroup(Group);
-data.assignRank(5);
+data.groupRules(object);
+// data.assignRank(5);
 data.logData();
 
 
-let data2 = new Data(datasetMonth);
-data2.runningTotal();
+// let data2 = new Data(datasetMonth);
+// data2.runningTotal();
