@@ -260,7 +260,7 @@ class SalesData {
       ["Nesley", "October", "800"],
       ["Kitkat", "October", "250"],
       ["Five Star", "October", "350"],
-      ["Snikkers", "October", "750"],
+      ["Snikkers", "October", "750"]
       ["Munch", "October", "550"],
       ["Perk", "October", "650"],
       ["Center Fresh", "October", "850"],
