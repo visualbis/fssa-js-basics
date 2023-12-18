@@ -1,5 +1,5 @@
 
-import { SalesDataFilter } from "../karthik/Top5Product.mjs";
+import { SalesDataFilter } from "./Top5Product.mjs";
 
 const salesData = [
     ["Product", "Sales"],

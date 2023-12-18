@@ -35,7 +35,7 @@ class DataParser {
       let values2 = [];
       header2 = productData[0];
       const groupResult = this.groupByColumn(productData, sourceColumn);
-      values2 = groupResult.slice(1);
+      values2 = groupResult.slice(1); 
   
       const index = header2.indexOf(sourceColumn);
       if (index === -1) {
@@ -54,7 +54,7 @@ class DataParser {
         const value = values2[i];
         const group = value[index];
         let number = 0;
-  
+        
         for (let j = i; j >= 0; j--) {
           const value1 = values2[j];
           const group1 = value1[index];
