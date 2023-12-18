@@ -23,15 +23,47 @@ class CategoryDataManager {
         return item[findIndex];
       });
 
-      let maxVal = Math.max(...dataSet);
+      const maxVal = Math.max(...dataSet);
 
-      let minVal = Math.min(...dataSet);
+      const minVal = Math.min(...dataSet);
 
-      let avgValue =
-        dataSet.reduce((sum, item) => sum + item, 0) / dataSet.length;
+      const avgValue =
+        dataSet.reduce((sum, item) => (item !== null ? sum + item : sum), 0) /
+        dataSet.length;
 
       const standardDeviation = this.calculateStandardDeviation(dataSet);
-      measuredData.push({ maxVal, minVal, avgValue, standardDeviation });
+
+      const nullCount = this.getTheNullCount(dataSet);
+
+      const nullCountPercentage = this.getNullCountPercentage(
+        nullCount,
+        this.head.length,
+        this.values.length
+      );
+      const firstQuarterValue = this.getFirstQuarterData(
+        this.values,
+        this.head,
+        findIndex,
+        "Date"
+      );
+      const secondQuaterValue = this.getSecondQuarterData(
+        this.values,
+        this.head,
+        findIndex,
+        "Date"
+      );
+
+      // Push the all the require data
+      measuredData.push({
+        maxVal,
+        minVal,
+        avgValue,
+        standardDeviation,
+        nullCount,
+        nullCountPercentage,
+        firstQuarterValue,
+        secondQuaterValue,
+      });
     });
 
     // Log the measureHead and measuredData arrays to the console
@@ -58,6 +90,61 @@ class CategoryDataManager {
     // Calculate the standard deviation (take the square root)
     const standardDeviation = Math.sqrt(meanSquaredDifferences);
     return standardDeviation;
+  }
+
+  // Find the null count
+  getTheNullCount(columnData) {
+    let count = 0;
+    columnData.forEach((item) => {
+      if (item == null) {
+        count++;
+      }
+    });
+
+    return count;
+  }
+  // Fond the null count percentage
+
+  getNullCountPercentage(nullData, headDataLength, entireItemLength) {
+    return (nullData * 100) / (headDataLength * entireItemLength);
+  }
+
+  // get quater data functions
+  getFirstQuarterData(valuesData, headData, valueColumnIndex, dateColumn) {
+    let quarterValue = 0;
+    let dateColumnIndex = headData.indexOf(dateColumn);
+
+    valuesData.forEach((item) => {
+      let date = new Date(item[dateColumnIndex]);
+
+      if (date.getMonth() >= 0 && date.getMonth() <= 2) {
+        let value = parseFloat(item[valueColumnIndex]);
+        if (!isNaN(value)) {
+          quarterValue += value;
+        }
+      }
+    });
+
+    return quarterValue;
+  }
+
+  getSecondQuarterData(valuesData, headData, valueColumnIndex, dateColumn) {
+    let quarterValue = 0;
+    let dateColumnIndex = headData.indexOf(dateColumn);
+
+    valuesData.forEach((item) => {
+      // Parse the date string into a Date object
+      let date = new Date(item[dateColumnIndex]);
+
+      if (date.getMonth() >= 3 && date.getMonth() <= 5) {
+        let value = parseFloat(item[valueColumnIndex]);
+        if (!isNaN(value)) {
+          quarterValue += value;
+        }
+      }
+    });
+
+    return quarterValue;
   }
 
   // Log Date

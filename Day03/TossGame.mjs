@@ -1,10 +1,8 @@
 const wonPlayerData = [];
+const roundData = [];
 
 function tossCoin() {
-  // Generate a random number (0 or 1)
   const randomNumber = Math.floor(Math.random() * 2);
-
-  // Use the random number to determine the result
   const result = randomNumber === 0 ? "heads" : "tails";
 
   return result;
@@ -13,6 +11,7 @@ function tossCoin() {
 let playerData = [];
 let numberOfPlayers = 2;
 let destinationScore = 10;
+let round = 1;
 
 while (!wonPlayerData.some((player) => player.score >= destinationScore)) {
   let outcome = tossCoin();
@@ -24,15 +23,32 @@ while (!wonPlayerData.some((player) => player.score >= destinationScore)) {
   );
 
   if (currentPlayerData) {
-    // Update the existing entry
     currentPlayerData.score += point;
   } else {
-    // Add a new entry for the player
     playerData.push({ player: numberOfPlayers, score: point });
+  }
+
+  // Store round data
+  let roundPlayerData = roundData.find((data) => data.round === round);
+  if (roundPlayerData) {
+    roundPlayerData["player" + numberOfPlayers] = currentPlayerData
+      ? currentPlayerData.score
+      : point;
+  } else {
+    let newRoundData = { round: round };
+    newRoundData["player" + numberOfPlayers] = currentPlayerData
+      ? currentPlayerData.score
+      : point;
+    roundData.push(newRoundData);
   }
 
   // Switch to the next player
   numberOfPlayers = (numberOfPlayers % 2) + 1;
+
+  // Check if a new round has started
+  if (numberOfPlayers === 1) {
+    round++;
+  }
 
   // Determine the winner(s)
   wonPlayerData.length = 0;
@@ -43,5 +59,5 @@ while (!wonPlayerData.some((player) => player.score >= destinationScore)) {
   });
 }
 
-console.log("Player data:", playerData);
+console.log("Round data:", roundData);
 console.log("Winner(s):", wonPlayerData);
