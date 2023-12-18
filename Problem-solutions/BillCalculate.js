@@ -20,13 +20,12 @@ function billFinder(bill, billPaid) {
         let personBill = bill[i];
         let personPaid = billPaid.find((paid) => paid.name === personBill.name);
      
-        if (personPaid) {
             let totalAmountPaid =
                 personPaid.morning + personPaid.afternoon + personPaid.night;
             let totalAmount = personBill.morning + personBill.afternoon + personBill.night;
             let remainingAmount = totalAmountPaid - totalAmount;
             result.push({ name: personBill.name, totalAmountPaid, remainingAmount });
-        }
+        
     }
 
     return result;
