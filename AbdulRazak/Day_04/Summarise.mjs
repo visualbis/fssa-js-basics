@@ -15,17 +15,17 @@ class SummarizeData {
             arr.push(this.nullPer(arrayOfData, count));
             arrList.push(arr);
         }
+        
         return arrList;
     }
+
     sum(arr, index) {
         let sum = 0;
         for (let i = 1; i < arr.length; i++) {
             if(arr[i][index] !=null){
-            let num = parseFloat(arr[i][index]);
-         
+            let num = parseFloat(arr[i][index]);  
                 sum += num
-            
-        }
+        }   
         }
         return sum;
     }
@@ -77,6 +77,7 @@ class SummarizeData {
         const total = arr.length - 1;
         return (count / total) * 100;
     }
+    s
 }
 
 
