@@ -1,4 +1,4 @@
-class DataParser3 {
+class Aggregate {
   header = [];
   values = [];
   resultHeader = [
@@ -196,4 +196,4 @@ class DataParser3 {
   }
 }
 
-export { DataParser3 };
+export { Aggregate };
