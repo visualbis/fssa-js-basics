@@ -70,16 +70,13 @@ while (destinationReachedPlayers.length < numberOfPlayers - 1) {
   count++;
 
   let newPosition = lastPosition + diceValue;
-  console.log("Before new Position : " + newPosition);
 
   if (newPosition > destination) {
     continue;
   }
   // Check the new position in the ladder
-  // Check the new position in the ladder
   ladderPositionData.forEach((item) => {
     if (newPosition == item.from) {
-      console.log("Ladder");
       newPosition = item.to;
     }
   });
@@ -87,13 +84,10 @@ while (destinationReachedPlayers.length < numberOfPlayers - 1) {
   // Check the new position in the snake
   snakePositionData.forEach((item) => {
     if (newPosition == item.from) {
-      console.log("Snake");
       newPosition = item.to;
     }
   });
 
-  console.log("After new Postion : " + newPosition);
-  // Ensure newPosition is not negative
   if (newPosition >= 0) {
     playerData[turnOfPlayer].moves.push({
       diceValue: diceValue,

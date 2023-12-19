@@ -1,0 +1,42 @@
+.counter-div-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2%;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 3px 8px;
+  font-size: 400;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-count-button {
+  background-color: transparent;
+  color: blue;
+  border: 1px solid blue;
+  border-radius: 5px;
+}
+.add-count-button:hover {
+  background-color: blue;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.minus-count-button {
+  background-color: transparent;
+  color: rgb(240, 74, 102);
+  border: 1px solid rgb(240, 74, 102);
+  border-radius: 5px;
+}
+.minus-count-button:hover {
+    background-color: rgb(240, 74, 102);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 5px;
+  }
