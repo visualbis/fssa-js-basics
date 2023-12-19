@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .countDown {
+    text-align: center;
+    background: #333;
+    padding-bottom: 25px;
+    margin-left: 50px;
+    padding-top: 30px;
+    margin-top: 10px;
+  }
+  
+  h1 {
+    color: #000;
+    margin-top: -10px;
+  }
+  h2{
+    color: #fff;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  span {
+    padding: 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  

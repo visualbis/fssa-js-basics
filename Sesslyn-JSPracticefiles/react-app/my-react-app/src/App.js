@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Todo from "./Todo/Todo";
+import Timer from "./Timer/Timer";
+import CountDown from "./CountDown/CountDown";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main-section">
+      <div>
+        <h1>Todo App</h1>
+        <Todo />
+      </div>
+      <div>
+        <h1>Timer App</h1>
+        <Timer />
+      </div>
+      <div>
+        <h1>CountDown</h1>
+        <CountDown />
+      </div>
     </div>
   );
 }
