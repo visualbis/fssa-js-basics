@@ -4,12 +4,12 @@ const data = [
     ["Product", "Category", "Date", "Sales", "Quantity", "Discount Percentage"],
     ["High-End Laptop", "Technology", "2023-12-01", 1200, 5, 10],
     ["Premium Printer", "Office Supplies", "2023-12-02", 800, 8, 20],
-    ["Luxury Sofa", "Furniture", "2023-12-03", 1500, 10, 15],
+    ["Luxury Sofa", "Furniture", "2023-12-03", null, 10, 15],
     ["Smartphone", "Technology", "2023-12-04", 2000, 7, 5],
-    ["Executive Desk", "Office Supplies", "2023-12-05", 1000, 12, 20],
+    ["Executive Desk", "Office Supplies", "2023-12-05", 1000, null, 20],
     ["Elegant Dining Table", "Furniture", "2023-12-06", 1800, 6, 10],
     ["VR Headset", "Technology", "2023-12-07", 1600, 9, 12],
-    ["Modern Office Chair", "Office Supplies", "2023-12-08", 2200, 8, 18],
+    ["Modern Office Chair", "Office Supplies", "2023-12-08", 2200, 8, null],
     ["Queen Size Bed", "Furniture", "2023-12-09", 1200, 5, 8],
     ["4K Smart TV", "Technology", "2023-12-10", 2500, 7, 15],
     ["High-Performance Printer", "Office Supplies", "2023-12-11", 1300, 10, 20],
@@ -30,4 +30,13 @@ let sales = new Sales(data);
 
 sales.sum();
 sales.sum(headArray);
- sales.minValue();
+sales.avg();
+sales.avg(headArray);
+sales.minValue();
+sales.minValue(headArray);
+sales.maxValue();
+sales.maxValue(headArray);
+sales.nullCount();
+sales.nullCount(headArray);
+sales.nullpercentage();
+sales.nullpercentage(headArray);
