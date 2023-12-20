@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Timer from './timer';
 import "./todo.css"
 import CreateTask from './create/CreateTask';
 import ViewTask from './view/ViewTask';
