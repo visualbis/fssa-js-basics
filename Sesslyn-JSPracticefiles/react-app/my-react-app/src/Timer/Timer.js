@@ -39,12 +39,10 @@ const Timer = () => {
             {`${formatTimeUnit(hours)}:${formatTimeUnit(minutes)}:${formatTimeUnit(seconds)}.${formatTimeUnit(milliseconds)}`}
           </div>
           <div className="btn-component">
-            <button className="stopwatch-btn" onClick={startAndStop}>
+            <button onClick={startAndStop}>
               {isRunning ? 'Stop' : 'Start'}
             </button>
-            <button className="stopwatch-btn" onClick={reset}>
-              Reset
-            </button>
+            <button onClick={reset}>Reset</button>
           </div>
         </div>
       </div>
