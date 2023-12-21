@@ -1,25 +1,59 @@
-.todo-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #343a40;
-    color: #fff;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .todo-item:hover {
-    background-color: #495057;
-  }
-  
-  .todo-item-actions button {
-    margin-right: 5px;
-  }
-  
-  .todo-item-actions button:hover {
-    background-color: #adb5bd;
-    color: #212529;
-  }
-  
+/* TodoApp.css */
+
+.todo-app-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.todo-input-group {
+  width: 100%;
+}
+
+.todo-input-group .FormControl {
+  border-radius: 5px;
+}
+
+.todo-input-group .InputGroup {
+  display: flex;
+  align-items: center;
+}
+
+.todo-input-group .Button {
+  margin-left: 10px;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+.list-group-item .delete-button,
+.list-group-item .edit-button {
+  cursor: pointer;
+  font-size: 14px;
+  color: #dc3545;
+  border: none;
+  background: none;
+  margin-left: 10px;
+  padding: 0;
+}
+
+.list-group-item .edit-button {
+  color: #007bff;
+}
+
+.list-group-item .edit-button:hover {
+  text-decoration: underline;
+}
+
