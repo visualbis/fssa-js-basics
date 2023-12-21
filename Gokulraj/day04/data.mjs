@@ -1,5 +1,4 @@
-import { Sales } from "./sales.mjs"
-
+import { Sales } from "./sales.mjs";
 const data = [
     ["Product", "Category", "Date", "Sales", "Quantity", "Discount Percentage"],
     ["High-End Laptop", "Technology", "2023-12-01", 1200, 5, 10],
@@ -23,20 +22,11 @@ const data = [
     ["Home Theater System", "Technology", "2023-12-19", 2000, 8, 20],
     ["Executive Office Desk", "Office Supplies", "2023-12-20", 1400, 6, 15],
 ];
-
+ 
 const headArray = ["Sales", "Quantity"];
-
+ 
 let sales = new Sales(data);
-
+ 
 sales.sum();
 sales.sum(headArray);
-sales.avg();
-sales.avg(headArray);
 sales.minValue();
-sales.minValue(headArray);
-sales.maxValue();
-sales.maxValue(headArray);
-sales.nullCount();
-sales.nullCount(headArray);
-sales.nullpercentage();
-sales.nullpercentage(headArray);
