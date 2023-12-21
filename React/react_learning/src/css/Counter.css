@@ -2,7 +2,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
+}
+
+.counter-inside-div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   gap: 2%;
+  width: 100%;
+}
+
+.counter-head-div {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+.counter-head {
+  font-size: 500;
+}
+.counter-calculation-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+}
+.counter-calculation-inside-div {
+  display: flex;
+  width: 99%;
+  align-items: center;
+  gap: 5%;
 }
 
 button {
@@ -15,6 +46,39 @@ button {
   cursor: pointer;
 }
 
+.minus-count-div {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.minus-count-button {
+  background-color: transparent;
+  color: rgb(240, 74, 102);
+  border: 1px solid rgb(240, 74, 102);
+  border-radius: 5px;
+}
+.minus-count-button:hover {
+  background-color: rgb(240, 74, 102);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.count-showing-div {
+  display: flex;
+  align-items: center;
+  flex: 2.6;
+}
+.count-head {
+  font-size: 500;
+}
+
+.add-count-div {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
 .add-count-button {
   background-color: transparent;
   color: blue;
@@ -27,16 +91,3 @@ button {
   border: 1px solid transparent;
   border-radius: 5px;
 }
-
-.minus-count-button {
-  background-color: transparent;
-  color: rgb(240, 74, 102);
-  border: 1px solid rgb(240, 74, 102);
-  border-radius: 5px;
-}
-.minus-count-button:hover {
-    background-color: rgb(240, 74, 102);
-    color: #fff;
-    border: 1px solid transparent;
-    border-radius: 5px;
-  }

@@ -54,6 +54,9 @@ const ToDo = () => {
 
   return (
     <div className="task-div-container">
+      <div className="todo-head-div">
+        <h1 className="todo-head">Todo</h1>
+      </div>
       <div className="task-add-div-container">
         <label for="taskInput">Task</label>
         <input
