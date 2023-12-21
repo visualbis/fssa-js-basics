@@ -4,6 +4,7 @@ import Todo from "./Todo/Todo";
 import Timer from "./Timer/Timer";
 import CountDown from "./CountDown/CountDown";
 import TicTacToe from "./TicTacToe/TicTacToe";
+import UseState,{ UserProfile } from './Hooks/UseState';
 
 function App() {
   const [selectedProject, setSelectedProject] = useState("todo");
@@ -20,6 +21,7 @@ function App() {
           <button onClick={() => handleProjectChange("timer")}>Timer</button>
           <button onClick={() => handleProjectChange("countdown")}>CountDown</button>
           <button onClick={() => handleProjectChange("tictactoe")}>Tic TacToe</button>
+          <button onClick={() => handleProjectChange("hooks")}>Hooks</button>
         </div>
         {selectedProject === "todo" && (
           <>
@@ -42,6 +44,12 @@ function App() {
         {selectedProject === "tictactoe" && (
           <>
             <TicTacToe />
+          </>
+        )}
+         {selectedProject === "hooks" && (
+          <>
+            <UseState />
+            <UserProfile />
           </>
         )}
       </div>

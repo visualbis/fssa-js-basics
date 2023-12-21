@@ -1,0 +1,19 @@
+h2 {
+  color: black;
+}
+h3 {
+  margin-top: 20px;
+  color: black;
+}
+.hooksButton {
+  margin-top: 20px;
+}
+.hooksDiv {
+  text-align: center;
+  margin: 20px;
+}
+.hooksInput {
+  padding: 8px;
+  margin: 8px;
+  width: 200px;
+}
