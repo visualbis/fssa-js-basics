@@ -1,48 +1,112 @@
-import React from 'react'
-import { useState } from 'react'
+import {useState} from 'react';
+import AddTaskForm from './components/AddTaskForm.js';
+import UpdateForm from './components/UpdateForm.js';
+import ToDo from './components/ToDo.js';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './todo.css';
 
-function TodoList () {
-  const [todos, setTodos] = useState([])
-  const [inputValue, setInputValue] = useState('')
+const TodoList = () => {
 
-function handleChange(e){
-  setInputValue(e.target.value)
-}
+  // Tasks (ToDo List) State
+  const [toDo, setToDo] = useState([]);
 
-function handleSubmit(e) {
-    e.preventDefault();
-    const newTodo = {
-      id: Date.now(),
-      text: inputValue,
-    };
-    setTodos([...todos, newTodo]);
-    setInputValue('');
+  // Temp State
+  const [newTask, setNewTask] = useState('');
+  const [updateData, setUpdateData] = useState('');
+
+  // Add task 
+  ///////////////////////////
+  const addTask = () => {
+    if(newTask) {
+      let num = toDo.length + 1; 
+      let newEntry = { id: num, title: newTask, status: false }
+      setToDo([...toDo, newEntry])
+      setNewTask('');
+    }
   }
 
+  // Delete task 
+  ///////////////////////////
+  const deleteTask = (id) => {
+    let newTasks = toDo.filter( task => task.id !== id)
+    setToDo(newTasks);
+  }
 
-function removeTask(targetId) {
-    const updatedTodos = todos.filter(todo => todo.id !== targetId);
-    setTodos(updatedTodos);
-}
+  // Mark task as done or completed
+  ///////////////////////////
+  const markDone = (id) => {
+    let newTask = toDo.map( task => {
+      if( task.id === id ) {
+        return ({ ...task, status: !task.status })
+      }
+      return task;
+    })
+    setToDo(newTask);
+  }
+
+  // Cancel update
+  ///////////////////////////
+  const cancelUpdate = () => {
+    setUpdateData('');
+  }
+
+  // Change task for update
+  ///////////////////////////
+  const changeTask = (e) => {
+    let newEntry = {
+      id: updateData.id,
+      title: e.target.value,
+      status: updateData.status ? true : false
+    }
+    setUpdateData(newEntry);
+  }
+
+  // Update task
+  ///////////////////////////
+  const updateTask = () => {
+    let filterRecords = [...toDo].filter( task => task.id !== updateData.id );
+    let updatedObject = [...filterRecords, updateData]
+    setToDo(updatedObject);
+    setUpdateData('');
+  }
 
   return (
-    <div className='conatiner'>
-      <h2>Todo List</h2>
-      <form class="inputSection">
-        <input type='text' value={inputValue} onChange={handleChange}/>
-        <button onClick={handleSubmit}>Add Todo</button>
-      </form>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-          {todo.text}
-           <button onClick={() => removeTask(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+    <div className="container App">
+
+    <br /><br />
+    <h2>To Do List App (ReactJS)</h2>
+    <br /><br />
+
+    {updateData && updateData ? (
+      <UpdateForm 
+        updateData={updateData}
+        changeTask={changeTask}
+        updateTask={updateTask}
+        cancelUpdate={cancelUpdate}
+      />
+    ) : (
+      <AddTaskForm 
+        newTask={newTask}
+        setNewTask={setNewTask}
+        addTask={addTask}
+      />
+    )}
+
+    {/* Display ToDos */}
+
+    {toDo && toDo.length ? '' : 'No Tasks...'}
+
+    <ToDo
+      toDo={toDo}
+      markDone={markDone}
+      setUpdateData={setUpdateData}
+      deleteTask={deleteTask}
+    />  
+
     </div>
-  )
+  );
 }
 
-export default TodoList
+export default TodoList;

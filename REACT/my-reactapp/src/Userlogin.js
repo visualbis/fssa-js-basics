@@ -1,4 +1,5 @@
 import React, { useContext, createContext, useState, useEffect } from "react";
+import './hooks.css';
 
 //create context
 const UserContext = createContext();
@@ -22,19 +23,25 @@ const Userlogin = () => {
 
   return (
     <UserContext.Provider value={user}>
-      <h1>User Login</h1>
+      <h2>User Login</h2>
       <Page />
     </UserContext.Provider>
+     
   );
 };
 
 const Page = () => {
-   const user = useContext(UserContext);
-   if(user?.email){
-     return <p>You are logged in as {user?.email}</p>
-   }else{
-    return <p>You are not logged in</p>
-   }
+  const user = useContext(UserContext);
+
+  return (
+    <div className="Page">
+      {user?.email ? (
+        <p className="logged-in">You are logged in as {user?.email}</p>
+      ) : (
+        <p className="not-logged-in">You are not logged in</p>
+      )}
+    </div>
+  );
 }
 
 export default Userlogin;
