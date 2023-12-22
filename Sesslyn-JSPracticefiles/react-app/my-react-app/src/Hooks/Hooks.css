@@ -4,9 +4,12 @@ h2 {
 h3 {
   margin-top: 20px;
   color: black;
+  text-align: center;
 }
 .hooksButton {
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-left: 180px;
+  margin-bottom: 20px;
 }
 .hooksDiv {
   text-align: center;
@@ -16,4 +19,12 @@ h3 {
   padding: 8px;
   margin: 8px;
   width: 200px;
+}
+.hooksPara{
+  font-size: 18px;
+  margin-left: 100px;
+  color:black;
+}
+pre{
+  color:black;
 }

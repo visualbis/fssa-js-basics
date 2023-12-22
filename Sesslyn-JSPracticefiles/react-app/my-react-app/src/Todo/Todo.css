@@ -53,7 +53,13 @@ h1 {
 .todo-input-item input {
   border: none;
   padding: 8px;
-  width: 250px;
+  width: 200px;
+}
+
+.todo-input-item select {
+  border: none;
+  padding: 8px;
+  width: 90px;
 }
 
 .todo-input-item input:focus {
@@ -65,9 +71,9 @@ h1 {
   color: white;
   border-radius: 0px;
   border: none;
-  margin-top: 32px;
+  margin-top: 30px;
   padding: 9px;
-  width: 60px;
+  width: 80px;
   cursor: pointer;
 }
 
@@ -104,22 +110,22 @@ h1 {
 
 .todo-list-item {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  background-color: #414040;
-  padding: 25px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  box-shadow: 0px 2px 4px rgb(39, 38, 38);
+  align-items: space-between;
 }
 
-.todo-list-item h3 {
-  font-size: 25px;
-  color: rgb(0, 230, 122);
-  font-weight: bold;
-  margin: 0px;
+.todo-list-div{
+  background-color: #414040;
+    padding: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    box-shadow: 0px 2px 4px rgb(39, 38, 38);
+}
+.listDiv{
+  display:block;
 }
 
 .todo-list-item p {
@@ -127,33 +133,73 @@ h1 {
   font-size: 14px;
   color: rgb(179, 178, 178);
 }
+.todoh3 {
+  font-size: 25px;
+  color: rgb(0, 230, 122);
+  font-weight: bold;
+  margin: 0px;
+  text-align: left;
+}
+.flexTodo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.ulh3 {
+  font-size: 15px;
+  color: rgb(179, 225, 204);
+  font-weight: bold;
+  margin: 0px;
+  text-align: left;
+}
+.list{
+  margin-left:40px;
+}
+.flexTodoPara{
+  display: flex;
+  flex-direction: row;
+}
+.flexPara{
+  font-size:12px;
+  color: rgb(179, 178, 178);
+}
+.priority{
+  margin-left:10px;
+}
 
 .icon {
   font-size: 30px;
   cursor: pointer;
-}
-
-.icon:hover {
   color: red;
+  padding-top: 10px;
+  margin-bottom:8px;
 }
-
 .edit-icon {
-  font-size: 45px;
+  font-size: 35px;
   cursor: pointer;
   color: rgb(229 229 18);
-  margin-left: 8px;
-  margin-bottom: 5px;
   padding-right: 15px;
-  padding-top: 20px;
+  padding-top: 10px;
+  margin-bottom:6px;
+}
+.sub-task-icon {
+  font-size: 38px;
+  cursor: pointer;
+  padding-right: 15px;
+  padding-top: 10px;
+  margin-bottom:6px;
 }
 .check-icon {
-  font-size: 25px;
+  font-size: 22px;
   cursor: pointer;
   color: rgb(0, 230, 122);
   margin-left: 10px;
   margin-bottom: 5px;
 }
-
-.check-icon:hover {
-  color: rgb(4, 192, 104);
+.inputBox{
+  margin-left: 10px;
+  font-size:15px;
+}
+.inputBox:checked + label {
+  color: rgb(0, 230, 122);
 }

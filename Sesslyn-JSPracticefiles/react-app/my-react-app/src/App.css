@@ -1,6 +1,41 @@
-.project-buttons{
-    margin-bottom: 50px;
+.project-buttons {
+  margin-bottom: 50px;
 }
-h1{
-    color:#000;
+
+h1 {
+  color: #000;
+}
+
+.hooksBtn {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 150px;
+}
+
+.hooksBtn button {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #1f3540;
+  color: #26ffcb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.hooksBtn button:hover {
+  background-color: #26ffcb;
+  color: #1f3540;
+}
+
+.hooksFlex{
+    display:flex;
+    flex-direction: row;
+}
+
+.hooksDisplay{
+    margin-left:45px;
+    margin-top:20px;
 }

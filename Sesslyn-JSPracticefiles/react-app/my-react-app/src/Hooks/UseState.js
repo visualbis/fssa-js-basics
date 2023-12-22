@@ -5,14 +5,13 @@ function Count(){
     const [count, setCount] = useState(0);
     return(
       <div>
-        <h2>UseState My Example</h2>
+        <h2>UseState</h2>
+        <h3>Example : 1</h3>
         <h3>Click the button to increase the count {count}</h3>
         <button className="hooksButton" onClick = {() => setCount(count + 1)}>Click me !</button>
       </div>
     )
 }
-
-
 
 export function UserProfile() {
     const [user, setUser] = useState({ name: '---', age: 0 });
@@ -24,7 +23,7 @@ export function UserProfile() {
   
     return (
       <div className="hooksDiv">
-        <h2>UseState Example</h2>
+        <h3>Example : 2</h3>
         <input className="hooksInput" type="text" name="name" placeholder="Name" value={user.name} onChange={handleChange}/>
         <input className="hooksInput" type="number" name="age" placeholder="Age" value={user.age} onChange={handleChange} />
         <h2>{user.name} is {user.age} years old</h2>

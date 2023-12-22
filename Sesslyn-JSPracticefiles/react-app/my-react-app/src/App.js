@@ -4,13 +4,20 @@ import Todo from "./Todo/Todo";
 import Timer from "./Timer/Timer";
 import CountDown from "./CountDown/CountDown";
 import TicTacToe from "./TicTacToe/TicTacToe";
-import UseState,{ UserProfile } from './Hooks/UseState';
+import UseState, { UserProfile } from "./Hooks/UseState";
+import UseEffect, { JsonData }from "./Hooks/UseEffect";
+import { Component1, Component5 } from './Hooks/UseContext'; 
 
 function App() {
   const [selectedProject, setSelectedProject] = useState("todo");
+  const [selectedHooks, setSelectedHooks] = useState("useState");
 
   const handleProjectChange = (project) => {
     setSelectedProject(project);
+  };
+
+  const handleHooksChange = (project) => {
+    setSelectedHooks(project);
   };
 
   return (
@@ -20,7 +27,7 @@ function App() {
           <button onClick={() => handleProjectChange("todo")}>Todo</button>
           <button onClick={() => handleProjectChange("timer")}>Timer</button>
           <button onClick={() => handleProjectChange("countdown")}>CountDown</button>
-          <button onClick={() => handleProjectChange("tictactoe")}>Tic TacToe</button>
+          <button onClick={() => handleProjectChange("tictactoe")}> Tic TacToe</button>
           <button onClick={() => handleProjectChange("hooks")}>Hooks</button>
         </div>
         {selectedProject === "todo" && (
@@ -37,7 +44,7 @@ function App() {
         )}
         {selectedProject === "countdown" && (
           <>
-            <h1 className='countDownHeading'>CountDown</h1>
+            <h1 className="countDownHeading">CountDown</h1>
             <CountDown />
           </>
         )}
@@ -46,11 +53,70 @@ function App() {
             <TicTacToe />
           </>
         )}
-         {selectedProject === "hooks" && (
-          <>
-            <UseState />
-            <UserProfile />
-          </>
+        {selectedProject === "hooks" && (
+        <div className="hooksFlex">
+          <div className="hooksBtn">
+              <button onClick={() => handleHooksChange("useState")}>Use State</button>
+              <button onClick={() => handleHooksChange("useEffect")}>Use Effect</button>
+              <button onClick={() => handleHooksChange("useContext")}>Use Context</button>
+              <button onClick={() => handleHooksChange("useRef")}>Use Ref</button>
+              <button onClick={() => handleHooksChange("useReducer")}> Use Reducer</button>
+              <button onClick={() => handleHooksChange("useCallback")}>Use Callback</button>
+              <button onClick={() => handleHooksChange("useMemo")}> Use Memo </button>
+          </div>
+   
+          <div className="hooksDisplay">
+            {selectedHooks === "useState" && (
+              <>
+                <UseState />
+                <UserProfile />
+              </>
+            )}
+
+            {selectedHooks === "useEffect" && (
+              <>
+                <UseEffect />
+                <JsonData />
+              </>
+            )}
+
+            {selectedHooks === "useContext" && (
+              <div>
+                <Component1 />
+                <Component5 />
+              </div>
+            )}
+
+           {selectedHooks === "useRef" && (
+              <>
+                <UseState />
+                <UserProfile />
+              </>
+            )}
+
+           {selectedHooks === "useReducer" && (
+              <>
+                <UseState />
+                <UserProfile />
+              </>
+            )}
+
+            {selectedHooks === "useCallback" && (
+              <>
+                <UseState />
+                <UserProfile />
+              </>
+            )}
+
+            {selectedHooks === "useMemo" && (
+              <>
+                <UseState />
+                <UserProfile />
+              </>
+            )}
+          </div>
+        </div>
+
         )}
       </div>
     </div>
