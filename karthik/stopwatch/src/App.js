@@ -1,88 +1,94 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
+import React, { useState, useEffect, useRef } from "react";
+import "./App.css"; // Make sure to import the CSS file
 
-function App() {
-  const [time, setTime] = useState(0);
+const Stopwatch = () => {
+  const [startTime, setStartTime] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
   const [laps, setLaps] = useState([]);
-  const [isRunning, setIsRunning] = useState(false);
-  const [lapStartTime, setLapStartTime] = useState(0);
+  const intervalRef = useRef(null);
+
+  const startStopwatch = () => {
+    setStartTime(Date.now() - currentTime);
+  };
+
+  const stopStopwatch = () => {
+    clearInterval(intervalRef.current);
+    setStartTime(0);
+  };
+
+  const resetStopwatch = () => {
+    setCurrentTime(0);
+    setStartTime(0);
+    setLaps([]);
+  };
+
+  const recordLap = () => {
+    setLaps([...laps, currentTime]);
+  };
+
+  // Function to format time in desired units (minutes, seconds, milliseconds)
+  const formatTime = (timeInMilliseconds) => {
+    const totalSeconds = Math.floor(timeInMilliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const milliseconds = Math.floor((timeInMilliseconds % 1000) / 10); // Display two-digit milliseconds
+
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const formattedSeconds = String(seconds).padStart(2, "0");
+    const formattedMilliseconds = String(milliseconds).padStart(2, "0");
+
+    return `${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
+  };
+
+  // Function to format laps output in desired units
+  const formatLap = (lapInMilliseconds) => {
+    const totalSeconds = Math.floor(lapInMilliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const milliseconds = Math.floor((lapInMilliseconds % 1000) / 10); // Display two-digit milliseconds
+
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const formattedSeconds = String(seconds).padStart(2, "0");
+    const formattedMilliseconds = String(milliseconds).padStart(2, "0");
+
+    return `${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
+  };
 
   useEffect(() => {
-    let intervalId;
-    if (isRunning) {
-      intervalId = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
+    if (startTime) {
+      intervalRef.current = setInterval(() => {
+        setCurrentTime(Date.now() - startTime);
       }, 10);
-    }
-    return () => clearInterval(intervalId);
-  }, [isRunning]);
-
-  const hours = Math.floor(time / 360000);
-  const minutes = Math.floor((time % 360000) / 6000);
-  const seconds = Math.floor((time % 6000) / 100);
-  const milliseconds = time % 100;
-
-  const startAndStop = () => {
-    if (isRunning) {
-      const lapTime = time - lapStartTime;
-      setLaps([...laps, lapTime]);
-      setLapStartTime(time); // Update lap start time to the current time
     } else {
-      setLapStartTime(time);
+      clearInterval(intervalRef.current);
     }
-    setIsRunning(!isRunning);
-  };
-  
 
-  const reset = () => {
-    setTime(0);
-    setLaps([]);
-    setLapStartTime(0);
-  };
+    return () => clearInterval(intervalRef.current);
+  }, [startTime]);
 
   return (
     <div className="stopwatch-container">
-      <p className="stopwatch-time">
-        {hours}:{minutes.toString().padStart(2, "0")}:
-        {seconds.toString().padStart(2, "0")}:
-        {milliseconds.toString().padStart(2, "0")}
-      </p>
+      <div className="stopwatch-time">{formatTime(currentTime)}</div>
       <div className="stopwatch-buttons">
-        <button className="stopwatch-button" onClick={startAndStop}>
-          {isRunning ? "Stop" : "Start"}
+        <button onClick={startStopwatch}>Start</button>
+        <button className="stopwatch-button-reset" onClick={stopStopwatch}>
+          Stop
         </button>
-        <button className="stopwatch-button-reset" onClick={reset}>
-          Reset
-        </button>
-        <button className="stopwatch-button-addlap" onClick={startAndStop}>
+        <button onClick={resetStopwatch}>Reset</button>
+        <button className="stopwatch-button-addlap" onClick={recordLap}>
           Lap
         </button>
       </div>
-      {laps.length > 0 && (
-        <div className="stopwatch-laps">
-          <h2>Laps:</h2>
-          <ul>
-            {laps.map((lap, index) => (
-              <li key={index}>
-                Lap {index + 1}: {formatTime(lap)}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div className="stopwatch-laps">
+        <h2>Lap Times</h2>
+        <ul>
+          {laps.map((lap, index) => (
+            <li key={index}>{formatLap(lap)}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
-}
-
-const formatTime = (time) => {
-  const hours = Math.floor(time / 360000);
-  const minutes = Math.floor((time % 360000) / 6000);
-  const seconds = Math.floor((time % 6000) / 100);
-  const milliseconds = time % 100;
-
-  return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
-    .toString()
-    .padStart(2, "0")}:${milliseconds.toString().padStart(2, "0")}`;
 };
 
-export default App;
+export default Stopwatch;

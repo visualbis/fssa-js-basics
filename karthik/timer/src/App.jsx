@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
-
+import './App.css';
 const PomodoroTimer = () => {
+  const getFormattedTime = () => {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
   const [isActive, setIsActive] = useState(false);
   const [minutes, setMinutes] = useState(30);
   const [seconds, setSeconds] = useState(0);
   const [isBreak, setIsBreak] = useState(false);
   const [breakMinutes, setBreakMinutes] = useState(5);
   const [breakSeconds, setBreakSeconds] = useState(0);
+  const [currentTime, setCurrentTime] = useState(getFormattedTime());
 
   useEffect(() => {
     let timer;
@@ -14,7 +24,6 @@ const PomodoroTimer = () => {
       timer = setInterval(() => {
         if (seconds === 0) {
           if (minutes === 0) {
-            // If productivity time is over, switch to break time
             setIsBreak(true);
             setMinutes(breakMinutes);
             setSeconds(breakSeconds);
@@ -30,6 +39,16 @@ const PomodoroTimer = () => {
 
     return () => clearInterval(timer);
   }, [isActive, minutes, seconds, breakMinutes, breakSeconds]);
+
+  useEffect(() => {
+    const updateTime = () => {
+      setCurrentTime(getFormattedTime());
+    };
+
+    const intervalId = setInterval(updateTime, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const toggleTimer = () => {
     setIsActive(!isActive);
@@ -70,6 +89,7 @@ const PomodoroTimer = () => {
 
   return (
     <div>
+      <div id="current-time" className='current-time'>{currentTime}</div>
       <h1>{isBreak ? 'Break Time' : 'Productivity Time'}</h1>
       <p>
         {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
