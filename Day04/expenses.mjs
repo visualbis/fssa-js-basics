@@ -76,4 +76,6 @@ const expenses = [
     },
   },
 ];
-let expenseManager = new ExpensesManager(expenses)
+let expenseManager = new ExpensesManager(expenses);
+expenseManager.findPaidDetails();
+expenseManager.logData();
