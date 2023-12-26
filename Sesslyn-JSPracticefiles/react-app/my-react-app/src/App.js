@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
-import Todo from "./Todo/Todo";
 import Timer from "./Timer/Timer";
-import CountDown from "./CountDown/CountDown";
-import TicTacToe from "./TicTacToe/TicTacToe";
 import UseState, { UserProfile } from "./Hooks/UseState";
 import UseEffect, { JsonData }from "./Hooks/UseEffect";
 import { Component1, Component5 } from './Hooks/UseContext'; 
 
 function App() {
-  const [selectedProject, setSelectedProject] = useState("todo");
+  const [selectedProject, setSelectedProject] = useState("timer");
   const [selectedHooks, setSelectedHooks] = useState("useState");
 
   const handleProjectChange = (project) => {
@@ -24,33 +21,13 @@ function App() {
     <div className="main-section">
       <div>
         <div className="project-buttons">
-          <button onClick={() => handleProjectChange("todo")}>Todo</button>
           <button onClick={() => handleProjectChange("timer")}>Timer</button>
-          <button onClick={() => handleProjectChange("countdown")}>CountDown</button>
-          <button onClick={() => handleProjectChange("tictactoe")}> Tic TacToe</button>
           <button onClick={() => handleProjectChange("hooks")}>Hooks</button>
         </div>
-        {selectedProject === "todo" && (
-          <>
-            <h1>Todo App</h1>
-            <Todo />
-          </>
-        )}
         {selectedProject === "timer" && (
           <>
             <h1>Timer App</h1>
             <Timer />
-          </>
-        )}
-        {selectedProject === "countdown" && (
-          <>
-            <h1 className="countDownHeading">CountDown</h1>
-            <CountDown />
-          </>
-        )}
-        {selectedProject === "tictactoe" && (
-          <>
-            <TicTacToe />
           </>
         )}
         {selectedProject === "hooks" && (

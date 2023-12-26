@@ -16,18 +16,29 @@ function Todo() {
   const [showPopup, setShowPopup] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [subTasks, setSubTasks] = useState([]);
+  const [newDate, setNewDate] = useState("");
+  const [newTime, setNewTime] = useState("");
+  const [textError, setTextError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [dateError, setDateError] = useState("");
+  const [timeError, setTimeError] = useState("");
 
   const generateUniqueId = () => {
     return new Date().getTime();
   };
 
   const handleAddNewToDo = () => {
+    if (!validateInputs()) {
+      return;
+    }
     if (!editMode) {
       let newTodoItem = {
         id: generateUniqueId(),
         title: newTitle,
         description: newDescription,
         priority: newPriority,
+        date: newDate,
+        time: newTime,
       };
       let updatedTodo = [...allTodos, newTodoItem];
       setTodos(updatedTodo);
@@ -35,6 +46,8 @@ function Todo() {
       setNewTitle("");
       setNewDescription("");
       setNewPriority("low");
+      setNewDate("");
+      setNewTime("");
     } else {
       let updatedTodoList = [...allTodos];
       updatedTodoList[editIndex] = {
@@ -42,12 +55,16 @@ function Todo() {
         title: newTitle,
         description: newDescription,
         priority: newPriority,
+        date: newDate,
+        time: newTime,
       };
       setTodos(updatedTodoList);
       localStorage.setItem("todolist", JSON.stringify(updatedTodoList));
       setNewTitle("");
       setNewDescription("");
       setNewPriority("low");
+      setNewDate("");
+      setNewTime("");
       setEditMode(false);
       setEditIndex(null);
     }
@@ -58,67 +75,11 @@ function Todo() {
     setNewTitle(filteredTodo.title);
     setNewDescription(filteredTodo.description);
     setNewPriority(filteredTodo.priority);
+    setNewDate(filteredTodo.date);
+    setNewTime(filteredTodo.time);
     setEditMode(true);
     setEditIndex(index);
   };
-
-  const handleComplete = (index) => {
-    const date = new Date();
-    const dd = date.getDate();
-    const mm = date.getMonth() + 1;
-    const yyyy = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-
-    const finalDate = `${dd}-${mm}-${yyyy} ${hours}:${minutes}:${seconds}`;
-
-    let filteredTodo = {
-      ...allTodos[index],
-      completedOn: finalDate,
-    };
-
-    let updatedCompletedList = [...completedTodos, filteredTodo];
-    setCompletedTodos(updatedCompletedList);
-    localStorage.setItem(
-      "completedTodos",
-      JSON.stringify(updatedCompletedList)
-    );
-    deletedAddedTodo(index);
-  };
-
-  const deletedAddedTodo = (index) => {
-    let reducedTodos = [...allTodos];
-    reducedTodos.splice(index, 1);
-
-    localStorage.setItem("todolist", JSON.stringify(reducedTodos));
-    setTodos(reducedTodos);
-  };
-
-  const deletedCompletedTodo = (index) => {
-    let reducedCompletedTodos = [...completedTodos];
-    reducedCompletedTodos.splice(index);
-    localStorage.setItem(
-      "completedTodos",
-      JSON.stringify(reducedCompletedTodos)
-    );
-    setCompletedTodos(reducedCompletedTodos);
-  };
-
-  useEffect(() => {
-    let savedTodo = JSON.parse(localStorage.getItem("todolist"));
-    let savedCompletedTodos = JSON.parse(
-      localStorage.getItem("completedTodos")
-    );
-
-    if (savedTodo) {
-      setTodos(savedTodo);
-    }
-
-    if (savedCompletedTodos) {
-      setCompletedTodos(savedCompletedTodos);
-    }
-  }, []);
 
   const subTask = JSON.parse(localStorage.getItem("subTask")) || [];
 
@@ -146,6 +107,161 @@ function Todo() {
     localStorage.setItem("subTask", JSON.stringify(updatedSubTasks));
   };
 
+  const handleComplete = (index) => {
+    const hasSubTasks = handleFilter(allTodos[index].id).some(
+      (subTask) => !subTask.status
+    );
+
+    if (hasSubTasks) {
+      alert(
+        "Complete all subtasks first before marking the main task as complete."
+      );
+      return;
+    }
+
+    const date = new Date();
+    const dd = date.getDate();
+    const mm = date.getMonth() + 1;
+    const yyyy = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    const finalDate = `${dd}-${mm}-${yyyy} ${hours}:${minutes}:${seconds}`;
+
+    let filteredTodo = {
+      ...allTodos[index],
+      completedOn: finalDate,
+    };
+
+    let updatedCompletedList = [...completedTodos, filteredTodo];
+    setCompletedTodos(updatedCompletedList);
+    localStorage.setItem(
+      "completedTodos",
+      JSON.stringify(updatedCompletedList)
+    );
+    deletedOnlyTask(index);
+  };
+
+  const deletedOnlyTask = (index) => {
+    let reducedTodos = [...allTodos];
+    reducedTodos.splice(index, 1);
+
+    localStorage.setItem("todolist", JSON.stringify(reducedTodos));
+    setTodos(reducedTodos);
+  };
+
+  const deletedAddedTodo = (index) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this task and its sub task?"
+    );
+    if (!confirmed) {
+      return;
+    }
+
+    let reducedTodos = [...allTodos];
+    const deletedTodo = reducedTodos.splice(index, 1)[0];
+    const updatedSubTasks = subTask.filter(
+      (subItem) => subItem.taskId !== deletedTodo.id
+    );
+    localStorage.setItem("subTask", JSON.stringify(updatedSubTasks));
+
+    localStorage.setItem("todolist", JSON.stringify(reducedTodos));
+    setTodos(reducedTodos);
+  };
+
+  const deletedCompletedTodo = (index) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this completed task and its sub task?"
+    );
+    if (!confirmed) {
+      return;
+    }
+
+    let reducedCompletedTodos = [...completedTodos];
+    const deletedCompletedTodo = reducedCompletedTodos.splice(index, 1)[0];
+
+    const updatedSubTasks = subTask.filter(
+      (subItem) => subItem.taskId !== deletedCompletedTodo.id
+    );
+    localStorage.setItem("subTask", JSON.stringify(updatedSubTasks));
+
+    localStorage.setItem(
+      "completedTodos",
+      JSON.stringify(reducedCompletedTodos)
+    );
+    setCompletedTodos(reducedCompletedTodos);
+  };
+
+  useEffect(() => {
+    let savedTodo = JSON.parse(localStorage.getItem("todolist"));
+    let savedCompletedTodos = JSON.parse(
+      localStorage.getItem("completedTodos")
+    );
+
+    if (savedTodo) {
+      setTodos(savedTodo);
+    }
+
+    if (savedCompletedTodos) {
+      setCompletedTodos(savedCompletedTodos);
+    }
+  }, []);
+
+  const validateInputs = () => {
+    const trimmedTitle = newTitle.trim();
+    if (trimmedTitle.length < 4) {
+      setTextError("Title should be at least 4 characters long.");
+      return false;
+    }
+
+    const trimmedDescription = newDescription.trim();
+    if (trimmedDescription.length < 4) {
+      setDescriptionError("Description should be at least 4 characters long.");
+      return false;
+    }
+    setTextError("");
+    setDescriptionError("");
+    return true;
+  };
+
+  const handleDateChange = (e) => {
+    const selectedDate = new Date(e.target.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const nextYear = new Date();
+    nextYear.setFullYear(today.getFullYear() + 1);
+
+    if (selectedDate >= today && selectedDate <= nextYear) {
+      setNewDate(e.target.value);
+      setDateError("");
+    } else {
+      setDateError("Please select a date within the next 365 days.");
+    }
+  };
+
+  const handleTimeChange = (e) => {
+    const selectedTime = e.target.value;
+    const currentTime = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+    const selectedDateTime = new Date(`${newDate}T${selectedTime}`);
+    const currentDateTime = new Date();
+
+    if (
+      selectedDateTime > currentDateTime ||
+      newDate !== currentDateTime.toISOString().split("T")[0]
+    ) {
+      setNewTime(e.target.value);
+      setTimeError("");
+    } else {
+      setTimeError("Please select a time equal to or after the current time.");
+    }
+  };
+
   return (
     <div className="App">
       <div className="div-wrapper">
@@ -158,6 +274,7 @@ function Todo() {
               onChange={(e) => setNewTitle(e.target.value)}
               placeholder="What's the title of your To Do?"
             />
+            <div className="error-message">{textError}</div>
           </div>
 
           <div className="todo-input-item">
@@ -168,8 +285,10 @@ function Todo() {
               onChange={(e) => setNewDescription(e.target.value)}
               placeholder="What's the title of your To Do?"
             />
+            <div className="error-message">{descriptionError}</div>
           </div>
-
+        </div>
+        <div className="todo-wrapper">
           <div className="todo-input-item">
             <label>Priority:</label>
             <select
@@ -180,6 +299,24 @@ function Todo() {
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
+          </div>
+
+          <div className="todo-input-item">
+            <label>Date:</label>
+            <input
+              type="date"
+              value={newDate}
+              onChange={handleDateChange}
+              min={new Date().toISOString().split("T")[0]}
+              max={(new Date().getFullYear() + 1).toString() + "-12-31"}
+            />
+            <div className="error-message">{dateError}</div>
+          </div>
+
+          <div className="todo-input-item">
+            <label>Time:</label>
+            <input type="time" value={newTime} onChange={handleTimeChange} />
+            <div className="error-message">{timeError}</div>
           </div>
 
           <div className="todo-input-item">
@@ -226,8 +363,14 @@ function Todo() {
                     <div>
                       <h3 className="todoh3">{item.title}</h3>
                       <div className="flexTodo">
-                        <p>{item.description} </p>
-                        <p className="priority"> - {item.priority} </p>
+                        <p>
+                          {item.description} - {item.priority}{" "}
+                        </p>
+                      </div>
+                      <div className="dateDiv">
+                        <p>
+                          Date : {item.date} - {item.time}{" "}
+                        </p>
                       </div>
                     </div>
                     <div>
@@ -267,15 +410,15 @@ function Todo() {
                             <div className="flexTodoPara">
                               <h3 className="ulh3">{subItem.title}</h3>
                               <div className="flexTodoPara">
-                              <input
-                                className="inputBox"
-                                type="checkbox"
-                                checked={subItem.status === true}
-                                disabled={subItem.status === true}
-                                onChange={() =>
-                                  handleAddSubtask(item.id, subItem.id)
-                                }
-                              />
+                                <input
+                                  className="inputBox"
+                                  type="checkbox"
+                                  checked={subItem.status === true}
+                                  disabled={subItem.status === true}
+                                  onChange={() =>
+                                    handleAddSubtask(item.id, subItem.id)
+                                  }
+                                />
                               </div>
                             </div>
                             <div className="flexTodoPara">
@@ -289,25 +432,62 @@ function Todo() {
                   </div>
                 </div>
               ))}
-          {isCompletedScreen === true &&
-            completedTodos
-              .sort((a, b) => {
-                const priorityOrder = { high: 1, medium: 2, low: 3 };
-                return priorityOrder[a.priority] - priorityOrder[b.priority];
-              })
-              .map((item, index) => (
-                <div className="todo-list-div" key={index}>
-                  <h3 className="todoh3">{item.title}</h3>
-                  <div className="flexTodo">
-                    <p>{item.description}</p>
-                    <p>Completed at: {item.completedOn} </p>
+          {isCompletedScreen &&
+            completedTodos.length > 0 &&
+            completedTodos.map((item, index) => (
+              <div
+                className={`todo-list-div ${
+                  expandedIndex === index ? "expanded" : ""
+                }`}
+                onClick={() => handleItemClick(index)}
+                key={index}
+              >
+                <div class="flexTodo">
+                  <div>
+                    <h3 className="todoh3">{item.title}</h3>
+                    <div className="flexTodo">
+                      <p>
+                        {item.description} - {item.priority}{" "}
+                      </p>
+                    </div>
+                    <div className="dateDiv">
+                      <p>Date: {item.completedOn} </p>
+                    </div>
+                  </div>
+                  <div>
                     <AiOutlineDelete
                       className="icon"
                       onClick={() => deletedCompletedTodo(index)}
                     />
                   </div>
                 </div>
-              ))}
+                <ul>
+                  {expandedIndex === index &&
+                    handleFilter(item.id).map((subItem, subIndex) => (
+                      <li className="list" key={subIndex}>
+                        <div className="flexTodoPara">
+                          <h3 className="ulh3">{subItem.title}</h3>
+                          <div className="flexTodoPara">
+                            <input
+                              className="inputBox"
+                              type="checkbox"
+                              checked={subItem.status === true}
+                              disabled={subItem.status === true}
+                              onChange={() =>
+                                handleAddSubtask(item.id, subItem.id)
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="flexTodoPara">
+                          <p className="flexPara">{subItem.description}</p>
+                          <p className="flexPara"> - {subItem.priority}</p>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            ))}
         </div>
       </div>
     </div>

@@ -21,6 +21,7 @@ h1 {
   margin-bottom: 25px;
   display: flex;
   margin-bottom: underline;
+  flex-direction: row;
 }
 .todo-wrapper::after {
   content: "";
@@ -53,9 +54,14 @@ h1 {
 .todo-input-item input {
   border: none;
   padding: 8px;
-  width: 200px;
+  width: 260px;
 }
-
+.todo-input-item input[type="time"],
+.todo-input-item input[type="date"] {
+  border: none;
+  padding: 8px;
+  width: 150px;
+}
 .todo-input-item select {
   border: none;
   padding: 8px;
@@ -116,7 +122,6 @@ h1 {
 }
 
 .todo-list-div{
-  background-color: #414040;
     padding: 25px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -145,6 +150,11 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
 }
+.flexTodo p{
+  margin-top: 8px;
+  font-size: 14px;
+  color: rgb(179, 178, 178);
+}
 .ulh3 {
   font-size: 15px;
   color: rgb(179, 225, 204);
@@ -168,29 +178,29 @@ h1 {
 }
 
 .icon {
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
-  color: red;
+  color: white;
   padding-top: 10px;
   margin-bottom:8px;
 }
 .edit-icon {
-  font-size: 35px;
+  font-size: 26px;
   cursor: pointer;
-  color: rgb(229 229 18);
+  color: rgb(4, 192, 104);
   padding-right: 15px;
   padding-top: 10px;
   margin-bottom:6px;
 }
 .sub-task-icon {
-  font-size: 38px;
+  font-size: 28px;
   cursor: pointer;
   padding-right: 15px;
   padding-top: 10px;
   margin-bottom:6px;
 }
 .check-icon {
-  font-size: 22px;
+  font-size: 28px;
   cursor: pointer;
   color: rgb(0, 230, 122);
   margin-left: 10px;
@@ -202,4 +212,13 @@ h1 {
 }
 .inputBox:checked + label {
   color: rgb(0, 230, 122);
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.dateDiv{
+  margin-top: -5px;
 }
