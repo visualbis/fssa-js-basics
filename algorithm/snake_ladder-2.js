@@ -23,8 +23,7 @@ const snakes = [
   
   const players = [
     { name: "Gaurav", moves: [{ diceValue: 0, position: 0 }] },
-    { name: "Sagar", moves: [{ diceValue: 0, position: 0 }] },
-    // { name: "Susi", moves: [{ diceValue: 0, position: 0 }] },
+    { name: "Sagar", moves: [{ diceValue: 0, position: 0 }] }
   ];
   
   const snakePositions = snakes.map((pair) => ({

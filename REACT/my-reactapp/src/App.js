@@ -1,34 +1,17 @@
 import React, { useState, useEffect } from "react";
-// import Counter from "./counter";
+import Counter from "./counter";
 import PomodoroTimer from "./PomodoroTimer";
 import TodoList from "./todo-app";
 // import Userlogin from "./Userlogin";
 // import UseMemo from "./UseMemo";
-import TicTacToe from "./tic_tac_toe";
 
 export default function App() {
 
-  //useCase 1
-  // useEffect(() => {
-  //      console.log("incside useEffect");
-  // })
-
-//   //useCase 2
-//   useEffect(() => {
-//     console.log("incside useEffect");
-// },[])
-
-//useCase 3
-// useEffect(() => {
-//   console.log("incside useEffect");
-// },[count1]) // --> Pass any one of the State like count1 or count2
-
-
   return (
     <div style={{ margin: "5rem" }}>
-      {/* <div>
+      <div>
         <Counter />
-      </div> */}
+      </div>
 
       <div>
         <PomodoroTimer />
@@ -37,7 +20,28 @@ export default function App() {
       <div>
         <TodoList />
       </div>
+  
 
+
+      
+
+  {/* useCase 1
+   useEffect(() => {
+        console.log("incside useEffect");
+   })
+
+//   useCase 2
+//   useEffect(() => { */}
+{/* //     console.log("incside useEffect");
+// },[])
+
+//useCase 3
+// useEffect(() => { */}
+{/* //   console.log("incside useEffect");
+// },[count1]) // --> Pass any one of the State like count1 or count2 */}
+
+
+  
       {/* <div>
 
         <h2>Hooks State Managment</h2>
@@ -51,10 +55,6 @@ export default function App() {
         <h3>Only for pure functions</h3>
         <UseMemo/>
     </div> */}
-
-      <div>
-        <TicTacToe />
-      </div> 
       
       {/* <div>
         <h2>Use Effect Hook</h2>

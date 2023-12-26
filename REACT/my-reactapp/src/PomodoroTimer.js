@@ -52,8 +52,11 @@ const PomodoroTimer = () => {
       <div>
         <h2>Lap Times</h2>
         <ul>
-          {lapTimes.map((lap, index) => (
-            <li key={index}>{formatTime(lap)}</li>
+          {lapTimes.map((lap, index, lapArray) => (
+            <li key={index}>
+              {index > 0 && <span>{formatTime(lapArray[index - 1] -lap)}</span>}
+              <span> ----- {formatTime(lap)} </span> 
+            </li>
           ))}
         </ul>
       </div>
