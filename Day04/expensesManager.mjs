@@ -1,85 +1,89 @@
 class ExpensesManager {
   expensesData = [];
+  owingDetails = [];
+  receivingDetails = [];
+
   constructor(data) {
     this.expenses = data;
-    this.owingDetails = {};
   }
 
   findPaidDetails() {
     this.expenses.forEach((expense) => {
       const persons = Object.keys(expense.expenseForEachPerson);
-
+      const eachExpenses = [];
       persons.forEach((person) => {
         const expenseAmount = expense.expenseForEachPerson[person];
         const paidAmount = expense.expensesPaid[person];
 
         if (expenseAmount > paidAmount) {
-          this.handleOwing(person, expenseAmount - paidAmount);
+          this.handleOwing(person, expenseAmount - paidAmount, eachExpenses);
         }
 
         if (paidAmount > expenseAmount) {
-          this.handleReceiving(person, paidAmount - expenseAmount);
+          this.handleReceiving(
+            person,
+            paidAmount - expenseAmount,
+            eachExpenses
+          );
         }
       });
+      this.expensesData.push(eachExpenses);
     });
   }
 
-  handleOwing(person, amount) {
-    const owingPersons = Object.keys(this.owingDetails);
+  handleOwing(person, amount, eachExpenses) {
+    this.owingDetails.push({ owingPerson: person, amount: amount });
 
-    owingPersons.forEach((owingPerson) => {
-      const remainingAmount = this.owingDetails[owingPerson];
+    // Iterate over receivingDetails
+    let i = 0;
+    while (i < this.receivingDetails.length && amount > 0) {
+      const receivingPerson = this.receivingDetails[i]["receivingPerson"];
+      const receivingAmount = this.receivingDetails[i]["amount"];
 
-      if (amount > 0 && remainingAmount > 0) {
-        const transferAmount = Math.min(amount, remainingAmount);
+      this.handleReceiving(
+        receivingPerson,
+        receivingAmount,
+        eachExpenses
+      );
 
-        // Update owingDetails
-        this.owingDetails[owingPerson] -= transferAmount;
-
-        this.expensesData.push({
-          receivedPerson: person,
-          paidPerson: owingPerson,
-          amount: transferAmount,
-        });
-
-        // Update the remaining amount to distribute
-        amount -= transferAmount;
+      if (receivingAmount <= amount) {
+        this.receivingDetails.splice(i, 1);
+      } else {
+        this.receivingDetails[i]["amount"] -= amount;
       }
-    });
 
-    // If there's still an amount to distribute, update owingDetails
-    if (amount > 0) {
-      this.owingDetails[person] = (this.owingDetails[person] || 0) + amount;
+      amount -= receivingAmount;
+      i++;
     }
   }
 
-  handleReceiving(person, amount) {
-    const owingPersons = Object.keys(this.owingDetails);
+  handleReceiving(person, amount, eachExpenses) {
+    let index = 0;
+    while (index < this.owingDetails.length && amount > 0) {
+      const owingAmount = this.owingDetails[index].amount;
 
-    owingPersons.forEach((owingPerson) => {
-      const remainingAmount = this.owingDetails[owingPerson];
+      this.owingDetails[index].amount -= amount;
 
-      if (amount > 0 && remainingAmount < 0) {
-        const transferAmount = Math.min(Math.abs(remainingAmount), amount);
+      const paidAmount = Math.min(owingAmount, amount);
 
-        // Update owingDetails
-        this.owingDetails[owingPerson] += transferAmount;
+      eachExpenses.push({
+        receivedPerson: person,
+        paidPerson: this.owingDetails[index].owingPerson,
+        paid: paidAmount,
+      });
 
-        // Log the transaction
-        this.expensesData.push({
-          receivedPerson: owingPerson,
-          paidPerson: person,
-          amount: transferAmount,
-        });
-
-        // Update the remaining amount to receive
-        amount -= transferAmount;
+      if (this.owingDetails[index].amount <= 0) {
+        this.owingDetails.splice(index, 1);
       }
-    });
 
-    // If there's still an amount to receive, update owingDetails
+      amount -= paidAmount;
+    }
+
     if (amount > 0) {
-      this.owingDetails[person] = (this.owingDetails[person] || 0) - amount;
+      this.receivingDetails.push({
+        receivingPerson: person,
+        amount: amount,
+      });
     }
   }
 

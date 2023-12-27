@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/loginForm.css"
+import "../css/loginForm.css";
 const LoginForm = () => {
   // State variables for username and password
   const [username, setUsername] = useState("");
@@ -7,8 +7,8 @@ const LoginForm = () => {
 
   // Function to handle form submission
   const handleSubmit = () => {
-    // Use the username and password state values for authentication or API calls
-    console.log("Submitting:", { username, password });
+    const userData = { username, password };
+    localStorage.setItem("userData", JSON.stringify(userData));
   };
 
   return (
