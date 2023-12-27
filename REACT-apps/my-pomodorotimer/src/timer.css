@@ -1,0 +1,127 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #333;
+    margin: 0;
+  }
+  
+  div.container {
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    border: 15px solid black;
+    width: 200px;
+    max-height: 200vh;
+    padding: 3rem 2rem 3rem 2rem;
+    box-shadow: 0 0 10px rgba(236, 230, 230, 0.89);
+  }
+  
+  h1 {
+    color: #333;
+  }
+
+  .timeblock {
+    border: 2px solid gray;
+    border-radius: 7rem;
+    font-size: 120%;
+    font-weight: bold;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  button {
+    font-size: 1em;
+    padding: 5px 10px 5px 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5rem;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+    border-radius: 5rem;
+  }
+  
+  button:active {
+    background-color: #1f618d;
+    border-radius: 5rem;
+  }
+  
+  .timelaps {
+    position: relative; 
+    max-height: 200px; 
+    overflow: auto; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    padding: 10px; 
+}
+
+/* Style the scrollbar */
+.timelaps::-webkit-scrollbar {
+    width: 10px; /* Set the width of the scrollbar */
+}
+
+.timelaps::-webkit-scrollbar-thumb {
+    background-color: #3498db; /* Set the color of the thumb */
+    border-radius: 5px; /* Set the border radius of the thumb */
+}
+
+.timelaps::-webkit-scrollbar-track {
+    background-color: #f2f2f2; /* Set the color of the track */
+}
+
+.timelaps::-webkit-scrollbar-thumb:hover {
+    background-color: #2980b9; /* Set the color of the thumb on hover */
+}
+
+.lap-times {
+    margin-top: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  span {
+    flex: 1;
+    text-align: center;
+  }
+  
+  span:nth-child(1) {
+    color: #3498db;
+  }
+  
+  span:nth-child(2) {
+    color: #333;
+  }
+
+  .timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333; /* Adjust the color as needed */
+  }
+  
+  .text {
+    font-size: 1rem;
+    color: #555; /* Adjust the color as needed */
+  }
+  
