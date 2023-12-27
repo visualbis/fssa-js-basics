@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "../Assets/TicTacToe.css";
-import circleIcon from "../Assets/Images/circle.png";
-import crossIcon from "../Assets/Images/cross.png";
+import "../css/TicTacToe.css";
+import circleIcon from "../Images/circle.png";
+import crossIcon from "../Images/cross.png";
 
 function TicTacToe() {
     const initialData = [
@@ -114,7 +114,7 @@ function TicTacToe() {
                 ))}
             </div>
             <h1>{winner !== "" ? `Winner: ${winner}` : ""}</h1>
-            <button onClick={resetGame}>Rematch</button>
+            <button className="reset" onClick={resetGame}>Rematch</button>
         </div>
     );
 }
