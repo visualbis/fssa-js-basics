@@ -200,7 +200,7 @@ const TicTacToe = () => {
         <div className="row2">{renderRow(3, 6)}</div>
         <div className="row3">{renderRow(6, 9)}</div>
       </div>
-      <button className="reset" onClick={resetGame}>
+      <button className="reset" onClick={resetGame} style={{ display: showBoard ? " " : "none" }}>
         Reset
       </button>
     </div>

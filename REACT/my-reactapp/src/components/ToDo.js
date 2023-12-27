@@ -23,9 +23,9 @@ const ToDo = ({ toDo, markDone, setUpdateData, deleteTask }) => {
                     <span className="taskText">{task.title}</span>
                   </div>
                   <div className="iconsWrap">
-                    <span>
+                    {/* <span>
                       <FontAwesomeIcon icon={faPlus} />
-                    </span>
+                    </span> */}
 
                     <span
                       title="Completed / Not Completed"
