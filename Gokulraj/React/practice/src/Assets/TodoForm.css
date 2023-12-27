@@ -1,22 +1,26 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     width: 100%;
 
 }
-.app-container{
+
+.app-container {
     width: 100%;
     border: 1px solid black;
     height: auto;
     display: flex;
 }
-.left-side{
+
+.left-side {
     width: 70%;
     border: 1px solid black;
 }
-.right-side{
+
+.right-side {
     width: 30%;
     height: 700px;
     border: 1px solid black;
@@ -33,12 +37,12 @@ body{
 
 }
 
-.pop-up{
+.pop-up {
     position: absolute;
     z-index: 3;
     width: 50px;
     height: 50px;
-} 
+}
 
 
 #search {
@@ -59,7 +63,7 @@ body{
 }
 
 .today-list {
-    border: 1px solid black;  
+    border: 1px solid black;
     width: 100%;
     height: 500px;
     display: flex;
@@ -74,13 +78,14 @@ body{
     margin-right: 48px;
     margin-top: 10px;
     margin-bottom: 20px;
-    padding: 5px;    
+    padding: 5px;
 }
-.one-task h3{
+
+.one-task h3 {
     margin-left: 10px;
 }
 
-.todo-list{
+.todo-list {
     border: 1px solid black;
     width: 100%;
     height: 700px;
@@ -88,16 +93,16 @@ body{
     /* background-color: aqua; */
 }
 
-.user-info{
+.user-info {
     border: 1px solidn black;
     width: 100%;
     height: 80px;
     background-color: white;
     border-radius: 5px;
-    text-align: center; 
+    text-align: center;
 }
 
-.list{
+.list {
     width: 100%;
     height: 500px;
     background-color: white;
@@ -105,7 +110,7 @@ body{
     border-radius: 5px;
 }
 
-#nav{
+#nav {
     width: 100%;
     border: 1px solid black;
     height: 60px;
@@ -114,24 +119,118 @@ body{
     display: flex;
     justify-content: space-evenly;
 }
-#nav p{ 
+
+#nav p {
     cursor: pointer;
 }
-.task-list{
+
+.task-list {
     border: 1px solid black;
     height: 500px;
     padding: 10px 5px 5px 5px;
-    
+
 }
 
-.tasks{
+.tasks {
     width: 100%;
     height: 80px;
     border: 1px solid black;
     border-radius: 10px;
-    margin:  10px 0px;
+    margin: 10px 0px;
     display: flex;
     align-items: center;
     justify-content: space-around;
 
+}
+
+.overlay {
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+}
+
+.popup {
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    background: white;
+    padding: 10px;
+    width: 350px;
+    height: 400px;
+    z-index: 1000;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.popup-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: auto;
+    padding: 10px 10px 0px 20px;
+
+}
+
+.popup .popup-content button {
+    /* margin: 20px 0px 0px 440px;   */
+    font-size: 20px;
+    color: red;
+    cursor: pointer;
+    border-style: none;
+    background-color: white;
+}
+
+.form {
+    /* border: 1px solid black; */
+    margin: 20px 0px 0px 0px;
+}
+
+.form-group {
+    margin: 15px 10px 15px 50px;
+
+}
+
+#task-Name {
+    width: 250px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: none;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#description {
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 16px;
+}
+
+.form-group label{
+    font-size: 15px;
+}
+
+#mySelect{
+    margin-left: 20px;
+    width: 70px;
+    height: 23px;
+}
+#date{
+    margin-left: 7px;
+    width: 95px;    
+}
+.btn{
+    width: 80px;
+    height: 25px;
+    border-radius: 5px;
+    margin: 20px 5px 5px 5px;
+    border-style: none;
+    border: 1px solid black;
+
+}
+#cancel{
+    margin-left: 80px;
 }

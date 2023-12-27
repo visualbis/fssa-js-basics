@@ -1,14 +1,13 @@
 import "../Assets/TodoForm.css"
 
-function TodoForm() {
+function TodoForm({togglePopup}) {
 
     return (
         <>
         <div className="todo-form" >
-            <form>
+         
                 <input type="text" id='search' placeholder="Search a Task..."/>
-                <button type='submit' id="add-btn">+</button>
-            </form>
+                <button type='submit' onClick={togglePopup} id="add-btn">+</button>
         </div>
         </>
     )
