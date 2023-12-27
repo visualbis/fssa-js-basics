@@ -22,7 +22,7 @@ const Stopwatch = () => {
     setLaps([]);
   };
 
-  const recordLap = () => {
+  const recordLap = () => {  
     setLaps([...laps, currentTime]);
   };
 
@@ -74,7 +74,7 @@ const Stopwatch = () => {
         <button className="stopwatch-button-reset" onClick={stopStopwatch}>
           Stop
         </button>
-        <button onClick={resetStopwatch}>Reset</button>
+        <button onClick={resetStopwatch} className="stopwatch-button-reset">Reset</button>
         <button className="stopwatch-button-addlap" onClick={recordLap}>
           Lap
         </button>
