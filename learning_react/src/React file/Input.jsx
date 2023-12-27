@@ -1,3 +1,4 @@
+import "../CSS file/Input.css"
 const Input = ({ labelName, inputType, onChange, ...otherProps }) => {
     return (
       <>
@@ -8,4 +9,3 @@ const Input = ({ labelName, inputType, onChange, ...otherProps }) => {
   };
   
   export { Input };
-  

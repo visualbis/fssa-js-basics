@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../React Practice CSS files/Timer.css";
+// import { Button } from "../React file/button";
 
 const Timer = () => {
   const [time, setTime] = useState(0);
@@ -76,10 +76,20 @@ const Timer = () => {
         </div>
       </div>
       <div className="lap-list">
+        <p>Total Lap Count: {lapListRef.current.length}</p>
+
         <h2>Lap Times:</h2>
         <ul>
           {lapListRef.current.map((lapTime, index) => (
-            <li key={index}>{formatTime(lapTime)}</li>
+            <li key={index}>
+              {index + 1}: {formatTime(lapTime)}
+              {index > 0 && (
+                <span>
+                  {" "}
+                  ({formatTime(lapTime - lapListRef.current[index - 1])})
+                </span>
+              )}
+            </li>
           ))}
         </ul>
       </div>

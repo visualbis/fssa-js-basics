@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../CSS file/login.css";
+// import "../CSS file/signUp.css";
 import img from "../images/loginImage.png";
 import { Input } from "./Input";
-// import { Button } from "./button";
+import { Button } from "./button";
 
 const Login = ({ onChange }) => {
   const [loginEmail, setLoginEmail] = useState("");
@@ -20,36 +21,38 @@ const Login = ({ onChange }) => {
       console.log("Login successful!");
       onChange();
     } else {
-      setErrorMessage("Registration failed. Please try again.");
+      setErrorMessage("Invalid credentials. Please try again.");
       console.log("Login failed. Invalid credentials.");
     }
   };
 
-  const handlePageChange = () => {
-    onChange();
-  };
+  // const handlePageChange = () => {
+  //   onChange();
+  // };
 
   return (
-    <div>
-      <img src={img} alt="login" />
-      <form onSubmit={login}>
+    <div className="sign-up-container">
+      <img className="sign-up-image" src={img} alt="login" />
+      <form className="sign-up-form" onSubmit={login}>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <Input
+          className="input-field"
           labelName="Email"
           inputType="email"
           onChange={(e) => setLoginEmail(e.target.value)}
         />
         <Input
+          className="input-field"
           labelName="Password"
           inputType="password"
           onChange={(e) => setLoginPassword(e.target.value)}
         />
         <br />
-        {/* <Button type="submit" value="Login" /> */}
-        <button type="submit" onClick={handlePageChange}>
+        <Button className="submit-button" type="submit" value="Login" />
+        {/* <button type="submit" onClick={handlePageChange}>
           Login
-        </button>
+        </button> */}
       </form>
     </div>
   );

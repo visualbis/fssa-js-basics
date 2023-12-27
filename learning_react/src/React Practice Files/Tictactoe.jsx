@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../React Practice CSS files/Tictactoe.css";
-import Popup from "./Popup";
+import { Input } from "../React file/Input";
 
 const initialBoard = Array(9).fill(null);
 
@@ -38,6 +38,16 @@ const Board = () => {
 
   const [xIsNext, setXIsNext] = useState(true);
   const [moves, setMoves] = useState([]);
+  const [player1Name, setPlayer1Name] = useState(() => {
+    const storedName = localStorage.getItem("player1Name");
+    return storedName || "Player 1";
+  });
+
+  const [player2Name, setPlayer2Name] = useState(() => {
+    const storedName = localStorage.getItem("player2Name");
+    return storedName || "Player 2";
+  });
+
   const [player1Points, setPlayer1Points] = useState(() => {
     const storedPoints = JSON.parse(localStorage.getItem("player1Points"));
     return storedPoints || 0;
@@ -98,9 +108,23 @@ const Board = () => {
     setWinner(null);
   };
 
+  const handlePlayer1NameChange = (e) => {
+    const newName = e.target.value;
+    setPlayer1Name(newName);
+    localStorage.setItem("player1Name", newName);
+  };
+
+  const handlePlayer2NameChange = (e) => {
+    const newName = e.target.value;
+    setPlayer2Name(newName);
+    localStorage.setItem("player2Name", newName);
+  };
+
   let status;
   if (winner) {
-    status = `Congratulations ${winner}, You are the winner...`;
+    status = `Congratulations ${
+      winner === "X" ? player1Name : player2Name
+    }, You are the winner...`;
     setTimeout(() => {
       window.location.reload();
     }, 5000);
@@ -111,7 +135,9 @@ const Board = () => {
     }, 5000);
   } else {
     status = `${
-      xIsNext ? "Current Player : 1 ( X )" : "Current Player : 2 ( O )"
+      xIsNext
+        ? `Current Player : ${player1Name} ( X )`
+        : `Current Player : ${player2Name} ( O )`
     }`;
   }
 
@@ -128,31 +154,66 @@ const Board = () => {
       .filter((move) => move.player === player)
       .map((move, index) => (
         <div key={index}>{`${
-          player === "X" ? "Player 1" : "Player 2"
+          player === "X" ? player1Name : player2Name
         } moved to position ${move.position + 1}`}</div>
       ));
     return <div>{playerMoves}</div>;
   };
 
-  return (
-    <div>
-      <button onClick={handleReset}>Reset Game</button>
+  const Popup = ({ message, onClose }) => {
+    const [seconds, setSeconds] = useState(5);
 
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds - 1);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+      if (seconds === 0) {
+        onClose();
+      }
+    }, [seconds, onClose]);
+
+    return (
+      <div className="popup">
+        <div className="popup-content">
+          <p>{message}</p>
+          <p>{`Closing in ${seconds} seconds...`}</p>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="game-container">
+      <button className="reset-button" onClick={handleReset}>
+        Reset Game
+      </button>
       {showPopup && (
         <Popup
-          message={`Congratulations ${winner}, You are the winner...`}
+          message={`Congratulations ${
+            winner === "X" ? player1Name : player2Name
+          }, You are the winner...`}
           onClose={closePopup}
         />
       )}
-
-      <div className="main">
-        <div>
-          <h2>Player 1 Moves:</h2>
-          {renderMovesByPlayer("X")}
+      <div className="box-container">
+        <div className="player-info">
+          <Input
+            inputType="text"
+            value={player1Name}
+            onChange={handlePlayer1NameChange}
+            labelName="Player 1 Name: "
+          />
           <h2>Points: {player1Points}</h2>
+          <h2>{`${player1Name} Moves:`}</h2>
+          {renderMovesByPlayer("X")}
         </div>
 
-        <div className="game-container">
+        <div className="board">
           <div className="status">{status}</div>
           <div className="board-row">
             {renderSquare(0)}
@@ -170,10 +231,18 @@ const Board = () => {
             {renderSquare(8)}
           </div>
         </div>
-        <div>
-          <h2>Player 2 Moves:</h2>
-          {renderMovesByPlayer("O")}
+
+        <div className="player-info">
+          <Input
+            inputType="text"
+            value={player2Name}
+            onChange={handlePlayer2NameChange}
+            labelName="Player 2 Name: "
+          />
+
           <h2>Points: {player2Points}</h2>
+          <h2>{`${player2Name} Moves:`}</h2>
+          {renderMovesByPlayer("O")}
         </div>
       </div>
     </div>

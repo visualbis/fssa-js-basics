@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../CSS file/signUp.css";
+import "../CSS file/login.css";
 import img from "../images/signUp.png";
 import { Input } from "./Input.jsx";
 import { Button } from "./button.jsx";
@@ -14,7 +14,6 @@ const SignUp = ({ onChange }) => {
   const register = (e) => {
     e.preventDefault();
 
-    // Example: Simple email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setErrorMessage("Please enter a valid email address.");
@@ -51,35 +50,41 @@ const SignUp = ({ onChange }) => {
       console.error("Error during registration:", error);
     }
   };
+
   const handlePageChange = () => {
     onChange();
   };
+
   return (
-    <div>
-      <img src={img} alt="sign up" />
-      <form onSubmit={register}>
-        {registrationSuccess && <p>Registration successful!</p>}
+    <div className="sign-up-container">
+      <img className="sign-up-image" src={img} alt="sign up" />
+      <form className="sign-up-form" onSubmit={register}>
+        {registrationSuccess && <p className="success-message">Registration successful!</p>}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <Input
+          className="input-field"
           labelName="Name"
           inputType="text"
           onChange={(e) => setName(e.target.value)}
         />
         <Input
+          className="input-field"
           labelName="Email"
           inputType="email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
+          className="input-field"
           labelName="Password"
           inputType="password"
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button type="submit"
-        value="Register Now" />
+        <Button className="submit-button" type="submit" value="Register Now" />
+        {/* <Button className="login-button" type="submit" value="Login" onClick={handlePageChange}/> */}
 
-        <button type="submit" onClick={handlePageChange}>
+
+        <button className="login-button" type="submit" onClick={handlePageChange}>
           Login
         </button>
       </form>

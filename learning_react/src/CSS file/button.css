@@ -1,0 +1,27 @@
+button {
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: max-content;
+    background-color: #0e95cf;
+    color: white;
+    border: 1px solid white;
+}
+
+button:hover {
+    color: #0e95cf;
+    background-color: white;
+    border: 1px solid #0e95cf;
+}
+
+.submit-button {
+    background-color: #07fb17;
+    color: white;
+    border: 1px solid white;
+}
+
+.login-button {
+    background-color: #0e95cf;
+    color: white;
+    border: 1px solid white;
+}
