@@ -1,0 +1,39 @@
+.login-form-div-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.login-form-inside-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 99%;
+}
+.login-head-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.login-form-head {
+  text-align: center;
+}
+
+.login-form-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 99%;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}

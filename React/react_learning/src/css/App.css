@@ -1,0 +1,41 @@
+#App {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.app-inside-div-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 4em;
+}
+
+.counter-timer-div-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 99%;
+}
+
+.counter-timer-inside-div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.todo-login-form-div-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.todo-login-form-inside-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}

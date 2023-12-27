@@ -1,0 +1,49 @@
+.timer-div-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.timer-inside-div {
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  width: 100%;
+}
+
+.timer-head-div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-head {
+  font-weight: 500;
+}
+.timer-showing-div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.timer-para {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.timer-controller-button-div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+.timer-controller-button-inside-div {
+  display: flex;
+  align-items: center;
+  width: 52%;
+  gap: 5%;
+  justify-content: space-around;
+}
