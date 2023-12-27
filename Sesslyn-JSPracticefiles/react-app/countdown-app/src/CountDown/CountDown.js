@@ -43,7 +43,7 @@ function CountDown() {
               value={userInput}
               onChange={handleInputChange}
             />
-            <p>Click any one button to add or subtract the number</p>
+            <p>Click any one button to add or subtract the number - {count}</p>
             <div>
               <button onClick={() => trigger("subtract")}>
                 Subtract ( - )

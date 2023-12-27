@@ -1,3 +1,4 @@
+
 .ticTacContainer {
   text-align: center;
   margin-top: 110px;
@@ -75,65 +76,197 @@
   margin: 2px;
 }
 
-.reset {
-  width: 150px;
-  height: 60px;
+.reset,.restart {
+  width: 110%;
+  height: 50px;
   padding: 10px 20px;
   border-radius: 50px;
-  background: #1f3540;
-  border: 2px solid #0f1b21;;
-  font-size: 26px;
-  color: #61dafb;
+  background-color: #1f3540;;
+  color: #fff;
+  border:none;
+  font-size: 20px;
   cursor: pointer;
   margin-top: 20px;
   transition: background 0.3s;
 }
-
-.reset:hover {
-  background-color: #4fa3d1;
-  color: black;
+.restart{
+  margin-left:20px;
+}
+.reset:hover, .restart:hover {
+  background-color: #fff;;
+  color: #1f3540;
+  border:1px #1f3540 solid;
 }
 
 .startModal {
   text-align: center;
-  background-color: #333;
   padding: 20px;
   border-radius: 8px;
   margin: 0px 300px 0px 300px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
 .startModal h5 {
   font-size: 1.5em;
   margin-bottom: 20px;
-  color: #fff;
 }
 
-.startModal input {
-  font-size: 1em;
-    padding: 10px;
-    margin-bottom: 20px;
-    width: 400px;
-    display: block;
-    box-sizing: border-box;
-    background-color: #444;
-    color: #fff;
-    border: 1px solid #666;
-    border-radius: 4px;
-    margin-left: 180px;
+.playerDetails{
+  display: flex;
+  flex-direction: row;
+  margin-left:150px;
+}
+.coolinput {
+  display: flex;
+  flex-direction: column;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: static;
+  width: 200px;
+  margin-left: 50px;
 }
 
+.coolinput label.text {
+  font-size: 0.75rem;
+  color: #1f3540;
+  font-weight: 700;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background: #e8e8e8;
+  width: fit-content;
+}
+
+.coolinput input[type=text].input {
+  padding: 11px 10px;
+  font-size: 1rem;
+  border: 2px #1f3540 solid;
+  border-radius: 5px;
+  background: #e8e8e8;
+}
+
+.coolinput input[type=text].input:focus {
+  outline: none;
+}
+
+.buttonFlex{
+  display: flex;
+  flex-direction: row;
+  padding-left:20px;
+}
 .startModal button {
   font-size: 1.2em;
   padding: 10px 20px;
-  background-color: #61dafb;
+  background-color: #1f3540;;
   color: #fff;
   border: none;
   cursor: pointer;
   border-radius: 4px;
   margin-bottom: 20px;
+  margin-top:40px;
 }
 
 .startModal button:hover {
-  background-color: #4fa3d1;
+  background-color: #cddbe2;
+  color:#1f3540;
+  border:1px #1f3540 solid;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.congrats {
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  max-width: 400px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in-out forwards; /* Apply fade-in animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start with opacity 0 */
+  }
+  to {
+    opacity: 1; /* End with opacity 1 */
+  }
+}
+
+.congrats p {
+  margin: 10px 0;
+}
+
+.congrats button {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  background-color: #1f3540;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.congrats-restart{
+  margin-left:10px;
+}
+.congrats button:hover {
+  background-color: #cddbe2;
+  color: #1f3540;
+  border: 1px #1f3540 solid;
+}
+
+body {
+	color:black;
+	overflow: hidden;
+}
+h1{
+  font-size: 35px;
+  margin-top: 80px;
+  padding:15px;
+}
+.congrats {
+  position: absolute;
+  top: 140px;
+  width: 630px;
+  height: 350px;
+  padding: 20px 10px;
+  text-align: center;
+  margin: 20px auto auto auto;
+  left: 0;
+  right: 0;
+  font-size: 20px;
+}
+
+.text {
+	transform-origin: 50% 50%;
+	font-size: 50px;
+	font-family: 'Sigmar One', cursive;
+	cursor: pointer;
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	text-align: center;
+	width: 100%;
+}
+
+.blob {
+	height: 50px;
+	width: 50px;
+	color: #ffcc00;
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	z-index: 1;
+	font-size: 30px;
+	display: none;	
 }

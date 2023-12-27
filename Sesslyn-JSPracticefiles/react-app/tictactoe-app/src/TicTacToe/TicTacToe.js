@@ -15,7 +15,6 @@ const TicTacToe = () => {
     player2: { name: "", symbol: "o" },
   });
   const [currentPlayer, setCurrentPlayer] = useState("player1");
-
   const [showStartModal, setShowStartModal] = useState(true);
   const [showBoard, setShowBoard] = useState(false);
 
@@ -47,7 +46,6 @@ const TicTacToe = () => {
         if (data[a] && data[a] === data[b] && data[a] === data[c]) {
           const winningPlayer = data[a] === "x" ? "player1" : "player2";
           setWinner(winningPlayer);
-          updateScore(winningPlayer);
           setLock(true);
           return;
         }
@@ -62,15 +60,28 @@ const TicTacToe = () => {
     checkWinner();
   }, [data, count, winner]);
 
+
   const updateScore = (winningPlayer) => {
+    if (winningPlayer !== "Draw") {
     setPlayers((prevPlayers) => {
       const newPlayers = { ...prevPlayers };
       newPlayers[winningPlayer].score += 1;
       return newPlayers;
     });
+  }
     localStorage.setItem("players", JSON.stringify(players));
   };
-
+ 
+  const resetGame = () => {
+    if (winner) {
+      updateScore(winner);
+    }
+    setData([...initialData]);
+    setCount(0);
+    setLock(false);
+    setWinner(null);
+    setCurrentPlayer("player1");
+  };
   const toggle = (index) => {
     if (lock || data[index] || winner) {
       return;
@@ -84,15 +95,9 @@ const TicTacToe = () => {
 
     setCount((prevCount) => prevCount + 1);
 
-    setCurrentPlayer((prevPlayer) => (prevPlayer === "player1" ? "player2" : "player1"));
-  };
-
-  const resetGame = () => {
-    setData([...initialData]);
-    setCount(0);
-    setLock(false);
-    setWinner(null);
-    setCurrentPlayer("player1");
+    setCurrentPlayer((prevPlayer) =>
+      prevPlayer === "player1" ? "player2" : "player1"
+    );
   };
 
   useEffect(() => {
@@ -102,9 +107,21 @@ const TicTacToe = () => {
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("players", JSON.stringify(players));
-  }, [players]);
+
+  const restartGame = () => {
+    localStorage.removeItem("players");
+    setPlayers({
+      player1: { name: "", symbol: "x" },
+      player2: { name: "", symbol: "o" },
+    });
+    setData([...initialData]);
+    setCount(0);
+    setLock(false);
+    setWinner(null);
+    setCurrentPlayer("player1");
+    window.location.reload();
+  };
+  
 
   const renderRow = (start, end) => {
     return data.slice(start, end).map((value, index) => (
@@ -121,32 +138,46 @@ const TicTacToe = () => {
 
   return (
     <div className="ticTacContainer">
-      <h1 className="title">
-        Tic Tac Toe 
-      </h1>
+      <h1 className="title">Tic Tac Toe</h1>
       {showStartModal && (
         <div className="startModal">
           <h5>Enter Player Names</h5>
-          <input
-            type="text"
-            placeholder="Player 1 Name"
-            onChange={(e) =>
-              setPlayers({
-                ...players,
-                player1: { ...players.player1, name: e.target.value },
-              })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Player 2 Name"
-            onChange={(e) =>
-              setPlayers({
-                ...players,
-                player2: { ...players.player2, name: e.target.value },
-              })
-            }
-          />
+
+          <div className="playerDetails">
+            <div class="coolinput">
+              <label for="input" class="text">
+                Player 1:
+              </label>
+              <input
+                type="text"
+                name="input"
+                onChange={(e) =>
+                  setPlayers({
+                    ...players,
+                    player1: { ...players.player1, name: e.target.value },
+                  })
+                }
+                class="input"
+              />
+            </div>
+
+            <div class="coolinput">
+              <label for="input" class="text">
+                Player 2:
+              </label>
+              <input
+                type="text"
+                name="input"
+                onChange={(e) =>
+                  setPlayers({
+                    ...players,
+                    player2: { ...players.player2, name: e.target.value },
+                  })
+                }
+                class="input"
+              />
+            </div>
+          </div>
 
           {players.player1.name &&
           players.player2.name &&
@@ -169,51 +200,71 @@ const TicTacToe = () => {
       <div className="result">
         {winner && (
           <div className="winningImg">
-            {winner !== "Draw" ? (
-              <>
-                Winner is : {players[winner].name}
-                <img
-                  src={players[winner].symbol === "x" ? cross : circle}
-                  alt="winner"
-                  style={{ maxWidth: "1rem", marginLeft: "5px" }}
-                />
-              </>
-            ) : (
-              "It's a Draw!"
-            )}
+            <div className="overlay">
+              <div className="congrats">
+                {winner !== "Draw" ? (
+                  <h1>Congratulations! 🥳 {players[winner].name} won the match. 🎊</h1>
+                ) : (
+                  <h1>It's Draw !</h1>
+                )}
+                <p className="text">Game over</p>
+                <button  onClick={resetGame}>
+              Reset
+            </button>
+                <button  className='congrats-restart'onClick={restartGame}>
+                  Restart
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
+
       <div className="scoreboard">
         <div
           className="players"
           style={{
             backgroundColor:
-              players.player1.symbol === "x" ? (currentPlayer === "player1" ? "#61dafb" : "gray") : "gray",
+              players.player1.symbol === "x"
+                ? currentPlayer === "player1"
+                  ? "rgb(172, 190, 199)"
+                  : "#e0dbdb"
+                : "#e0dbdb",
             color: players.player1.symbol === "x" ? "black" : "white",
           }}
         >
-          {players.player1.name}
+          {players.player1.name  || "Player 1"} - {players.player1.score}
         </div>
         <div
           className="players"
           style={{
             backgroundColor:
-              players.player2.symbol === "o" ? (currentPlayer === "player2" ? "#61dafb" : "gray") : "gray",
+              players.player2.symbol === "o"
+                ? currentPlayer === "player2"
+                  ? "rgb(172, 190, 199)"
+                  : "#e0dbdb"
+                : "#e0dbdb",
             color: players.player2.symbol === "o" ? "black" : "white",
           }}
         >
-          {players.player2.name}
+          {players.player2.name  || "Player 2 "} - {players.player2.score}
         </div>
       </div>
-      <div className="board" style={{ display: showBoard ? " " : "none" }}>
-        <div className="row1">{renderRow(0, 3)}</div>
-        <div className="row2">{renderRow(3, 6)}</div>
-        <div className="row3">{renderRow(6, 9)}</div>
-      </div>
-      <button className="reset" onClick={resetGame}>
-        Reset
-      </button>
+      {showBoard && (
+        <div className="board">
+          <div className="row1">{renderRow(0, 3)}</div>
+          <div className="row2">{renderRow(3, 6)}</div>
+          <div className="row3">{renderRow(6, 9)}</div>
+          <div className="buttonFlex">
+            <button className="reset" onClick={resetGame}>
+              Reset
+            </button>
+            <button className="restart" onClick={restartGame}>
+              Restart
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

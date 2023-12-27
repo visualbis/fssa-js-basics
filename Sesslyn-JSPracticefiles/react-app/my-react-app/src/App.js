@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
-import Timer from "./Timer/Timer";
 import UseState, { UserProfile } from "./Hooks/UseState";
 import UseEffect, { JsonData }from "./Hooks/UseEffect";
 import { Component1, Component5 } from './Hooks/UseContext'; 
 
 function App() {
-  const [selectedProject, setSelectedProject] = useState("timer");
   const [selectedHooks, setSelectedHooks] = useState("useState");
-
-  const handleProjectChange = (project) => {
-    setSelectedProject(project);
-  };
-
   const handleHooksChange = (project) => {
     setSelectedHooks(project);
   };
@@ -20,17 +13,7 @@ function App() {
   return (
     <div className="main-section">
       <div>
-        <div className="project-buttons">
-          <button onClick={() => handleProjectChange("timer")}>Timer</button>
-          <button onClick={() => handleProjectChange("hooks")}>Hooks</button>
-        </div>
-        {selectedProject === "timer" && (
-          <>
-            <h1>Timer App</h1>
-            <Timer />
-          </>
-        )}
-        {selectedProject === "hooks" && (
+        
         <div className="hooksFlex">
           <div className="hooksBtn">
               <button onClick={() => handleHooksChange("useState")}>Use State</button>
@@ -93,8 +76,6 @@ function App() {
             )}
           </div>
         </div>
-
-        )}
       </div>
     </div>
   );
