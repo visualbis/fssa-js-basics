@@ -7,8 +7,8 @@ import { useState } from "react";
 
 function App() {
   const pages = [
-    // <SignUp onChange={() => setPageIndex(1)}/>,
-    // <Login onChange={() => setPageIndex(2)}/>,
+    <SignUp onChange={() => setPageIndex(1)}/>,
+    <Login onChange={() => setPageIndex(2)}/>,
     <HomePage/>
   ];
 

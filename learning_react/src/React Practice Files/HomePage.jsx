@@ -7,7 +7,7 @@ const HomePage = () => {
     <>
       <Game />
       <Counter />
-      {/* <TodoApp /> */}
+      <TodoApp />
       <Timer />
     </>
   );
