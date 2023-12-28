@@ -31,6 +31,7 @@ const Stopwatch = () => {
 
     const addLap = () => {
         setLaps([time, ...laps]);
+
     };
 
     return (
@@ -42,7 +43,8 @@ const Stopwatch = () => {
             <div className="timer"><h1>{formatTime(time)}</h1></div>
             <div className="flex">
                 <div className="controls">
-                    <button className="control-btn" onClick={startStop}>
+                    <button className="control-btn" onClick={startStop} style={{ backgroundColor: isRunning ? 'red' : 'blue' }}
+                    >
                         {isRunning ? 'Stop' : 'Start'}
 
                     </button>
@@ -60,7 +62,12 @@ const Stopwatch = () => {
                     <h2>Lap</h2>
                     <ul>
                         {laps.slice().reverse().map((lap, index) => (
-                            <li key={index}>{`${index + 1}    ${formatTime(lap)}`}</li>
+                            <div key={index} >
+                                <li className="lap-item">
+                                    {`#${index + 1} ${formatTime(lap)}`}
+                                </li>
+                                {index < laps.length - 1 && <hr className="hr" />}
+                            </div>
                         ))}
                     </ul>
                 </div>
