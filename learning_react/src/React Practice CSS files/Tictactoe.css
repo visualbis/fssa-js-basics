@@ -63,7 +63,7 @@
   background-color: #f0f0f0;
 }
 
-/* Popup.css */
+/* css for Popup */
 .popup {
   position: fixed;
   top: 50%;
@@ -83,4 +83,10 @@
 .popup-content p:last-child {
   color: #888;
   margin-top: 10px;
+}
+
+/* css for timer */
+.timer-container h1 {
+  font-size: 100px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

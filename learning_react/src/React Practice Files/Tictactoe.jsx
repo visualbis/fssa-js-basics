@@ -99,7 +99,7 @@ const Board = () => {
   };
 
   const handleReset = () => {
-    localStorage.clear();
+    //localStorage.clear();
     setSquares(initialBoard);
     setXIsNext(true);
     setMoves([]);
@@ -194,12 +194,17 @@ const Board = () => {
       </button>
       {showPopup && (
         <Popup
-          message={`Congratulations ${
-            winner === "X" ? player1Name : player2Name
-          }, You are the winner...`}
+          message={
+            winner !== ""
+              ? `Congratulations ${
+                  winner === "X" ? player1Name : player2Name
+                }, You are the winner...`
+              : "Well played both of you, it is drawn"
+          }
           onClose={closePopup}
         />
       )}
+
       <div className="box-container">
         <div className="player-info">
           <Input

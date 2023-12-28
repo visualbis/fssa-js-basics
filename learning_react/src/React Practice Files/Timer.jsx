@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import "../React Practice CSS files/Timer.css"
 // import { Button } from "../React file/button";
 
 const Timer = () => {
@@ -75,6 +76,7 @@ const Timer = () => {
           </button>
         </div>
       </div>
+
       <div className="lap-list">
         <p>Total Lap Count: {lapListRef.current.length}</p>
 

@@ -1,20 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 
 const TodoApp = () => {
   const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState('');
-  const [newPriority, setNewPriority] = useState('medium');
+  const [newTodo, setNewTodo] = useState("");
+  const [newPriority, setNewPriority] = useState("medium");
+  const [newTask, setNewTask] = useState("Meeting");
   const [editTodoId, setEditTodoId] = useState(null);
-  const [editedText, setEditedText] = useState('');
+  const [editedText, setEditedText] = useState("");
+  const [filterTask, setFilterTask] = useState("all");
+  const [filterPriority, setFilterPriority] = useState("all");
+  const [newTaskName, setNewTaskName] = useState("");
+  const [uniqueTaskNames, setUniqueTaskNames] = useState([]);
+
+  const uniqueTaskOptions = uniqueTaskNames.map((taskName) => (
+    <option key={taskName} value={taskName}>
+      {taskName}
+    </option>
+  ));
+
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+    setTodos(storedTodos);
+    const uniqueNames = Array.from(
+      new Set(storedTodos.map((todo) => todo.taskName))
+    );
+    setUniqueTaskNames(uniqueNames);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  const addNewTaskName = (event) => {
+    event.preventDefault();
+
+    if (newTaskName.trim() !== "" && !uniqueTaskNames.includes(newTaskName)) {
+      // Add the new task name to the set
+      setUniqueTaskNames((prevTaskNames) => [...prevTaskNames, newTaskName]);
+      setNewTaskName("");
+    }
+  };
 
   const addTodo = () => {
-    if (newTodo.trim() !== '') {
+    if (newTodo.trim() !== "") {
       setTodos([
         ...todos,
-        { id: Date.now(), text: newTodo, priority: newPriority, completed: false },
+        {
+          id: Date.now(),
+          text: newTodo,
+          priority: newPriority,
+          task: newTask,
+          taskName: newTaskName,
+          completed: false,
+          date: new Date().toLocaleString(),
+        },
       ]);
-      setNewTodo('');
-      setNewPriority('medium');
+      setNewTodo("");
+      setNewPriority("medium");
+      setNewTask("Meeting");
+      setNewTaskName("");
     }
   };
 
@@ -37,7 +81,7 @@ const TodoApp = () => {
 
   const cancelEdit = () => {
     setEditTodoId(null);
-    setEditedText('');
+    setEditedText("");
   };
 
   const saveEdit = (id) => {
@@ -47,8 +91,16 @@ const TodoApp = () => {
       )
     );
     setEditTodoId(null);
-    setEditedText('');
+    setEditedText("");
   };
+
+  const filteredTodos = todos.filter((todo) => {
+    const taskFilter = filterTask === "all" || todo.task === filterTask;
+    const priorityFilter =
+      filterPriority === "all" || todo.priority === filterPriority;
+
+    return taskFilter && priorityFilter;
+  });
 
   return (
     <div>
@@ -61,6 +113,30 @@ const TodoApp = () => {
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="New Todo"
         />
+
+        <div>
+          <select
+            value={newTaskName}
+            onChange={(e) => setNewTaskName(e.target.value)}
+          >
+            {uniqueTaskOptions}
+          </select>
+          <input
+            type="text"
+            value={newTaskName}
+            onChange={(e) => setNewTaskName(e.target.value)}
+          />
+          <button onClick={addNewTaskName}>+</button>
+        </div>
+
+        <select value={newTask} onChange={(e) => setNewTask(e.target.value)}>
+          <option value="meeting">Meeting</option>
+          <option value="exercise">Exercise</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="sports">Sports</option>
+          <option value="learning">Learning</option>
+        </select>
+
         <select
           value={newPriority}
           onChange={(e) => setNewPriority(e.target.value)}
@@ -71,8 +147,40 @@ const TodoApp = () => {
         </select>
         <button onClick={addTodo}>Add Todo</button>
       </div>
+
+      {/* Filter controls */}
+      <div>
+        <label>
+          Filter by Task:
+          <select
+            value={filterTask}
+            onChange={(e) => setFilterTask(e.target.value)}
+          >
+            <option value="all">All</option>
+            <option value="Meeting">Meeting</option>
+            <option value="exercise">Exercise</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="sports">Sports</option>
+            <option value="learning">Learning</option>
+          </select>
+        </label>
+
+        <label>
+          Filter by Priority:
+          <select
+            value={filterPriority}
+            onChange={(e) => setFilterPriority(e.target.value)}
+          >
+            <option value="all">All</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+      </div>
+
       <ul>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <li key={todo.id}>
             <input
               type="checkbox"
@@ -88,10 +196,17 @@ const TodoApp = () => {
             ) : (
               <span
                 style={{
-                  textDecoration: todo.completed ? 'line-through' : 'none',
+                  textDecoration: todo.completed ? "line-through" : "none",
+                  color:
+                    todo.priority === "high"
+                      ? "red"
+                      : todo.priority === "medium"
+                      ? "orange"
+                      : "green",
                 }}
               >
-                {todo.text} (Priority: {todo.priority})
+                {todo.text} (Priority: {todo.priority}, #{todo.taskName}, #
+                {todo.task})
               </span>
             )}
             {todo.completed ? (
@@ -105,14 +220,15 @@ const TodoApp = () => {
                     <button onClick={cancelEdit}>Cancel</button>
                   </>
                 ) : (
-                  <button onClick={() => startEdit(todo.id, todo.text)}>Edit</button>
+                  <button onClick={() => startEdit(todo.id, todo.text)}>
+                    Edit
+                  </button>
                 )}
               </>
             )}
           </li>
         ))}
       </ul>
-      
     </div>
   );
 };
