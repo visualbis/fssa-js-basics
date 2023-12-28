@@ -103,7 +103,7 @@ const PomodoroTimer = () => {
   const decrementBreakTime = () => {
     if (!isActive && breakMinutes > 1) {
       setBreakMinutes(breakMinutes - 1);
-    }
+    }   
   };
 
   return (
