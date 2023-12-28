@@ -19,6 +19,10 @@ function TicTacToe() {
         return count % 2 === 0 ? "X" : "O";
     };
 
+    const nextMove = () => {
+        return complete ? "" : `Next Move: ${playGame()}`;
+    };
+
 
     const toggle = (rowIndex, columnIndex) => {
 
@@ -69,13 +73,28 @@ function TicTacToe() {
             return diag2;
         }
 
-        if(count === data.length + data[0].length + 2){
+        if (count === data.length + data[0].length + 2) {
             return "Draw"
         }
 
         return null;
 
-        
+
+    };
+    const isBoardFull = () => {
+        return data.every(row => row.every(square => square !== null));
+    };
+
+
+
+    const getResultMessage = () => {
+        if (winner === "X" || winner === "O") {
+            return `Winner: ${winner}`;
+        } else if (isBoardFull()) {
+            return 'It\'s a draw!';
+        } else {
+            return '';
+        }
     };
 
 
@@ -93,6 +112,7 @@ function TicTacToe() {
     return (
         <div className="container">
             <h1>TIC TAC TOE</h1>
+            <h2>{nextMove()}</h2>
             <div className="board">
                 {data.map((row, rowIndex) => (
                     <div key={rowIndex} className="row">
@@ -113,7 +133,7 @@ function TicTacToe() {
                     </div>
                 ))}
             </div>
-            <h1>{winner !== "" ? `Winner: ${winner}` : ""}</h1>
+            <h1>{getResultMessage()}</h1>
             <button className="reset" onClick={resetGame}>Rematch</button>
         </div>
     );

@@ -74,11 +74,12 @@ body {
     width: 600px;
     height: 60px;
     border-radius: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin-right: 48px;
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 5px;
+
 }
 
 .one-task h3 {
@@ -209,20 +210,22 @@ body {
     font-size: 16px;
 }
 
-.form-group label{
+.form-group label {
     font-size: 15px;
 }
 
-#mySelect{
+#mySelect {
     margin-left: 20px;
     width: 70px;
     height: 23px;
 }
-#date{
+
+#date {
     margin-left: 7px;
-    width: 95px;    
+    width: 95px;
 }
-.btn{
+
+.btn {
     width: 80px;
     height: 25px;
     border-radius: 5px;
@@ -231,6 +234,7 @@ body {
     border: 1px solid black;
 
 }
-#cancel{
+
+#cancel {
     margin-left: 80px;
 }
