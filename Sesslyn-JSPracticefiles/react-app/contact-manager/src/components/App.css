@@ -1,0 +1,49 @@
+.main {
+  margin-top: 5em;
+}
+
+.center {
+  justify-content: center;
+  padding: 10px;
+}
+
+.ui.icon.input input {
+  width: 80rem;
+  border-radius: 0 !important;
+}
+
+.item {
+  padding: 15px 0px !important;
+}
+
+i.icon {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.ui.button.blue.right {
+   margin-left: 870px; 
+  text-align:right;
+}
+
+.ui.button.blue.center{
+  margin-left: 470px;
+}
+
+@media (max-width: 800px) {
+  .ui.button.blue.right {
+    margin-left: 400px;
+  }
+  .ui.icon.input input {
+    width: 47rem;
+    border-radius: 0 !important;
+  }
+  .ui.button.blue.center {
+    margin-left: 235px;
+  }
+}
+
+.phoneNo{
+color:black;
+}
