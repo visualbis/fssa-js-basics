@@ -1,10 +1,10 @@
 import "./App.css";
-import TicTacToe from "./component/Assets/TicTacToe/TicTacToe.jsx";
+import Game from "./component/Assets/TicTacToe/TicTacToe.jsx";
 
 function App() {
   return (
     <div>
-      <TicTacToe />
+      <Game />
     </div>
   );
 }

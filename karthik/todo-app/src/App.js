@@ -9,7 +9,9 @@ function App() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [status, setStatus] = useState("pending");
+  const [category, setCategory] = useState("");
   const [editIndex, setEditIndex] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     // Load tasks from local storage on component mount
@@ -23,17 +25,17 @@ function App() {
   }, [tasks]);
 
   const addTask = () => {
-    if (task.trim() === "") return;
+    if (task.trim() === "" || category.trim() === "") return;
 
     if (editIndex !== null) {
       // Edit existing task
       const updatedTasks = [...tasks];
-      updatedTasks[editIndex] = { task, startDate, endDate, status };
+      updatedTasks[editIndex] = { task, startDate, endDate, status, category };
       setTasks(updatedTasks);
       setEditIndex(null);
     } else {
       // Add new task
-      setTasks([...tasks, { task, startDate, endDate, status }]);
+      setTasks([...tasks, { task, startDate, endDate, status, category }]);
     }
 
     // Clear form fields
@@ -41,14 +43,16 @@ function App() {
     setStartDate(new Date());
     setEndDate(new Date());
     setStatus("pending");
+    setCategory(""); // Clear category field
   };
 
   const editTask = (index) => {
-    const { task, startDate, endDate, status } = tasks[index];
+    const { task, startDate, endDate, status, category } = tasks[index];
     setTask(task);
     setStartDate(new Date(startDate));
     setEndDate(new Date(endDate));
     setStatus(status);
+    setCategory(category);
     setEditIndex(index);
   };
 
@@ -68,6 +72,15 @@ function App() {
           placeholder="task name"
           value={task}
           onChange={(e) => setTask(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Category:</label>
+        <input
+          type="text"
+          placeholder="category name"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
         />
       </div>
       <div>
@@ -91,15 +104,23 @@ function App() {
       <button onClick={addTask}>
         {editIndex !== null ? "Update Task" : "Add Task"}
       </button>
+      <div>
+        <button onClick={() => setSelectedCategory("All")}>All</button>
+        <button onClick={() => setSelectedCategory("Personal")}>Category1</button>
+        <button onClick={() => setSelectedCategory("Category2")}>Category2</button>
+        {/* Add more buttons for other categories as needed */}
+      </div>
       <ul>
-        {tasks.map((t, index) => (
-          <li key={index}>
-            {t.task} | Start Date: {t.startDate.toDateString()} | End Date:{" "}
-            {t.endDate.toDateString()} | Status: {t.status}
-            <button onClick={() => editTask(index)}>Edit</button>
-            <button onClick={() => deleteTask(index)}>Delete</button>
-          </li>
-        ))}
+        {tasks
+          .filter((t) => selectedCategory === "All" || t.category === selectedCategory)
+          .map((t, index) => (
+            <li key={index}>
+              {t.task} | Category: {t.category} | Start Date: {t.startDate.toDateString()} | End Date:{" "}
+              {t.endDate.toDateString()} | Status: {t.status}
+              <button onClick={() => editTask(index)}>Edit</button>
+              <button onClick={() => deleteTask(index)}>Delete</button>
+            </li>
+          ))}
       </ul>
     </div>
   );
