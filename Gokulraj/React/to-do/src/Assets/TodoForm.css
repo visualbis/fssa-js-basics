@@ -10,25 +10,25 @@ body {
 
 .app-container {
     width: 100%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: auto;
     display: flex;
 }
 
 .left-side {
     width: 70%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .right-side {
     width: 30%;
     height: 700px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .todo-form {
     display: flex;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 100%;
     height: 120px;
     display: flex;
@@ -63,7 +63,7 @@ body {
 }
 
 .today-list {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 100%;
     height: 500px;
     display: flex;
@@ -74,16 +74,41 @@ body {
     width: 600px;
     height: 60px;
     border-radius: 5px;
-    /* border: 1px solid black; */
     margin-right: 48px;
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 5px;
+    display: flex;
 
 }
 
+.hidden {
+    /* border: 1px solid black; */
+    width: 55%;
+    height: 55px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
 .one-task h3 {
-    margin-left: 10px;
+    font-size: 22px;
+    padding: 4px 0px 0px 5px;
+}
+
+.values {
+    /* border: 1px solid black; */
+    width: 45%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.buttons {
+    border: none;
+    background-color: transparent;
+    /* font-size: 20px; */
 }
 
 .todo-list {
@@ -158,7 +183,7 @@ body {
     background: white;
     padding: 10px;
     width: 350px;
-    height: 400px;
+    height: 430px;
     z-index: 1000;
     border: 1px solid black;
     border-radius: 5px;
@@ -202,6 +227,12 @@ body {
     text-align: center;
 }
 
+.add-subtask {
+    width: 20px;
+    height: 20px;
+    margin-left: 140px;
+}
+
 #description {
     width: 250px;
     border-radius: 5px;
@@ -235,6 +266,18 @@ body {
 
 }
 
+.close {
+    background-color: transparent;
+    color: red;
+    border: none;
+    font-size: 24px;
+    border-style: none;
+
+}
+
 #cancel {
     margin-left: 80px;
+}
+li{
+    list-style: none;
 }

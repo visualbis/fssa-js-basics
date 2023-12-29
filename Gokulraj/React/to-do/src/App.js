@@ -1,9 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import TodoForm from './components/TodoForm';
 import Today from "./components/TodayList";
 import TodoList from './components/TodoList';
 import Popup from './components/Popup'
+import SubTask from './components/SubTask';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
   const [tasks, setTasks] = useState(storedData);
   const [isPopupActive, setPopupActive] = useState(false);
+  const [isPopupActiveTask, setPopupActiveTask] = useState(false);
   const [subTaskId, setSubTaskId] = useState(0);
   const [subTask, setSubTask] = useState([]);
   const [editTask, setEditTask] = useState(null);
@@ -27,7 +29,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log("completed")
+    // console.log("completed")
   }, [tasks]);
 
   const setSubTasks = (id) => {
@@ -35,10 +37,23 @@ function App() {
     setSubTask(task ? task.subTasks : []);
   };
 
-  const togglePopup = (newId) => {
+  const togglePopup = () => {
+    setNewTask({
+      taskName: '',
+      description: '',
+      priority: 'high',
+      dueDate: '',
+      status: false,
+      subTasks: [],
+    });
+    setEditTask(null);
+    setPopupActive(!isPopupActive);
+  };
+
+  const togglePopupTask = (newId) => {
     setSubTaskId(newId);
     setSubTasks(newId);
-    setPopupActive(!isPopupActive);
+    setPopupActiveTask(!isPopupActiveTask);
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -70,6 +85,7 @@ function App() {
       const updatedTasks = tasks.map((task) => (task.id === editTask.id ? newTask : task));
       setTasks(updatedTasks);
       setEditTask(null);
+
       setNewTask({
         taskName: '',
         description: '',
@@ -78,6 +94,8 @@ function App() {
         status: false,
         subTasks: [],
       })
+
+      togglePopup();
 
     } else {
 
@@ -100,6 +118,7 @@ function App() {
         status: false,
         subTasks: [],
       });
+      togglePopup();
     }
   };
 
@@ -111,8 +130,9 @@ function App() {
 
 
   const updateTask = (id) => {
-    // Find the task with the given ID and set it in the newTask state for editing
     const taskToEdit = tasks.find((task) => task.id === id);
+
+    togglePopup();
 
     if (taskToEdit) {
       setNewTask({
@@ -124,6 +144,7 @@ function App() {
         subTasks: taskToEdit.subTasks,
       });
       setEditTask(taskToEdit);
+
     }
   }
 
@@ -141,8 +162,13 @@ function App() {
   };
 
 
+  const updateStatus = (id) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, status: !task.status } : task
+    );
 
-
+    setTasks(updatedTasks);
+  };
 
   return (
     <>
@@ -151,17 +177,21 @@ function App() {
       <div className="app-container" >
         <div className="left-side">
           <TodoForm togglePopup={togglePopup} />
-          <Today togglePopup={togglePopup} tasks={tasks} />
+          <Today togglePopupTask={togglePopupTask} tasks={tasks}
+            updateTask={updateTask} deleteTask={deleteTask} updateStatus={updateStatus} />
         </div>
 
         <div className="right-side">
           <TodoList />
         </div>
+
         {isPopupActive && <Popup onClose={togglePopup} addTask={addTask}
           handleInputChange={handleInputChange}
           handleSubTaskChange={handleSubTaskChange}
           newTask={newTask}
           addSubTask={addSubTask} />}
+
+        {isPopupActiveTask && <SubTask onClose={togglePopupTask} subTask={subTask} onDelete={deleteSubTask} taskId={subTaskId} />}
       </div>
     </>
 

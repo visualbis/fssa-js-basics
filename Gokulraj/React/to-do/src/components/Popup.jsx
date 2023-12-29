@@ -1,6 +1,6 @@
-import { React, useState } from 'react';
+import { React     } from 'react';
 
-function Popup({ onClose , addTask, handleInputChange, handleSubTaskChange, newTask, addSubTask }){
+function Popup({ onClose, addTask, handleInputChange, handleSubTaskChange, newTask, addSubTask }) {
 
     return (
         <>
@@ -11,7 +11,7 @@ function Popup({ onClose , addTask, handleInputChange, handleSubTaskChange, newT
                     <button onClick={onClose}>X</button>
                 </div>
                 <div className='form'>
-                <form onSubmit={addTask}>
+                    <form onSubmit={addTask}>
                         <div className='form-group'>
                             <input type="text" name='taskName' value={newTask.taskName} onChange={handleInputChange} placeholder='Enter a New Task' id="task-Name" />
                         </div>
@@ -34,30 +34,37 @@ function Popup({ onClose , addTask, handleInputChange, handleSubTaskChange, newT
                             <input type="date" id='date' name="dueDate" onChange={handleInputChange} value={newTask.dueDate} />
                         </div>
 
-                        <label htmlFor="subtask">Sub Task</label>
-                        {newTask.subTasks.map((subTask, index) => (
-                            <div key={index}>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    value={subTask.title}
-                                    onChange={(e) => handleSubTaskChange(e, index)}
-                                />
-                                <label>
-                                    Status:
-                                    <input
-                                        type="checkbox"
-                                        name="status"
-                                        checked={subTask.status}
-                                        onChange={(e) => handleSubTaskChange(e, index)}
-                                    />
-                                </label>
+                        <div className='form-group' >
+                            <div style={{ display: "flex", alignItems: 'center',marginBottom : 10}}>
+                                <label htmlFor="subtask">Sub Task :- </label>
+                                <button type="button" className='add-subtask' onClick={addSubTask}>+</button>
                             </div>
-                        ))}
-                        
-                        <button type="button" onClick={addSubTask}>+</button>
-                        <br />
-                            
+                            <div>
+                                {newTask.subTasks.map((subTask, index) => (
+                                    <div key={index}>
+                                        <input
+                                            type="text"
+                                            name="title"
+                                            value={subTask.title}
+                                            onChange={(e) => handleSubTaskChange(e, index)}
+                                        />
+                                        <label>
+                                            Status:
+                                            <input
+                                                type="checkbox"
+                                                name="status"
+                                                checked={subTask.status}
+                                                onChange={(e) => handleSubTaskChange(e, index)}
+                                            />
+                                        </label>
+                                    </div>
+
+                                ))}
+                            </div>
+
+
+
+                        </div>
                         <button onClick={onClose} id='cancel' className='btn'>Cancel</button>
                         <button type='submit' id='add-task' className='btn'>Add Task</button>
                     </form>

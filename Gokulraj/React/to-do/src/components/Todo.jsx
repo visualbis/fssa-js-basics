@@ -109,7 +109,7 @@ function Todo() {
                 subTasks: [],
             });
         }
-    };
+    }; 
 
     const deleteTask = (id) => {
         const del = tasks.filter((oneTask) => oneTask.id !== id);

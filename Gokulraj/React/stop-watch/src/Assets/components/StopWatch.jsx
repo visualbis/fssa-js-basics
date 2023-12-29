@@ -81,7 +81,7 @@ const formatTime = (timeInMilliseconds) => {
     const seconds = Math.floor((timeInMilliseconds % 60000) / 1000);
     const milliseconds = timeInMilliseconds % 1000;
 
-    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}:${String(
         milliseconds
     ).padStart(3, '0').slice(0, 2)}`;
 };
