@@ -1,0 +1,114 @@
+.container {
+  width: 500px;
+  margin: auto;
+  margin-top: 80px;
+  background: white;
+  color: #262626;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  padding: 40px 50px;
+  height: 500px;
+}
+.container hr {
+  height: 2px;
+  border: none;
+  background: #707070;
+}
+.container h2 {
+  font-size: 27px;
+  font-weight: 400;
+  color:#553f9a;
+}
+.container ul li {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-left: 15px;
+  border: 1px solid;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.container button {
+  margin: auto;
+  width: 250px;
+  height: 65px;
+  background: #553f9a;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.container .index {
+  margin: auto;
+  font-size: 18px;
+}
+.container .correct {
+  background-color: #dffff2;
+  border-color: #00d397;
+}
+.container .wrong {
+  background-color: #ffebeb;
+  border-color: #ff4a4a;
+}
+.container .reset {
+  margin: auto;
+  width: 180px;
+  background: #553f9a;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  margin-top: 20px;
+  height: auto;
+  border-color:none;
+}
+
+.container .result-good {
+  color: #00d397;
+  font-size: 24px;
+  text-align: center;
+}
+
+.container .result-bad {
+  color: #ff4a4a;
+  font-size: 24px;
+  text-align: center;
+}
+.container img {
+  height: 270px;
+  width: 400px;
+  margin-left: 50px;
+}
+.start{
+    text-align:center;
+}
+label{
+   
+    display: block;
+    font-size: 20px;
+    margin-top: 30px;
+    text-align:center;
+}
+input{
+    display:block;
+    margin-left:150px;
+    padding:5px 20px;
+    margin-top: 5px;
+    margin-bottom:20px;
+}
+.top-ranks h2{
+    text-align:center;
+    margin-top:20px;
+}
+.top-ranks ol{
+    margin-left: 200px;
+    margin-top: 10px;
+    font-size: 18px;
+}
