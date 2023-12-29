@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.main {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.game-container {
+  width: 400px;
+   /* Adjust the width as needed */
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 20px; /* Increased padding for a larger container */
+  text-align: center;
+
+}
+
+.board-row {
+  display: flex;
+}
+
+.square {
+  width: 130px;
+  height: 130px;
+  margin: 5px;
+  font-size: 1.5em;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.square:hover {
+  background-color: #b46f6f;
+}
+
+.status {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+button {
+  font-size: 1em;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #070807;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Additional Styles for Player Moves and Points */
+.game-container > div {
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-container {
+    width: 300px; /* Adjust the width for smaller screens */
+    margin-top: 20px;
+  }
+}
