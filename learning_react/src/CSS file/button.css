@@ -3,15 +3,15 @@ button {
     border-radius: 5px;
     cursor: pointer;
     width: max-content;
-    background-color: #0e95cf;
+    background-color: black;
     color: white;
     border: 1px solid white;
 }
 
 button:hover {
-    color: #0e95cf;
+    color: black;
     background-color: white;
-    border: 1px solid #0e95cf;
+    border: 1px solid black;
 }
 
 .submit-button {
@@ -21,7 +21,7 @@ button:hover {
 }
 
 .login-button {
-    background-color: #0e95cf;
+    background-color: black;
     color: white;
     border: 1px solid white;
 }

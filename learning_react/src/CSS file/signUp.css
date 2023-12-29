@@ -35,7 +35,7 @@ input {
     width: 100%;
 }
 
-button {
+/* button {
     padding: 15px;
     background-color: #4CAF50;
     color: white;
@@ -47,4 +47,4 @@ button {
 
 button:hover {
     background-color: #45a049;
-}
+} */

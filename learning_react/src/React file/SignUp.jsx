@@ -3,6 +3,7 @@ import "../CSS file/login.css";
 import img from "../images/signUp.png";
 import { Input } from "./Input.jsx";
 import { Button } from "./button.jsx";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const SignUp = ({ onChange }) => {
   const [name, setName] = useState("");
@@ -10,6 +11,7 @@ const SignUp = ({ onChange }) => {
   const [password, setPassword] = useState("");
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const register = (e) => {
     e.preventDefault();
@@ -44,7 +46,8 @@ const SignUp = ({ onChange }) => {
       setRegistrationSuccess(true);
       setErrorMessage("");
       console.log("User Registered:", newUser);
-      onChange();
+      navigate('/login');
+      // onChange();
     } catch (error) {
       setErrorMessage("Registration failed. Please try again.");
       console.error("Error during registration:", error);
@@ -52,14 +55,17 @@ const SignUp = ({ onChange }) => {
   };
 
   const handlePageChange = () => {
-    onChange();
+    navigate('/login');
+    // onChange();
   };
 
   return (
     <div className="sign-up-container">
       <img className="sign-up-image" src={img} alt="sign up" />
       <form className="sign-up-form" onSubmit={register}>
-        {registrationSuccess && <p className="success-message">Registration successful!</p>}
+        {registrationSuccess && (
+          <p className="success-message">Registration successful!</p>
+        )}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <Input
           className="input-field"
@@ -83,8 +89,11 @@ const SignUp = ({ onChange }) => {
         <Button className="submit-button" type="submit" value="Register Now" />
         {/* <Button className="login-button" type="submit" value="Login" onClick={handlePageChange}/> */}
 
-
-        <button className="login-button" type="submit" onClick={handlePageChange}>
+        <button
+          className="login-button"
+          type="submit"
+          onClick={handlePageChange}
+        >
           Login
         </button>
       </form>
