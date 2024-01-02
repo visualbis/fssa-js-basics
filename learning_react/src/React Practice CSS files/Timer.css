@@ -1,0 +1,47 @@
+.timer-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.lap-list {
+  margin-top: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-top: 10px;
+}
+
+/* Additional styling for lap times */
+.lap-list p {
+  font-weight: bold;
+}
+
+.lap-list span {
+  font-style: italic;
+}
