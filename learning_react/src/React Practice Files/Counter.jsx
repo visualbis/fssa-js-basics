@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import '../React Practice CSS files/Counter.css';
+import React, { useState } from "react";
+import "../React Practice CSS files/Counter.css";
+import { Button } from "../React file/button";
+import { Input } from "../React file/Input";
 
 const Counter = () => {
   const [count, setCount] = useState(0);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
+
+  const reset = () => {
+    setCount(0);
+  };
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -14,16 +20,16 @@ const Counter = () => {
 
     if (!isNaN(inputValueAsNumber)) {
       switch (operation) {
-        case 'add':
+        case "add":
           setCount(count + inputValueAsNumber);
           break;
-        case 'subtract':
+        case "subtract":
           setCount(count - inputValueAsNumber);
           break;
-        case 'multiply':
+        case "multiply":
           setCount(count * inputValueAsNumber);
           break;
-        case 'divide':
+        case "divide":
           if (inputValueAsNumber !== 0) {
             setCount(count / inputValueAsNumber);
           } else {
@@ -39,19 +45,39 @@ const Counter = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="heading">Value: {count}</h1>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={handleInputChange}
-        className="input"
-        placeholder="Enter a number"
-      />
-      <button className="button" onClick={() => performOperation('add')}>Add</button>
-      <button className="button" onClick={() => performOperation('subtract')}>Subtract</button>
-      <button className="button" onClick={() => performOperation('multiply')}>Multiply</button>
-      <button className="button" onClick={() => performOperation('divide')}>Divide</button>
+    <div>
+      <div className="container">
+        <Button type="submit" value="Reset" onClick={reset} />
+        <h1 className="heading">Value: {count} </h1>
+        <Input
+          className="input"
+          labelName=""
+          inputType="text"
+          onChange={handleInputChange}
+          value={inputValue}
+        />
+
+        <Button
+          type="submit"
+          value="Add"
+          onClick={() => performOperation("add")}
+        />
+        <Button
+          type="submit"
+          value="Subtract"
+          onClick={() => performOperation("subtract")}
+        />
+        <Button
+          type="submit"
+          value="Multiply"
+          onClick={() => performOperation("multiply")}
+        />
+        <Button
+          type="submit"
+          value="Divide"
+          onClick={() => performOperation("divide")}
+        />
+      </div>
     </div>
   );
 };

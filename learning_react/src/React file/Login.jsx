@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "../CSS file/login.css";
-// import "../CSS file/signUp.css";
 import img from "../images/loginImage.png";
 import { Input } from "./Input";
 import { Button } from "./button";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ onChange }) => {
   const [loginEmail, setLoginEmail] = useState("");
@@ -22,16 +21,15 @@ const Login = ({ onChange }) => {
     if (user && user.password === loginPassword) {
       console.log("Login successful!");
       navigate("/homepage");
-      // onChange();
     } else {
       setErrorMessage("Invalid credentials. Please try again.");
       console.log("Login failed. Invalid credentials.");
     }
   };
 
-  const handlePageChange = () => {
-    navigate("/homepage");
-    };
+  // const handlePageChange = () => {
+  //   navigate("/homepage");
+  // };
 
   return (
     <div className="sign-up-container">
@@ -52,10 +50,7 @@ const Login = ({ onChange }) => {
           onChange={(e) => setLoginPassword(e.target.value)}
         />
         <br />
-        {/* <Button className="submit-button" type="submit" value="Login" /> */}
-        <button type="submit" onClick={handlePageChange}>
-          Login
-        </button>
+        <Button type="submit" value="Login" />
       </form>
     </div>
   );

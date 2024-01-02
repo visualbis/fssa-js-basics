@@ -1,14 +1,33 @@
-// import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+// indexPage.js
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../React file/button";
+import img from "../images/taskManagerLogo.png";
+import "../CSS file/button.css"
 
-export class IndexPage extends Component {
-  static propTypes = {}
+const IndexPage = () => {
+  const navigate = useNavigate();
 
-  render() {
-    return (
-      <div>IndexPage</div>
-    )
-  }
-}
+  const signUp = () => {
+    navigate("/signup");
+  };
 
-export default IndexPage
+  const Login = () => {
+    navigate("/login");
+  };
+
+  return (
+    <div>
+      <header className="header">
+        <img src={img} alt="logo" width="15%" />
+        <h2>Welcome to Teddy</h2>
+        <div className="header-button">
+          <Button type="" value="Sign Up" onClick={signUp} />
+          <Button type="" value="Login" onClick={Login} />
+        </div>
+      </header>
+    </div>
+  );
+};
+
+export default IndexPage;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../React Practice CSS files/Timer.css"
-// import { Button } from "../React file/button";
+import "../React Practice CSS files/Timer.css";
+import { Button } from "../React file/button";
 
 const Timer = () => {
   const [time, setTime] = useState(0);
@@ -56,44 +56,40 @@ const Timer = () => {
     )}:${millisecondsFormat(milliseconds)}`;
   };
 
+ 
+
   return (
-    <div className="timer-container">
-      <h1>{formatTime(time)}</h1>
+    <div>
+      <div className="timer-container">
+        <h1>{formatTime(time)}</h1>
 
-      <div className="container">
-        <div className="button-container">
-          <button onClick={handleStart} disabled={isRunning}>
-            Start
-          </button>
-          <button onClick={handlePause} disabled={!isRunning}>
-            Pause
-          </button>
-          <button onClick={handleStop} disabled={!isRunning && time === 0}>
-            Reset
-          </button>
-          <button onClick={handleLap} disabled={!isRunning && time === 0}>
-            Lap Time
-          </button>
+        <div className="container">
+          <div className="button-container">
+          <Button type="" value="Start" onClick={handleStart} disabled={isRunning}/>
+          <Button type="" value="Pause" onClick={handlePause} disabled={isRunning}/>
+          <Button type="" value="Reset" onClick={handleStop} disabled={isRunning && time === 0}/>
+          <Button type="" value="Lap Time" onClick={handleLap} disabled={isRunning && time === 0}/>
+          </div>
         </div>
-      </div>
 
-      <div className="lap-list">
-        <p>Total Lap Count: {lapListRef.current.length}</p>
+        <div className="lap-list">
+          <p>Total Lap Count: {lapListRef.current.length}</p>
 
-        <h2>Lap Times:</h2>
-        <ul>
-          {lapListRef.current.map((lapTime, index) => (
-            <li key={index}>
-              {index + 1}: {formatTime(lapTime)}
-              {index > 0 && (
-                <span>
-                  {" "}
-                  ({formatTime(lapTime - lapListRef.current[index - 1])})
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
+          <h2>Lap Times:</h2>
+          <ul>
+            {lapListRef.current.map((lapTime, index) => (
+              <li key={index}>
+                {index + 1}: {formatTime(lapTime)}
+                {index > 0 && (
+                  <span>
+                    {" "}
+                    ({formatTime(lapTime - lapListRef.current[index - 1])})
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

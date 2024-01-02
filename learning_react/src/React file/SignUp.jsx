@@ -3,7 +3,7 @@ import "../CSS file/login.css";
 import img from "../images/signUp.png";
 import { Input } from "./Input.jsx";
 import { Button } from "./button.jsx";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = ({ onChange }) => {
   const [name, setName] = useState("");
@@ -87,15 +87,7 @@ const SignUp = ({ onChange }) => {
         />
 
         <Button className="submit-button" type="submit" value="Register Now" />
-        {/* <Button className="login-button" type="submit" value="Login" onClick={handlePageChange}/> */}
-
-        <button
-          className="login-button"
-          type="submit"
-          onClick={handlePageChange}
-        >
-          Login
-        </button>
+        <Button type="submit" value="Login" onClick={handlePageChange} />
       </form>
     </div>
   );

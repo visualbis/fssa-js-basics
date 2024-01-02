@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../React Practice CSS files/Tictactoe.css";
 import { Input } from "../React file/Input";
+import { Button } from "../React file/button";
 
 const initialBoard = Array(9).fill(null);
 
@@ -99,7 +100,6 @@ const Board = () => {
   };
 
   const handleReset = () => {
-    //localStorage.clear();
     setSquares(initialBoard);
     setXIsNext(true);
     setMoves([]);
@@ -189,9 +189,11 @@ const Board = () => {
 
   return (
     <div className="game-container">
-      <button className="reset-button" onClick={handleReset}>
+      <Button type="" value="Reset Game" onClick={handleReset} />
+
+      {/* <button className="reset-button" onClick={handleReset}>
         Reset Game
-      </button>
+      </button> */}
       {showPopup && (
         <Popup
           message={

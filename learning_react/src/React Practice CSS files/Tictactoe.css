@@ -45,8 +45,8 @@
 
 .square {
   font-size: 60px;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border: 1px solid #ddd;
   display: flex;
   justify-content: center;
@@ -74,6 +74,7 @@
   border: 2px solid #333;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-size: 40px;
 }
 
 .popup-content {
@@ -87,6 +88,6 @@
 
 /* css for timer */
 .timer-container h1 {
-  font-size: 100px;
+  /* font-size: 100px; */
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

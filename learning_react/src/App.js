@@ -9,7 +9,7 @@ import Timer from "./React Practice Files/Timer";
 import TodoApp from "./React Practice Files/Todo";
 import IndexPage from "./React Practice Files/IndexPage";
 // import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   // const pages = [
@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="" element={<IndexPage />} index />
+          <Route path="/index" element={<IndexPage />}  />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/homepage" element={<HomePage />} />
@@ -36,6 +36,7 @@ function App() {
           <Route path="/counter" element={<Counter />} />
           <Route path="/timer" element={<Timer />} />
           <Route path="/todoApp" element={<TodoApp />} />
+          <Route index element={<Navigate to="/index"/>}/>
         </Routes>
       </Router>
     </div>
