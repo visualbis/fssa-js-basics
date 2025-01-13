@@ -1,0 +1,71 @@
+.task-div-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.task-add-div-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2%;
+  width: 100%;
+}
+
+/* Style for the button container */
+.add-task-button {
+  display: inline-block;
+  background-color: #3498db;
+  color: #fff;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Style for the icon inside the button */
+.add-task-button i {
+  margin-right: 5px;
+}
+
+/* Hover effect */
+.add-task-button:hover {
+  background-color: #2980b9;
+}
+
+/* task showing div container css */
+
+.task-showing-div-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.task-showing-div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.task-div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* each task div container */
+.task-list-div-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.each-task-div {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+}
