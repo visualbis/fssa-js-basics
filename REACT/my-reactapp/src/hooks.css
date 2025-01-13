@@ -1,0 +1,28 @@
+/* Style for Userlogin component */
+.Userlogin {
+    text-align: center;
+    margin: 50px;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  /* Style for Page component */
+  .Page {
+    margin-top: 20px;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .logged-in {
+    color: #008000; /* Green color for logged-in text */
+  }
+  
+  .not-logged-in {
+    color: #ff0000; /* Red color for not logged-in text */
+  }
+  

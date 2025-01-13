@@ -1,0 +1,145 @@
+body {
+  background-color: #333;
+  color: #fff;
+}
+
+.ticTacContainer {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.reactHead {
+  color: #61dafb;
+}
+
+.result {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.winningImg {
+  margin-top: 10px;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.players {
+  margin: 0px 40px 0px 40px;
+  border: 2px solid #0f1b21;
+  padding: 0px 40px 5px 40px;
+  border-radius: 10px;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boxes {
+  display: flex;
+  height: 80px;
+  width: 90px;
+  background: #1f3540;
+  border: 2px solid #0f1b21;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 12px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  transition: background 0.3s;
+}
+
+.boxes:hover {
+  background: #0f1b21;
+}
+
+.boxes img {
+  margin: 1rem;
+  width: 50%;
+}
+
+.row1,
+.row2,
+.row3 {
+  display: flex;
+}
+
+.row1 .boxes,
+.row2 .boxes,
+.row3 .boxes {
+  margin: 2px;
+}
+
+.reset {
+  width: 150px;
+  height: 60px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: #1f3540;
+  border: 2px solid #0f1b21;;
+  font-size: 26px;
+  color: #26ffcb;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.reset:hover {
+  background-color: #4fa3d1;
+  color: black;
+}
+
+.startModal {
+  text-align: center;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.startModal h5 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.startModal input {
+  font-size: 1em;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 4px;
+}
+
+.startModal button {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  background-color: #61dafb;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.startModal button:hover {
+  background-color: #4fa3d1;
+}
+
