@@ -1,0 +1,22 @@
+{
+  "contacts": [
+    {
+      "id": "1703764157836-809978",
+      "name": "Sam",
+      "email": "sam@gmail.com",
+      "phoneNo": "9988776644"
+    },
+    {
+      "id": "1703765410530-941793",
+      "name": "Deepi",
+      "email": "deepi@gmail.com",
+      "phoneNo": "9841661248"
+    },
+    {
+      "id": "1703821499385-364781",
+      "name": "Martin",
+      "email": "martin@gmail.com",
+      "phoneNo": "8778065567"
+    }
+  ]
+}
