@@ -1,0 +1,32 @@
+* {
+    background-color: rgb(247, 245, 245);
+}
+
+.sign-up-container {
+    border-radius: 5px;
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.sign-up-image {
+    width: 30%;
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.success-message {
+    color: green;
+}
+
+.error-message {
+    color: red;
+}

@@ -1,0 +1,36 @@
+button {
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: max-content;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+button:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.submit-button {
+    background-color: #07fb17;
+    color: white;
+    border: 1px solid white;
+}
+
+.login-button {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.header-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: white;
+
+}
