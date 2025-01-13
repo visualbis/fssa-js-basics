@@ -1,0 +1,48 @@
+.task-list-div{
+    width: 350px;
+    height: 750px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+.task-list{
+    width: 95%;
+    height: 90%;
+}
+.task{
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    justify-content: space-between;
+  color: white;
+    border-bottom: 2px solid white;
+}
+.task div{
+    display: flex;
+    font-size: 10px;
+    align-items: center;
+}
+.task p{color: white    ;}
+.task button{
+    width: 30%;
+    border-radius: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4%;
+    color: aqua;
+    background-color: black;
+    border: none;
+    border: 2px solid aqua;
+
+}
+.task button:hover{
+border: 2px solid black;
+cursor: pointer;
+color: black;
+background-color: aqua;
+}
